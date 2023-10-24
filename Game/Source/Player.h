@@ -19,6 +19,8 @@ public:
 
 	bool Start();
 
+	void AnimationLogic();
+
 	void MovementLogic();
 
 	bool Update(float dt);

@@ -41,6 +41,8 @@ bool Player::Start() {
 	return true;
 }
 
+void Player::AnimationLogic() {}
+
 void Player::MovementLogic() {
 
 	//Gravity application
@@ -107,7 +109,7 @@ bool Player::Update(float dt)
 {
 	MovementLogic();
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x +5, position.y - 7);
 
 	return true;
 }
