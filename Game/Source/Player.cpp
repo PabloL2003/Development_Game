@@ -18,11 +18,35 @@ Player::~Player() {
 
 }
 
+void Player::InitAnims() {
+
+	//R.Idle
+	for (pugi::xml_node node = parameters.child("right_idle").child("pushback");
+		node; node = node.next_sibling("pushback")) {
+		rightIdle.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+
+	//L.Idle
+	for (pugi::xml_node node = parameters.child("left_idle").child("pushback");
+		node; node = node.next_sibling("pushback")) {
+		leftIdle.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+		
+}
+
+
 bool Player::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	InitAnims();
 
 	return true;
 }
@@ -41,7 +65,21 @@ bool Player::Start() {
 	return true;
 }
 
-void Player::AnimationLogic() {}
+void Player::AnimationLogic() {
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		if (pbody->body->GetLinearVelocity().x > 0.01f) 
+		{
+			
+		}
+		else if (pbody->body->GetLinearVelocity().x < -0.01f)
+		{
+			currentAnim = &leftIdle;
+		}
+	}
+
+}
 
 void Player::MovementLogic() {
 
@@ -107,15 +145,21 @@ void Player::MovementLogic() {
 
 bool Player::Update(float dt)
 {
+	/*currentAnim->Update();
+	app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+
+	AnimationLogic();*/
 	MovementLogic();
 
-	app->render->DrawTexture(texture, position.x +5, position.y - 7);
 
 	return true;
 }
 
 bool Player::CleanUp()
 {
+
+	texturePath = nullptr;
+	currentAnim = nullptr;
 
 	return true;
 }

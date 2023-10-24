@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Anim.h"
+
 
 struct SDL_Texture;
 
@@ -14,6 +16,8 @@ public:
 	Player();
 	
 	virtual ~Player();
+
+	void InitAnims();
 
 	bool Awake();
 
@@ -44,6 +48,12 @@ private:
 	float movementDampen = 12.0;
 	float idleDampenMultiplier = 3.0f;
 	float maxVel = 7.0;
+
+	Animation* currentAnim = nullptr;
+
+	Animation rightIdle, rightRun;
+
+	Animation leftIdle, leftRun;
 
 };
 
