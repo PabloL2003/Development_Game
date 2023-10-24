@@ -37,7 +37,30 @@ void Player::InitAnims() {
 							node.attribute("width").as_int(),
 							node.attribute("height").as_int() });
 	}
-		
+    //R.Run
+	for (pugi::xml_node node = parameters.child("right_run").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		rightRun.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+	rightRun.speed = parameters.child("right_run").attribute("animspeed").as_float();
+	rightRun.loop = parameters.child("right_run").attribute("loop").as_bool();
+	//L.Run
+	for (pugi::xml_node node = parameters.child("left_run").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		leftRun.PushBack({ node.attribute("x").as_int(),
+						   node.attribute("y").as_int(),
+						   node.attribute("width").as_int(),
+						   node.attribute("height").as_int() });
+	}
+	leftRun.speed = parameters.child("left_run").attribute("animspeed").as_float();
+	leftRun.loop = parameters.child("left_run").attribute("loop").as_bool();
+
+	currentAnim = &rightIdle;
 }
 
 
@@ -71,7 +94,7 @@ void Player::AnimationLogic() {
 	{
 		if (pbody->body->GetLinearVelocity().x > 0.01f) 
 		{
-			
+			currentAnim = &rightIdle;
 		}
 		else if (pbody->body->GetLinearVelocity().x < -0.01f)
 		{
@@ -79,6 +102,63 @@ void Player::AnimationLogic() {
 		}
 	}
 
+	if (currentAnim == &rightIdle)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			currentAnim = &leftRun;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			currentAnim = &rightRun;
+		}
+	}
+
+	if (currentAnim == &rightIdle)
+	{
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			currentAnim = &leftRun;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			currentAnim = &rightRun;
+		}
+	}
+
+	if (currentAnim == &rightRun)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT)
+			{
+				currentAnim = &rightIdle;
+			}
+			else currentAnim = &leftRun;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			currentAnim = &leftRun;
+		}
+	}
+	
+	if (currentAnim == &leftRun)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
+			{
+				currentAnim = &leftIdle;
+			}
+			else currentAnim = &rightRun;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			currentAnim = &rightRun;
+		}
+	}
+	//
 }
 
 void Player::MovementLogic() {
@@ -145,12 +225,11 @@ void Player::MovementLogic() {
 
 bool Player::Update(float dt)
 {
-	/*currentAnim->Update();
+	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
 
-	AnimationLogic();*/
+	AnimationLogic();
 	MovementLogic();
-
 
 	return true;
 }
