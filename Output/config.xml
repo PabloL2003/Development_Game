@@ -22,7 +22,7 @@
   </audio>
 
   <scene>
-    <map path="Assets/Maps/" name="MapTemplate.tmx"/>
+	<map path="Assets/Maps/" name="MapTemplate.tmx"/>
 	<map path="Assets/Maps/" name="mapa gamedev.tmx"/>  
 	<map path="Assets/Maps/" name="mapa gamedev2.tmx"/>
 	<map path="Assets/Maps/" name="mapa gamedev3.tmx"/>
