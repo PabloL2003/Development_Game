@@ -23,7 +23,13 @@
 
   <scene>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
-    <player x="400" y="352" texturepath="Assets/Textures/Pepe1-Sheet.png"/>
+	<map path="Assets/Maps/" name="mapa gamedev.tmx"/>  
+	<map path="Assets/Maps/" name="mapa gamedev2.tmx"/>
+	<map path="Assets/Maps/" name="mapa gamedev3.tmx"/>
+	<map path="Assets/Maps/" name="mapa gamedev4.tmx"/>
+	  
+	  
+	  <player x="400" y="352" texturepath="Assets/Textures/Pepe1-Sheet.png"/>
 	<right_idle>
 	 <pushback x="11" y="21" width="24" height="43"/>
 	</right_idle>
