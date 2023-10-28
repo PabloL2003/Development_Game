@@ -193,6 +193,11 @@ bool Map::Load(SString mapFileName)
 
     PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
     c3->ctype = ColliderType::PLATFORM;
+
+    //
+    //  Copiar codigo y cambiar coordenadas para mapear los colliders
+    // PhysBody* c4 = app->physics->CreateRectangle(456, 704 + 32, 576, 64, STATIC);
+    //c4->ctype = ColliderType::PLATFORM;
     
     if(ret == true)
     {
