@@ -19,6 +19,7 @@ class Scene;
 class EntityManager;
 class Map;
 class Physics;
+class Debug;
 
 class App
 {
@@ -83,6 +84,11 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
+	Debug* debug;
+
+	uint32 maxFrameDuration = 0;
+	int framecap;
+	bool vsync;
 
 private:
 
@@ -112,8 +118,6 @@ private:
 
 	float averageFps = 0.0f;
 	uint32 secondsSinceStartup = 0;
-
-	uint32 maxFrameDuration = 16;
 
 };
 

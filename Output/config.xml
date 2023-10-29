@@ -2,6 +2,7 @@
   <app>
     <title>Game Development template</title>
     <maxFrameDuration value="16"/>
+	<framecap value="32"/>
   </app>
 
   <renderer>
@@ -27,39 +28,41 @@
 	<map path="Assets/Maps/" name="mapa gamedev2.tmx"/>
 	<map path="Assets/Maps/" name="mapa gamedev3.tmx"/>
 	<map path="Assets/Maps/" name="mapa gamedev4.tmx"/>
+
+
+	  <player x="400" y="352" texturepath="Assets/Textures/Pepe1Sheet.png">
+		  <right_idle>
+			  <pushback x="11" y="21" width="30" height="43"/>
+		  </right_idle>
+		  <left_idle>
+			  <pushback x="75" y="149" width="30" height="43"/>
+		  </left_idle>
+		  <right_run animspeed ="0.2f" loop="true">
+			  <pushback x="76" y="21" width="30" height="43"/>
+			  <pushback x="140" y="21" width="30" height="43"/>
+			  <pushback x="205" y="21" width="30" height="43"/>
+			  <pushback x="268" y="21" width="30" height="43"/>
+			  <pushback x="11" y="85" width="30" height="43"/>
+			  <pushback x="76" y="85" width="30" height="43"/>
+			  <pushback x="140" y="85" width="30" height="43"/>
+			  <pushback x="205" y="85" width="30" height="43"/>
+			  <pushback x="268" y="85" width="30" height="43"/>
+			  <pushback x="11" y="149" width="30" height="43"/>
+		  </right_run>
+		  <left_run animspeed =" 0.2f" loop="true">
+			  <pushback x="140" y="149" width="30" height="43"/>
+			  <pushback x="205" y="149" width="30" height="43"/>
+			  <pushback x="268" y="149" width="30" height="43"/>
+			  <pushback x="11" y="213" width="30" height="43"/>
+			  <pushback x="76" y="213" width="30" height="43"/>
+			  <pushback x="140" y="213" width="30" height="43"/>
+			  <pushback x="205" y="213" width="30" height="43"/>
+			  <pushback x="268" y="213" width="30" height="43"/>
+			  <pushback x="11" y="276" width="30" height="43"/>
+			  <pushback x="76" y="276" width="30" height="43"/>
+		  </left_run>
+	  </player>
 	  
-	  
-	  <player x="400" y="352" texturepath="Assets/Textures/Pepe1-Sheet.png"/>
-	<right_idle>
-	 <pushback x="11" y="21" width="24" height="43"/>
-	</right_idle>
-	<left_idle>
-	 <pushback x="75" y="149" width="24" height="43"/>
-    </left_idle>
-	<right_run animspeed ="0.4f" loop="true">
-		<pusback x="76" Y="21" width="24" height="43"/>
-		<pusback x="140" Y="21" width="24" height="43"/>
-		<pusback x="205" Y="21" width="24" height="43"/>
-		<pusback x="268" Y="21" width="24" height="43"/>
-		<pusback x="11" Y="85" width="24" height="43"/>
-		<pusback x="76" Y="85" width="24" height="43"/>
-		<pusback x="140" Y="85" width="24" height="43"/>
-		<pusback x="205" Y="85" width="24" height="43"/>
-		<pusback x="268" Y="85" width="24" height="43"/>
-		<pusback x="11" Y="149" width="24" height="43"/>
-	</right_run>
-	<left_run animspeed =" 0.4f" loop="true">
-		<pusback x="140" Y="149" width="24" height="43"/>
-		<pusback x="205" Y="149" width="24" height="43"/>
-		<pusback x="268" Y="149" width="24" height="43"/>
-		<pusback x="11" Y="213" width="24" height="43"/>
-		<pusback x="76" Y="213" width="24" height="43"/>
-		<pusback x="140" Y="213" width="24" height="43"/>
-		<pusback x="205" Y="213" width="24" height="43"/>
-		<pusback x="268" Y="213" width="24" height="43"/>
-		<pusback x="11" Y="276" width="24" height="43"/>
-		<pusback x="76" Y="276" width="24" height="43"/>
-	</left_run>
 	  <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>

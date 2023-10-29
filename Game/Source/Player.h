@@ -27,6 +27,8 @@ public:
 
 	void MovementLogic();
 
+	void TeleportTo(iPoint pos);
+
 	bool Update(float dt);
 
 	bool CleanUp();
@@ -39,6 +41,9 @@ public:
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 	int pickCoinFxId;
+	int width = 24, height = 43;
+
+	iPoint spawn;
 	
 	int jumps = 2;
 

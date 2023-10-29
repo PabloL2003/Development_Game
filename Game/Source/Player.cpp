@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Debug.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -79,7 +80,17 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
+	//Rectangular hitbox
+	//pbody = app->physics->CreateRectangle(0, 0, 40, height, DYNAMIC);
+	//pbody->listener = this;
+	//pbody->body->SetFixedRotation(true);
+	//pbody->ctype = ColliderType::PLAYER;
+	//dashIndicator = 3;
+	////Changing the body's mass to fit the game physics
+	//b2MassData* data = new b2MassData; data->center = b2Vec2((float)width / 2, (float)height / 2); data->I = 0.0f; data->mass = 0.390625f;
+	//pbody->body->SetMassData(data);
+	//delete data;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -89,18 +100,6 @@ bool Player::Start() {
 }
 
 void Player::AnimationLogic() {
-
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		if (pbody->body->GetLinearVelocity().x > 0.01f) 
-		{
-			currentAnim = &rightIdle;
-		}
-		else if (pbody->body->GetLinearVelocity().x < -0.01f)
-		{
-			currentAnim = &leftIdle;
-		}
-	}
 
 	if (currentAnim == &rightIdle)
 	{
@@ -114,9 +113,8 @@ void Player::AnimationLogic() {
 		}
 	}
 
-	if (currentAnim == &rightIdle)
+	if (currentAnim == &leftIdle)
 	{
-
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			currentAnim = &leftRun;
@@ -163,6 +161,32 @@ void Player::AnimationLogic() {
 
 void Player::MovementLogic() {
 
+	if (app->debug->godMode) {
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(-5.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 5.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(5.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+	}
 	//Gravity application
 	pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y), pbody->body->GetWorldCenter(), true);
 
@@ -223,10 +247,15 @@ void Player::MovementLogic() {
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 }
 
+void Player::TeleportTo(iPoint pos)
+{
+
+}
+
 bool Player::Update(float dt)
 {
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x+5, position.y-8, &(currentAnim->GetCurrentFrame()));
 
 	AnimationLogic();
 	MovementLogic();

@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Debug.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -33,6 +34,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	entityManager = new EntityManager();
+	debug = new Debug();
 
 
 	// Ordered for awake / Start / Update
@@ -41,6 +43,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(debug);
 	AddModule(physics);
 	AddModule(scene);
 	AddModule(map);
@@ -78,13 +81,13 @@ bool App::Awake()
 {
 	Timer timer = Timer();
 
+	maxFrameDuration = 16;
 	bool ret = LoadConfig();
 
 	if(ret == true)
 	{
 		gameTitle = configNode.child("app").child("title").child_value();
 		win->SetTitle(gameTitle.GetString());
-		maxFrameDuration = configFile.child("config").child("app").child("maxFrameDuration").attribute("value").as_int();
 
 		ListItem<Module*>* item;
 		item = modules.start;
