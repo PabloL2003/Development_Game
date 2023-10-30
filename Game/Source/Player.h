@@ -31,7 +31,7 @@ public:
 
 	void TeleportTo(iPoint pos);
 
-	void isKilled();
+	void IsDead();
 
 	bool Update(float dt);
 
@@ -51,6 +51,7 @@ public:
 	
 	int jumps = 2;
 	bool jumping = false;
+	bool isKilled = false;
 
 private:
 	float movementForce = 10.0f;

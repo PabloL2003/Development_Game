@@ -255,9 +255,12 @@ void Player::MovementLogic() {
 
 }
 
-void Player::isKilled()
+void Player::IsDead()
 {
-	TeleportTo(spawn);
+	if (isKilled) 
+	{
+		TeleportTo(spawn);
+	}
 }
 
 void Player::SetSpawnPoint(iPoint pos)
@@ -288,6 +291,8 @@ bool Player::Update(float dt)
 
 	AnimationLogic();
 	MovementLogic();
+	IsDead();
+	isKilled = false;
 
 	return true;
 }
@@ -318,7 +323,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::SPIKE:
 		LOG("Collision SPIKE");
-		if (!app->debug->godMode) isKilled();
+		isKilled = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
