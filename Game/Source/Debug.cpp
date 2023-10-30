@@ -43,7 +43,7 @@ bool Debug::Update(float dt)
 		//Teleport to the start of the level
 		if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		{
-
+			app->scene->player->TeleportTo(app->scene->player->spawn);
 		}
 
 		//Enable/Disable hitboxes
@@ -84,6 +84,7 @@ bool Debug::Update(float dt)
 bool Debug::PostUpdate() 
 {
 	if (hitboxes) DrawHitboxes();
+	DebugDraw();
 
 	return true;
 }
@@ -92,11 +93,11 @@ void Debug::DebugDraw()
 {
 	if(limitFPS) 
 	{
-		if (app->maxFrameDuration != app->framecap) app->maxFrameDuration = app->framecap;
+		app->maxFrameDuration = 32;
 	}
 	else
 	{
-		if (app->maxFrameDuration != 16) app->maxFrameDuration = 16;
+		app->maxFrameDuration = 16;
 	}
 }
 

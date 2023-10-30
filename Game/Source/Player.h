@@ -27,7 +27,11 @@ public:
 
 	void MovementLogic();
 
+	void SetSpawnPoint(iPoint pos);
+
 	void TeleportTo(iPoint pos);
+
+	void isKilled();
 
 	bool Update(float dt);
 
@@ -43,9 +47,10 @@ public:
 	int pickCoinFxId;
 	int width = 24, height = 43;
 
-	iPoint spawn;
+	iPoint spawn = iPoint(400, 352);
 	
 	int jumps = 2;
+	bool jumping = false;
 
 private:
 	float movementForce = 10.0f;
@@ -53,6 +58,7 @@ private:
 	float movementDampen = 12.0;
 	float idleDampenMultiplier = 3.0f;
 	float maxVel = 7.0;
+
 
 	Animation* currentAnim = nullptr;
 

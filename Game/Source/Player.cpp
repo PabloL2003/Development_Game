@@ -81,6 +81,8 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
+	spawn.x = 400;
+	spawn.y = 352;
 	//Rectangular hitbox
 	//pbody = app->physics->CreateRectangle(0, 0, 40, height, DYNAMIC);
 	//pbody->listener = this;
@@ -93,6 +95,7 @@ bool Player::Start() {
 	//delete data;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
+	SetSpawnPoint(spawn);
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 
@@ -163,6 +166,8 @@ void Player::MovementLogic() {
 
 	if (app->debug->godMode) {
 
+		pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y), pbody->body->GetWorldCenter(), true);
+
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));
 
@@ -194,8 +199,10 @@ void Player::MovementLogic() {
 	{
 		pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
 		pbody->body->ApplyForce(b2Vec2(0, -225.0f), pbody->body->GetWorldCenter(), true);
+		jumping = true;
 		jumps--;
 	}
+	jumping = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
 	{
@@ -245,11 +252,33 @@ void Player::MovementLogic() {
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+}
+
+void Player::isKilled()
+{
+	TeleportTo(spawn);
+}
+
+void Player::SetSpawnPoint(iPoint pos)
+{
+	spawn = pos;
 }
 
 void Player::TeleportTo(iPoint pos)
 {
+	if (pbody != nullptr)
+	{
+		// Detén la velocidad actual del jugador
+		pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
+		// Establece la posición del cuerpo físico del jugador en el punto de destino
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(pos.x), PIXEL_TO_METERS(pos.y)), 0.0f);
+
+		// Actualiza la posición del jugador
+		position.x = pos.x;
+		position.y = pos.y;
+	}
 }
 
 bool Player::Update(float dt)
@@ -282,10 +311,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		jumps = 2;
+		if (jumping == false)
+		{
+			jumps = 2;
+		}
+		break;
+	case ColliderType::SPIKE:
+		LOG("Collision SPIKE");
+		if (!app->debug->godMode) isKilled();
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
+	
 	}
 }
