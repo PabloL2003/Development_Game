@@ -24,10 +24,8 @@
 
   <scene>
 	<map path="Assets/Maps/" name="MapTemplate.tmx"/>
-	<map path="Assets/Maps/" name="mapa gamedev.tmx"/>  
-	<map path="Assets/Maps/" name="mapa gamedev2.tmx"/>
-	<map path="Assets/Maps/" name="mapa gamedev3.tmx"/>
-	<map path="Assets/Maps/" name="mapa gamedev4.tmx"/>
+	<map path="Assets/Maps/" name="Mapa.Dungen_dev.tmx"/>  
+
 
 
 	  <player x="400" y="352" texturepath="Assets/Textures/Pepe1Sheet.png">
