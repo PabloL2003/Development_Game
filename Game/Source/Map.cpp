@@ -56,6 +56,12 @@ bool Map::Update(float dt)
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
                     int gid = mapLayerItem->data->Get(x, y);
+
+                    if (gid == 0)
+                    {
+                        continue;
+                    }
+
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
                     SDL_Rect r = tileset->GetTileRect(gid);

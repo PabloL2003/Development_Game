@@ -53,7 +53,7 @@
 25,12,12,12,12,12,25,25,25,25,25,25,25,12,12,12,25,25,25,25,12,12,12,12,12,25,25,25,25,25,25,25,12,25,25,25,25,12,12,12,12,12,12,12,12,12,12,25,25,25,25,25,25,25,25,25,25,25,25,12
 </data>
  </layer>
- <layer id="4" name="plataforma de salto rand" width="60" height="40" visible="0" locked="1">
+ <layer id="4" name="plataforma de salto rand" width="60" height="40" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -100,7 +100,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="3" name="chorradas" width="60" height="40" visible="0" locked="1">
+ <layer id="3" name="chorradas" width="60" height="40" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -147,7 +147,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="blocks" width="60" height="40" visible="0" locked="1">
+ <layer id="2" name="blocks" width="60" height="40" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
