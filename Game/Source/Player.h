@@ -23,9 +23,9 @@ public:
 
 	bool Start();
 
-	void AnimationLogic();
+	void AnimationLogic(float dt);
 
-	void MovementLogic();
+	void MovementLogic(float dt);
 
 	void SetSpawnPoint(iPoint pos);
 
@@ -54,11 +54,11 @@ public:
 	bool isKilled = false;
 
 private:
-	float movementForce = 10.0f;
+	float movementForce = 2.5f;
 	float jumpForce = 300.0f;
-	float movementDampen = 12.0;
-	float idleDampenMultiplier = 3.0f;
-	float maxVel = 7.0;
+	float movementDampen = 6.0;
+	float idleDampenMultiplier = 0.75f;
+	float maxVel = 5.0;
 
 
 	Animation* currentAnim = nullptr;

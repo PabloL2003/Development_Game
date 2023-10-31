@@ -102,7 +102,8 @@ bool Player::Start() {
 	return true;
 }
 
-void Player::AnimationLogic() {
+void Player::AnimationLogic(float dt) {
+
 
 	if (currentAnim == &rightIdle)
 	{
@@ -159,14 +160,14 @@ void Player::AnimationLogic() {
 			currentAnim = &rightRun;
 		}
 	}
-	//
+	//Jump
 }
 
-void Player::MovementLogic() {
+void Player::MovementLogic(float dt) {
 
 	if (app->debug->godMode) {
 
-		pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y), pbody->body->GetWorldCenter(), true);
+		pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
 
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));
@@ -193,12 +194,12 @@ void Player::MovementLogic() {
 			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	}
 	//Gravity application
-	pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y), pbody->body->GetWorldCenter(), true);
+	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && jumps > 0)
 	{
 		pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
-		pbody->body->ApplyForce(b2Vec2(0, -225.0f), pbody->body->GetWorldCenter(), true);
+		pbody->body->ApplyForce(b2Vec2(0, -18.0f*dt), pbody->body->GetWorldCenter(), true);
 		jumping = true;
 		jumps--;
 	}
@@ -210,12 +211,12 @@ void Player::MovementLogic() {
 		if (pbody->body->GetLinearVelocity().x > 0.5f)
 		{
 			//Opposite direction dampening
-			pbody->body->ApplyForce(b2Vec2(-movementDampen, 0.0f), pbody->body->GetWorldCenter(), true);
+			pbody->body->ApplyForce(b2Vec2(-movementDampen*dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 		else
 		{
 			if (pbody->body->GetLinearVelocity().x > -maxVel)
-				pbody->body->ApplyForce(b2Vec2(-movementForce, 0.0f), pbody->body->GetWorldCenter(), true);
+				pbody->body->ApplyForce(b2Vec2(-movementForce*dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 	}
 
@@ -224,12 +225,12 @@ void Player::MovementLogic() {
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
 			{
 				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(movementDampen, 0.0f), pbody->body->GetWorldCenter(), true);
+				pbody->body->ApplyForce(b2Vec2(movementDampen*dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 		else
 			{
 				if (pbody->body->GetLinearVelocity().x < maxVel)
-					pbody->body->ApplyForce(b2Vec2(movementForce, 0.0f), pbody->body->GetWorldCenter(), true);
+					pbody->body->ApplyForce(b2Vec2(movementForce*dt, 0.0f), pbody->body->GetWorldCenter(), true);
 			}
 	}
 
@@ -289,8 +290,8 @@ bool Player::Update(float dt)
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x+5, position.y-8, &(currentAnim->GetCurrentFrame()));
 
-	AnimationLogic();
-	MovementLogic();
+	AnimationLogic(dt);
+	MovementLogic(dt);
 	IsDead();
 	isKilled = false;
 

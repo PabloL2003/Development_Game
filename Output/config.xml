@@ -46,7 +46,7 @@
 			  <pushback x="268" y="85" width="30" height="43"/>
 			  <pushback x="11" y="149" width="30" height="43"/>
 		  </right_run>
-		  <left_run animspeed =" 0.2f" loop="true">
+		  <left_run animspeed ="0.2f" loop="true">
 			  <pushback x="140" y="149" width="30" height="43"/>
 			  <pushback x="205" y="149" width="30" height="43"/>
 			  <pushback x="268" y="149" width="30" height="43"/>

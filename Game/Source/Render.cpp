@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Scene.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -70,6 +72,9 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
+	camera.x = -(int)(app->scene->player->position.x - (camera.w * 0.5f));
+	camera.y = -(int)(app->scene->player->position.y - (camera.h * 0.5f));
+
 	return true;
 }
 

@@ -66,7 +66,10 @@ bool Debug::Update(float dt)
 		}
 
 		//Enable/Disable FPS cap
-		if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) limitFPS = !limitFPS;
+		if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) 
+		{
+			limitFPS = !limitFPS;
+		}
 	
 	}
 	else 
