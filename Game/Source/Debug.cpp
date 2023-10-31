@@ -81,6 +81,7 @@ bool Debug::Update(float dt)
 		if (limitFPS != false) limitFPS = false;
 	}
 
+
 	return true;
 }
 

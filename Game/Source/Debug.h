@@ -32,7 +32,7 @@ public:
 
 	bool variables;
 	bool hitboxes;
-	bool debugCamera;
+	bool debugCamera = false;
 	bool godMode;
 	bool limitFPS;
 

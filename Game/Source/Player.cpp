@@ -167,7 +167,7 @@ void Player::MovementLogic(float dt) {
 
 	if (app->debug->godMode) {
 
-		pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
+		pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
 
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));

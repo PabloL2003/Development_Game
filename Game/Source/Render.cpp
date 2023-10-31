@@ -3,6 +3,7 @@
 #include "Render.h"
 #include "Scene.h"
 #include "Physics.h"
+#include "Debug.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -72,9 +73,38 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
-	camera.x = -(int)(app->scene->player->position.x - (camera.w * 0.5f));
-	camera.y = -(int)(app->scene->player->position.y - (camera.h * 0.5f));
+	if (app->debug->debug)
+	{
+		float camSpeed = 1;
 
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			app->render->camera.y -= (int)ceil(camSpeed * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			app->render->camera.y += (int)ceil(camSpeed * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			app->render->camera.x -= (int)ceil(camSpeed * dt);
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			app->render->camera.x += (int)ceil(camSpeed * dt);
+	}
+
+	else 
+	{
+		camera.x = -(int)(app->scene->player->position.x - (camera.w * 0.5f));
+		camera.y = -(int)(app->scene->player->position.y - (camera.h * 0.5f));
+	}
+
+	if (camera.x < -895)
+		camera.x = -895;
+	if (camera.x > 0)
+		camera.x = 0;
+	if (camera.y < -500)
+		camera.y = -500;
+	if (camera.y > 0)
+		camera.y = 0;
+	
 	return true;
 }
 
