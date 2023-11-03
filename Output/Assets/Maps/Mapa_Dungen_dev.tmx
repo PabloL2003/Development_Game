@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="86">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="124">
  <tileset firstgid="1" name="Dungeon Tile Set" tilewidth="32" tileheight="32" tilecount="63" columns="7">
   <image source="Dungeon Tile Set.png" width="240" height="288"/>
  </tileset>
@@ -19268,7 +19268,7 @@
    <tile gid="1610612787"/>
   </data>
  </layer>
- <objectgroup id="12" name="colliders platforms">
+ <objectgroup id="12" name="colliders platforms" locked="1">
   <object id="2" x="0" y="1136.5" width="276" height="146">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -19604,5 +19604,45 @@
     <property name="Collision" type="bool" value="true"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="15" name="Collider pinchos" locked="1">
+  <object id="86" x="175.25" y="128" width="10.25" height="31.25"/>
+  <object id="87" x="231" y="224.75" width="9.25" height="31.5"/>
+  <object id="88" x="271.75" y="1151.75" width="10.5" height="128.75"/>
+  <object id="89" x="358.5" y="1152.75" width="9.75" height="127.75"/>
+  <object id="90" x="415.75" y="1126.5" width="64" height="10"/>
+  <object id="91" x="720" y="1152.25" width="9.5" height="128.75"/>
+  <object id="92" x="838" y="1152.25" width="10" height="129"/>
+  <object id="93" x="838.75" y="832.5" width="9" height="96"/>
+  <object id="94" x="1072" y="1104" width="9.75" height="79.75"/>
+  <object id="95" x="1071.75" y="1199.25" width="10" height="81"/>
+  <object id="96" x="1127.25" y="1152.25" width="8.75" height="80"/>
+  <object id="97" x="1423.25" y="1167.5" width="10.25" height="81.25"/>
+  <object id="98" x="1510.25" y="1152.75" width="10" height="79.25"/>
+  <object id="99" x="1775.75" y="1103.75" width="10.25" height="176"/>
+  <object id="100" x="1893.75" y="1088.25" width="10.25" height="191.75"/>
+  <object id="101" x="1895" y="640.5" width="8.5" height="64"/>
+  <object id="102" x="1663.5" y="677.75" width="63.75" height="10.25"/>
+  <object id="103" x="1599" y="390.5" width="31.5" height="10"/>
+  <object id="104" x="1456" y="383.5" width="11" height="33"/>
+  <object id="105" x="1375" y="357.5" width="62.5" height="10"/>
+  <object id="106" x="1471" y="165.5" width="66" height="10.5"/>
+  <object id="107" x="1743" y="127.5" width="11" height="65"/>
+  <object id="108" x="1632" y="69" width="32.5" height="11"/>
+  <object id="109" x="1151" y="580" width="66" height="13"/>
+  <object id="110" x="1054.5" y="580.5" width="66" height="12.5"/>
+  <object id="111" x="991" y="582" width="34" height="10"/>
+  <object id="112" x="965.5" y="607" width="11.5" height="65"/>
+  <object id="113" x="847.5" y="543.5" width="10.5" height="33"/>
+  <object id="114" x="574.5" y="550.5" width="34" height="10.5"/>
+  <object id="115" x="607" y="772" width="65.5" height="11.5"/>
+  <object id="116" x="549" y="798.5" width="12.5" height="34"/>
+  <object id="117" x="639" y="932" width="33" height="11.5"/>
+  <object id="118" x="805" y="320.5" width="11.5" height="64.5"/>
+  <object id="119" x="709.5" y="224.5" width="11" height="31"/>
+  <object id="120" x="591" y="142.5" width="11" height="81.5"/>
+  <object id="121" x="480" y="293.5" width="31.5" height="11"/>
+  <object id="122" x="358" y="512" width="11" height="32"/>
+  <object id="123" x="270.5" y="574" width="12" height="34"/>
  </objectgroup>
 </map>
