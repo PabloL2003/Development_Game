@@ -195,7 +195,7 @@ bool Map::Load(SString mapFileName)
         dentro de los loops crear un if que te diferencie el nombre de las 2 layes, y segun el nombre de la layer decir que los objetos tienen valor spike o platform.*/
 
    
-
+    // hay que añadirle un bool que lo llamas desde el load//
     for (pugi::xml_node objectMode = mapNode.child("objectgroup"); objectMode && ret; objectMode = objectMode.next_sibling("objectgroup")) {
 
         if (objectNode.attribute("id").as_int() ==2 ) {
