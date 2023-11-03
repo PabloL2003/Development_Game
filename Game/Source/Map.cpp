@@ -189,6 +189,18 @@ bool Map::Load(SString mapFileName)
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
     
+
+
+    /*   crear 2 loops uno fuera que va por las layers hasta que encuantra las object groups. y despues dentro un que va por cada objeto de la layer,
+        dentro de los loops crear un if que te diferencie el nombre de las 2 layes, y segun el nombre de la layer decir que los objetos tienen valor spike o platform.*/
+
+   
+
+
+
+
+
+
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
     PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
