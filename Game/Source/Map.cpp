@@ -198,7 +198,7 @@ bool Map::Load(SString mapFileName)
 
     for (pugi::xml_node objectMode = mapNode.child("objectgroup"); objectMode && ret; objectMode = objectMode.next_sibling("objectgroup")) {
 
-        if (objectNode.attribute("id").as_int() == ) {
+        if (objectNode.attribute("id").as_int() ==2 ) {
 
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
                 int x = objectIt.attribute("x").as_int();
@@ -214,12 +214,11 @@ bool Map::Load(SString mapFileName)
                 y += height / 2;
 
                 PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
-                c1->ctype = ColliderType::
+                c1->ctype = ColliderType::SPIKE;
 
             }
 
-        }
-        else {
+        }else {
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
                 int x = objectIt.attribute("x").as_int();
                 int y = objectIt.attribute("y").as_int();
@@ -234,7 +233,7 @@ bool Map::Load(SString mapFileName)
                 y += height / 2;
 
                 PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
-                c1->ctype = ColliderType::
+                c1->ctype = ColliderType::PLATFORM;
 
             }
 
