@@ -57,7 +57,7 @@ private:
 	float movementForce = 2.5f;
 	float jumpForce = 300.0f;
 	float movementDampen = 6.0;
-	float idleDampenMultiplier = 0.75f;
+	float idleDampenMultiplier = 1.5f;
 	float maxVel = 5.0;
 
 

@@ -203,7 +203,6 @@ void Player::MovementLogic(float dt) {
 		jumping = true;
 		jumps--;
 	}
-	jumping = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
 	{
@@ -223,32 +222,23 @@ void Player::MovementLogic(float dt) {
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
-			{
-				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(movementDampen*dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		{
+			//Opposite direction dampening
+			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 		else
-			{
-				if (pbody->body->GetLinearVelocity().x < maxVel)
-					pbody->body->ApplyForce(b2Vec2(movementForce*dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
+		{
+			if (pbody->body->GetLinearVelocity().x < maxVel)
+				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
 	}
 
-	/*if (pbody->body->GetLinearVelocity().x < 0.3 && pbody->body->GetLinearVelocity().x >= 0) {
-		pbody->body->SetLinearVelocity(b2Vec2(0.0f, -GRAVITY_Y));
-	}
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE) {
+		b2Vec2 velocity = pbody->body->GetLinearVelocity();
+		float frictionForce = -velocity.x * idleDampenMultiplier;
 
-	if (pbody->body->GetLinearVelocity().x > -0.3 && pbody->body->GetLinearVelocity().x <= 0) {
-		pbody->body->SetLinearVelocity(b2Vec2(0.0f, -GRAVITY_Y));
-	}*/
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
-	{
-		if (pbody->body->GetLinearVelocity().x > 0.5f)
-			pbody->body->ApplyForce(b2Vec2(-pbody->body->GetLinearVelocity().x * idleDampenMultiplier, 0.0f), pbody->body->GetWorldCenter(), true);
-
-		if (pbody->body->GetLinearVelocity().x < -0.5f)
-			pbody->body->ApplyForce(b2Vec2(-pbody->body->GetLinearVelocity().x * idleDampenMultiplier, 0.0f), pbody->body->GetWorldCenter(), true);
+		// Aplicar fricción en dirección opuesta al movimiento actual
+		pbody->body->ApplyForce(b2Vec2(frictionForce, 0.0f), pbody->body->GetWorldCenter(), true);
 	}
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -317,8 +307,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (jumping == false)
+		if (pbody->body->GetLinearVelocity().y > 0.0f)
 		{
+			jumping = false;
 			jumps = 2;
 		}
 		break;

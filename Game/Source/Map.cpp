@@ -196,7 +196,7 @@ bool Map::Load(SString mapFileName)
 
    
     // hay que añadirle un bool que lo llamas desde el load//
-    for (pugi::xml_node objectMode = mapNode.child("objectgroup"); objectMode && ret; objectMode = objectMode.next_sibling("objectgroup")) {
+   /* for (pugi::xml_node objectMode = mapNode.child("objectgroup"); objectMode && ret; objectMode = objectMode.next_sibling("objectgroup")) {
 
         if (objectNode.attribute("id").as_int() ==2 ) {
 
@@ -241,7 +241,7 @@ bool Map::Load(SString mapFileName)
         }
 
 
-    }
+    }*/
 
 
 
