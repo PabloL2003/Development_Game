@@ -10815,7 +10815,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1610612788"/>
+   <tile gid="67"/>
+   <tile gid="68"/>
    <tile/>
    <tile/>
    <tile/>
@@ -10874,9 +10875,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile gid="1610612787"/>
-   <tile/>
+   <tile gid="75"/>
+   <tile gid="76"/>
    <tile/>
    <tile/>
    <tile/>
@@ -11231,7 +11231,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1610612788"/>
+   <tile gid="67"/>
+   <tile gid="68"/>
    <tile/>
    <tile/>
    <tile/>
@@ -11290,8 +11291,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="67"/>
+   <tile gid="68"/>
    <tile/>
-   <tile gid="1610612787"/>
    <tile/>
    <tile/>
    <tile/>
@@ -11349,10 +11351,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="1610612787"/>
-   <tile/>
+   <tile gid="75"/>
+   <tile gid="76"/>
    <tile/>
    <tile/>
    <tile/>
@@ -12047,7 +12047,7 @@
    <tile gid="75"/>
   </data>
  </layer>
- <objectgroup id="12" name="colliders platforms">
+ <objectgroup id="12" name="colliders platforms" locked="1">
   <object id="2" x="0" y="1136.5" width="276" height="146">
    <properties>
     <property name="Collision" type="bool" value="false"/>
