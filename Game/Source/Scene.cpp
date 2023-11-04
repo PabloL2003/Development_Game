@@ -86,6 +86,8 @@ bool Scene::Update(float dt)
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
 
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) return false;
+
 	return true;
 }
 
