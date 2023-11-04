@@ -1,7 +1,7 @@
-# Development_Game
+# The Ordeal of King Pepe
 
 ## Description
-### The king Pepe has been betrayed and sent to the dungeon. He must claim his sword to get revenge, but the dungeon is filled with traps. Help Pepe find his way out! 
+### The King Pepe has been betrayed and sent to the dungeon. He must claim his sword to get revenge, but the dungeon is filled with traps. Help Pepe find his way out! 
 
 ## Key features
 ### ·Original main character and character animations.
