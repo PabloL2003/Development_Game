@@ -13,6 +13,7 @@
 ### ·A-D: Move left and right;
 ### ·SPACE: Jump;
 ### ·(WHILE IN GODMODE) W-A-S-D: Move freely.
+### ·ESC: Exit application.
 
 ## Debug Controls
 When in debug mode, spikes will not kill Pepe, and the debug camera will be activated. When the sword is claimed, the game will enter the debug mode automatically.
