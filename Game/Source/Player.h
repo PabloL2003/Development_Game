@@ -45,6 +45,7 @@ public:
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 	int pickCoinFxId;
+	int isKilledFx;
 	int width = 24, height = 43;
 
 	iPoint spawn;
