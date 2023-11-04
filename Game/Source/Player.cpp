@@ -98,6 +98,7 @@ bool Player::Start() {
 	SetSpawnPoint(spawn);
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
 
 	return true;
 }
@@ -318,6 +319,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!app->debug->debug)
 		{
 			isKilled = true;
+			app->audio->PlayFx(isKilledFx);
 		}
 		break;
 	case ColliderType::UNKNOWN:
