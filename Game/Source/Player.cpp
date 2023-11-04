@@ -83,21 +83,11 @@ bool Player::Start() {
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
 	spawn.x = 100;
 	spawn.y = 1100;
-	//Rectangular hitbox
-	//pbody = app->physics->CreateRectangle(0, 0, 40, height, DYNAMIC);
-	//pbody->listener = this;
-	//pbody->body->SetFixedRotation(true);
-	//pbody->ctype = ColliderType::PLAYER;
-	//dashIndicator = 3;
-	////Changing the body's mass to fit the game physics
-	//b2MassData* data = new b2MassData; data->center = b2Vec2((float)width / 2, (float)height / 2); data->I = 0.0f; data->mass = 0.390625f;
-	//pbody->body->SetMassData(data);
-	//delete data;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
 
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
 
 	return true;
@@ -304,7 +294,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		//app->audio->PlayFx(pickCoinFxId);
+		app->audio->PlayFx(pickSwordFx);
+		if (app->debug->debug == false)
+		{
+			app->debug->debug = true;
+		}
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

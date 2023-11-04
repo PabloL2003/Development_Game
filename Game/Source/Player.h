@@ -44,7 +44,7 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
-	int pickCoinFxId;
+	int pickSwordFx;
 	int isKilledFx;
 	int width = 24, height = 43;
 

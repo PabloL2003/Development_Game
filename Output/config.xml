@@ -59,6 +59,8 @@
 			  <pushback x="76" y="276" width="30" height="43"/>
 		  </left_run>
 	  </player>
+
+	  <item x="50" y="45" texturepath="Assets/Textures/espada.png"/>
   </scene>
   
 </config>
