@@ -81,8 +81,8 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
-	spawn.x = 400;
-	spawn.y = 352;
+	spawn.x = 100;
+	spawn.y = 1100;
 	//Rectangular hitbox
 	//pbody = app->physics->CreateRectangle(0, 0, 40, height, DYNAMIC);
 	//pbody->listener = this;
@@ -315,7 +315,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::SPIKE:
 		LOG("Collision SPIKE");
-		isKilled = true;
+		if (!app->debug->debug)
+		{
+			isKilled = true;
+		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
