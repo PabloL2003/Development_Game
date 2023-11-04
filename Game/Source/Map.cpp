@@ -4,6 +4,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -194,6 +195,10 @@ bool Map::Load(SString mapFileName)
         ret = LoadAllObjects(mapFileXML.child("map"));
     }
 
+    if (ret == true)
+    {
+        ret = LoadColliders(mapFileXML.child("map"));
+    }
    
 
 
@@ -254,20 +259,20 @@ bool Map::Load(SString mapFileName)
 
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
+    //PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
+    //c1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    c2->ctype = ColliderType::PLATFORM;
+    //PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
+    //c2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    c3->ctype = ColliderType::PLATFORM;
-    //  Copiar codigo y cambiar coordenadas para mapear los colliders
-    PhysBody* c4 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC);
-    c4->ctype = ColliderType::PLATFORM;
+    //PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    //c3->ctype = ColliderType::PLATFORM;
+    ////  Copiar codigo y cambiar coordenadas para mapear los colliders
+    //PhysBody* c4 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC);
+    //c4->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c5 = app->physics->CreateRectangle(592, 704 + 64, 96, 10, STATIC);
-    c5->ctype = ColliderType::SPIKE;
+    //PhysBody* c5 = app->physics->CreateRectangle(592, 704 + 64, 96, 10, STATIC);
+    //c5->ctype = ColliderType::SPIKE;
     
     if(ret == true)
     {
@@ -401,7 +406,43 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     return ret;
 }
 
+bool Map::LoadColliders(pugi::xml_node mapFile)
+{
+    bool ret = true;
 
+    for (pugi::xml_node parent = mapFile.child("objectgroup"); parent && ret; parent = parent.next_sibling("objectgroup"))
+    {
+        if ((SString)parent.attribute("name").as_string() == "colliders platforms")
+        {
+            for (pugi::xml_node collider = parent.child("object"); collider && ret; collider = collider.next_sibling("object"))
+            {
+                PhysBody* box = app->physics->CreateRectangle(collider.attribute("x").as_float() + collider.attribute("width").as_float() / 2,
+                    collider.attribute("y").as_float() + collider.attribute("height").as_int() / 2,
+                    collider.attribute("width").as_float(),
+                    collider.attribute("height").as_float(), STATIC);
+                box->ctype = ColliderType::PLATFORM;
+                app->scene->boxes.Add(box);
+
+            }
+        }
+        if ((SString)parent.attribute("name").as_string() == "Collider pinchos")
+        {
+            for (pugi::xml_node collider = parent.child("object"); collider && ret; collider = collider.next_sibling("object"))
+            {
+                PhysBody* spike = app->physics->CreateRectangle(collider.attribute("x").as_float() + collider.attribute("width").as_float() / 2,
+                    collider.attribute("y").as_float() + collider.attribute("height").as_int() / 2,
+                    collider.attribute("width").as_float(),
+                    collider.attribute("height").as_float(), STATIC);
+                spike->ctype = ColliderType::SPIKE;
+                app->scene->spikes.Add(spike);
+
+            }
+        }
+        
+    }
+
+    return ret;
+}
 
 
 // objects//
