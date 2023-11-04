@@ -188,7 +188,13 @@ bool Map::Load(SString mapFileName)
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
-    
+ 
+    if (ret == true)
+    {
+        ret = LoadAllObjects(mapFileXML.child("map"));
+    }
+
+   
 
 
     /*   crear 2 loops uno fuera que va por las layers hasta que encuantra las object groups. y despues dentro un que va por cada objeto de la layer,
@@ -241,8 +247,8 @@ bool Map::Load(SString mapFileName)
         }
 
 
-    }*/
-
+    }
+    */
 
 
 
@@ -394,6 +400,110 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
     return ret;
 }
+
+
+
+
+// objects//
+
+bool Map::LoadObject(pugi::xml_node& mapNode, Objects* object)
+{
+    bool ret = true;
+
+    ////Load the attributes
+    //object->id = node.attribute("id").as_int();
+    //object->name = node.attribute("name").as_string();
+    //object->width = node.attribute("width").as_int();
+    //object->height = node.attribute("height").as_int();
+
+    //LoadProperties(node, object->properties);
+
+    ////Reserve the memory for the data 
+    //object->data = new uint[object->width * object->height];
+    //memset(object->data, 0, object->width * object->height);
+
+    ////Iterate over all the tiles and assign the values
+    //pugi::xml_node tile;
+    //int i = 0;
+    //for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+    //{
+    //    object->data[i] = tile.attribute("gid").as_int();
+    //    i++;
+    //}
+    for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup")) {
+
+        if (objectNode.attribute("id").as_int() == 12) {
+
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
+                c1->ctype = ColliderType::PLATFORM;
+
+            }
+
+        }
+        else {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
+                c1->ctype = ColliderType::SPIKE;
+
+            }
+
+
+        }
+
+
+    }
+    return ret;
+}
+
+bool Map::LoadAllObjects(pugi::xml_node mapNode) {
+    bool ret = true;
+
+    for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup"))
+    {
+        //Load the layer
+        Objects* objects = new Objects();
+        ret = LoadObject(objectNode, objects);
+
+        //add the layer to the map
+        mapData.objects.Add(objects);
+    }
+
+    return ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {

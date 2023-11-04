@@ -84,6 +84,15 @@ struct MapLayer
 		return data[(y * width) + x];
 	}
 };
+struct Objects {
+	SString	name;
+	int id;
+	int width;
+	int height;
+	uint* data;
+
+	Properties properties;
+};
 
 struct MapData
 {
@@ -95,6 +104,7 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
+	List<Objects*> objects;
 };
 
 class Map : public Module
@@ -132,6 +142,10 @@ private:
 	bool LoadAllLayers(pugi::xml_node mapNode);
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+
+
+	bool LoadObject(pugi::xml_node& node, Objects* object);
+	bool LoadAllObjects(pugi::xml_node mapNode);
 
 public: 
 
