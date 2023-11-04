@@ -47,7 +47,7 @@ public:
 	int pickCoinFxId;
 	int width = 24, height = 43;
 
-	iPoint spawn = iPoint(400, 352);
+	iPoint spawn;
 	
 	int jumps = 2;
 	bool jumping = false;
