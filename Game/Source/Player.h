@@ -58,7 +58,7 @@ private:
 	float jumpForce = 300.0f;
 	float movementDampen = 6.0;
 	float idleDampenMultiplier = 1.5f;
-	float maxVel = 5.0;
+	float maxVel = 5;
 
 
 	Animation* currentAnim = nullptr;
