@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="139">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="140">
  <tileset firstgid="1" name="Dungeon Tile Set" tilewidth="32" tileheight="32" tilecount="63" columns="7">
   <image source="Dungeon Tile Set.png" width="240" height="288"/>
  </tileset>
@@ -2419,7 +2419,7 @@
    <tile gid="25"/>
   </data>
  </layer>
- <layer id="4" name="plataforma de salto rand" width="60" height="40">
+ <layer id="4" name="plataforma de salto rand" width="60" height="40" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -9640,7 +9640,7 @@
    <tile gid="72"/>
   </data>
  </layer>
- <layer id="11" name="Pinchos" width="60" height="40">
+ <layer id="11" name="Pinchos" width="60" height="40" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -10072,7 +10072,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1610612787"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -10683,7 +10683,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="51"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -12047,7 +12047,7 @@
    <tile gid="75"/>
   </data>
  </layer>
- <objectgroup id="12" name="colliders platforms" visible="0" locked="1">
+ <objectgroup id="12" name="colliders platforms">
   <object id="2" x="0" y="1136.5" width="276" height="146">
    <properties>
     <property name="Collision" type="bool" value="false"/>
@@ -12386,8 +12386,9 @@
   <object id="126" x="1916.67" y="-12" width="99.3333" height="651.333"/>
   <object id="127" x="2093.33" y="709.333"/>
   <object id="130" x="-58.6667" y="0" width="61.3333" height="1286.67"/>
+  <object id="139" x="-2.66667" y="-2.66667" width="1954.67" height="4"/>
  </objectgroup>
- <objectgroup id="15" name="Collider pinchos" visible="0" locked="1">
+ <objectgroup id="15" name="Collider pinchos" locked="1">
   <object id="86" x="175.25" y="128" width="10.25" height="31.25"/>
   <object id="87" x="231" y="224.75" width="9.25" height="31.5"/>
   <object id="88" x="271.75" y="1151.75" width="10.5" height="128.75"/>
