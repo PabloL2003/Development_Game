@@ -311,7 +311,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (pbody->body->GetLinearVelocity().y > 0.0f)
 		{
 			jumping = false;
-			jumps = 2;
+			jumps = 1;
 		}
 		break;
 	case ColliderType::SPIKE:
