@@ -7382,19 +7382,19 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="72"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="12"/>
-   <tile gid="74"/>
+   <tile gid="80"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="81"/>
+   <tile gid="82"/>
    <tile/>
    <tile/>
    <tile/>
@@ -7442,19 +7442,19 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="80"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="81"/>
-   <tile gid="82"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -12329,7 +12329,7 @@
     <property name="Collision" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="58" x="751" y="-1" width="389" height="117">
+  <object id="58" x="751" y="-1" width="389" height="88">
    <properties>
     <property name="Collision" type="bool" value="false"/>
    </properties>
