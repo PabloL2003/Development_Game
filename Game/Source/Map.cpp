@@ -109,8 +109,18 @@ SDL_Rect TileSet::GetTileRect(int gid) const
 
     rect.w = tileWidth;
     rect.h = tileHeight;
-    rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
-    rect.y = margin + (tileWidth + spacing) * (relativeIndex / columns);
+
+    if (columns != 0)
+    {
+        rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
+        rect.y = margin + (tileWidth + spacing) * (relativeIndex / columns);
+    }
+   
+    else
+    {
+        rect.x = 0;
+        rect.y = 0;
+    }
 
     return rect;
 }
@@ -528,23 +538,6 @@ bool Map::LoadAllObjects(pugi::xml_node mapNode) {
 
     return ret;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
