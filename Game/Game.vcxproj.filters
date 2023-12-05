@@ -51,6 +51,12 @@
     <ClCompile Include="Source\Debug.cpp">
       <Filter>Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="FlyingEnemie.cpp">
+      <Filter>Application\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkingEnemie.cpp">
+      <Filter>Application\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -129,6 +135,12 @@
     </ClInclude>
     <ClInclude Include="Source\Debug.h">
       <Filter>Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingEnemie.h">
+      <Filter>Application\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkingEnemie.h">
+      <Filter>Application\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
