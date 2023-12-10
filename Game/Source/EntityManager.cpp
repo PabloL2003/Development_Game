@@ -87,6 +87,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
+	case EntityType::FLYENEM:
+		entity = new Item();
+		break;
+	case EntityType::WALKENEM:
+		entity = new Item();
+		break;
 	default:
 		break;
 	}

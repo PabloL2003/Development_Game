@@ -61,6 +61,63 @@
 	  </player>
 
 	  <item x="50" y="45" texturepath="Assets/Textures/espada.png"/>
+
+
+	  <flyenem x="" y="" texturepath="Assets/Textures/bat anmation.png">
+
+		  <flyrigthmov animspeed ="0.2f" loop="true">
+			  <pushback x="0" y="1" width="32" height="17"/>
+			  <pushback x="29" y="7" width="32" height="17"/>
+			  <pushback x="65" y="7" width="32" height="17"/>
+		  </flyrigthmov>
+
+		  <flyleftmov  animspeed ="0.2f" loop="true">
+			  <pushback x="73" y="25" width="32" height="17"/>
+			  <pushback x="38" y="31" width="32" height="17"/>
+			  <pushback x="3" y="30" width="32" height="17"/>
+		  </flyleftmov>
+		  
+		  
+	  </flyenem>
+
+
+
+	  <wenem x="" y="" texturepath="Assets/Textures/bat spider anim2.png">
+
+
+		  <wr_idle>
+			  <pushback x="0" y="0" width="34" height="16"/>
+		  </wr_idle>
+			  
+		  <wl_idle>
+			  <pushback x="113" y="32"  width="34" height="16"/>
+		  </wl_idle>
+		  
+		  <wrigthmov animspeed ="0.2f" loop="true">
+			  <pushback x="0" y="0"  width="34" height="16"/>
+			  <pushback x="41" y="1"  width="34" height="16"/>
+			  <pushback x="79" y="0"  width="34" height="16"/>
+			  <pushback x="112" y="0"  width="34" height="16"/>
+			  
+		  </wrigthmov>
+
+		  <wleftmov  animspeed ="0.2f" loop="true">
+			  <pushback x="113" y="32"  width="34" height="16"/>
+			  <pushback x="72" y="32"  width="34" height="16"/>
+			  <pushback x="36" y="32"  width="34" height="16"/>
+			  <pushback x="1" y="32"  width="34" height="16"/>
+			  
+		  </wleftmov>
+
+
+	  </wenem>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
   </scene>
   
 </config>
