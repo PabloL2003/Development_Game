@@ -99,3 +99,32 @@ bool Wenem::Start() {
 	return true;
 }
 
+void Wenem::AnimationLogic(float dt) {
+
+	if (/*Player outside pathfinding range*/) {
+
+		if (/*player position < enemie position */)
+		{
+			currentAnim = &wl_idle;
+		}
+		if (/*player position > enemie position */)
+		{
+			currentAnim = &wr_idle;
+		}
+	}
+
+
+
+	if (/*Player inside pathfinding range*/) {
+
+
+		if(/*enem posx -- */){
+		
+			currentAnim = &wleftmov;
+		}
+		if (/*enem posx ++ */) {
+
+			currentAnim = &wrigthmov;
+		}
+	}
+}

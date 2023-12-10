@@ -64,6 +64,37 @@ bool Flyenem::Awake() {
 	return true;
 }
 
+
+void Flyenem::AnimationLogic(float dt) {
+
+	if (/*Player outside pathfinding range*/) {
+
+		if (/*player position < enemie position */)
+		{
+			currentAnim = &wl_idle;
+		}
+		if (/*player position > enemie position */)
+		{
+			currentAnim = &wr_idle;
+		}
+	}
+
+
+
+	if (/*Player inside pathfinding range*/) {
+
+
+		if (/*enem posx -- */) {
+
+			currentAnim = &wleftmov;
+		}
+		if (/*enem posx ++ */) {
+
+			currentAnim = &wrigthmov;
+		}
+	}
+}
+
 bool Flyenem::Start() {
 
 	//initilize textures
