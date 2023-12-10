@@ -71,11 +71,11 @@ void Flyenem::AnimationLogic(float dt) {
 
 		if (/*player position < enemie position */)
 		{
-			currentAnim = &wl_idle;
+			currentAnim = &flyleftmov;
 		}
 		if (/*player position > enemie position */)
 		{
-			currentAnim = &wr_idle;
+			currentAnim = &flyrigthmov;
 		}
 	}
 
@@ -86,11 +86,11 @@ void Flyenem::AnimationLogic(float dt) {
 
 		if (/*enem posx -- */) {
 
-			currentAnim = &wleftmov;
+			currentAnim = &flyleftmov;
 		}
 		if (/*enem posx ++ */) {
 
-			currentAnim = &wrigthmov;
+			currentAnim = &flyrigthmov;
 		}
 	}
 }
@@ -102,7 +102,7 @@ bool Flyenem::Start() {
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::ENEMIE;
 
 
 

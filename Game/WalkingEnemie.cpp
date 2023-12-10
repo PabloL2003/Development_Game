@@ -92,7 +92,7 @@ bool Wenem::Start() {
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::ENEMIE;
 
 	
 
