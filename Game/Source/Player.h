@@ -68,6 +68,10 @@ private:
 
 	Animation leftIdle, leftRun;
 
+	Animation leftJump, rightJump;
+
+	Animation leftDeath, rightDeath;
+
 };
 
 #endif // __PLAYER_H__

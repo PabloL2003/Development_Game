@@ -60,6 +60,50 @@ void Player::InitAnims() {
 	}
 	leftRun.speed = parameters.child("left_run").attribute("animspeed").as_float();
 	leftRun.loop = parameters.child("left_run").attribute("loop").as_bool();
+	//R.Jump
+	for (pugi::xml_node node = parameters.child("right_jump").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		rightJump.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+	rightJump.speed = parameters.child("right_jump").attribute("animspeed").as_float();
+	rightJump.loop = parameters.child("right_jump").attribute("loop").as_bool();
+	//L.Jump
+	for (pugi::xml_node node = parameters.child("left_jump").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		leftJump.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+	leftJump.speed = parameters.child("left_jump").attribute("animspeed").as_float();
+	leftJump.loop = parameters.child("left_jump").attribute("loop").as_bool();
+	//R.Death
+	for (pugi::xml_node node = parameters.child("right_death").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		rightDeath.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+	rightDeath.speed = parameters.child("right_death").attribute("animspeed").as_float();
+	rightDeath.loop = parameters.child("right_death").attribute("loop").as_bool();
+	//L.Death
+	for (pugi::xml_node node = parameters.child("left_death").child("pushback");
+		node; node = node.next_sibling("pushback"))
+	{
+		leftDeath.PushBack({ node.attribute("x").as_int(),
+							node.attribute("y").as_int(),
+							node.attribute("width").as_int(),
+							node.attribute("height").as_int() });
+	}
+	leftDeath.speed = parameters.child("left_death").attribute("animspeed").as_float();
+	leftDeath.loop = parameters.child("left_death").attribute("loop").as_bool();
 
 	currentAnim = &rightIdle;
 }
@@ -106,6 +150,10 @@ void Player::AnimationLogic(float dt) {
 		{
 			currentAnim = &rightRun;
 		}
+		if (jumping == true)
+		{
+			currentAnim = &rightJump;
+		}
 	}
 
 	if (currentAnim == &leftIdle)
@@ -117,6 +165,10 @@ void Player::AnimationLogic(float dt) {
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			currentAnim = &rightRun;
+		}
+		if (jumping == true)
+		{
+			currentAnim = &leftJump;
 		}
 	}
 

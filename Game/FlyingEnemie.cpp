@@ -34,9 +34,6 @@ void Flyenem::InitAnims() {
 	flyrigthmov.speed = parameters.child("flyrigthmov").attribute("animspeed").as_float();
 	flyrigthmov.loop = parameters.child("flyrigthmov").attribute("loop").as_bool();
 
-
-
-
 	for (pugi::xml_node node = parameters.child("flyleftmov").child("pushback");
 		node; node = node.next_sibling("pushback"))
 	{
@@ -49,10 +46,6 @@ void Flyenem::InitAnims() {
 	flyleftmov.loop = parameters.child("flyleftmov").attribute("loop").as_bool();
 	
 }
-
-
-
-
 
 bool Flyenem::Awake() {
 
