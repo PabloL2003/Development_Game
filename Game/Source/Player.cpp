@@ -204,6 +204,14 @@ void Player::AnimationLogic(float dt) {
 		}
 	}
 	//Jump
+	
+	if (currentAnim == &rightJump)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+		{
+			
+		}
+	}
 }
 
 void Player::MovementLogic(float dt) {
