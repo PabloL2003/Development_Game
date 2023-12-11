@@ -43,10 +43,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie2 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
 	enemie2->parameters = config.child("flyenem2");
 
-	enemie3 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie3 = (Entity*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie3->parameters = config.child("wenem");
 
-	enemie4 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie4 = (Entity*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
 
