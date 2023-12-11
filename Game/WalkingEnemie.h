@@ -20,8 +20,6 @@ class Wenem : public Entity
 
 		bool Start();
 
-	//	void AnimationLogic(float dt);
-
 
 		bool Update(float dt);
 

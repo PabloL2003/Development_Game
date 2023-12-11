@@ -36,6 +36,11 @@ public:
 
 public:
 	Player* player;
+	Entity* enemie;
+	Entity* enemie2;
+	Entity* enemie3;
+	Entity* enemie4;
+
 	List<PhysBody*> boxes;
 	List<PhysBody*> spikes;
 

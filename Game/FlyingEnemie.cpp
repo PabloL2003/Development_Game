@@ -57,36 +57,6 @@ bool Flyenem::Awake() {
 	return true;
 }
 
-//
-//void Flyenem::AnimationLogic(float dt) {
-//
-//	if (/*Player outside pathfinding range*/) {
-//
-//		if (/*player position < enemie position */)
-//		{
-//			currentAnim = &flyleftmov;
-//		}
-//		if (/*player position > enemie position */)
-//		{
-//			currentAnim = &flyrigthmov;
-//		}
-//	}
-//
-//
-//
-//	if (/*Player inside pathfinding range*/) {
-//
-//
-//		if (/*enem posx -- */) {
-//
-//			currentAnim = &flyleftmov;
-//		}
-//		if (/*enem posx ++ */) {
-//
-//			currentAnim = &flyrigthmov;
-//		}
-//	}
-//}
 
 bool Flyenem::Start() {
 
@@ -108,7 +78,6 @@ bool Flyenem::Update(float dt)
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
-	//AnimationLogic(dt);
 
 
 	return true;

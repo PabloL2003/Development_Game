@@ -35,6 +35,25 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 	// declare awake of enemies
+
+
+	enemie = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie->parameters = config.child("flyenem");
+
+	enemie2 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie2->parameters = config.child("flyenem2");
+
+	enemie3 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie3->parameters = config.child("wenem");
+
+	enemie4 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie4->parameters = config.child("wenem2");
+
+
+
+
+
+
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = config.child("map").attribute("name").as_string();

@@ -21,9 +21,6 @@ public:
 
 	bool Start();
 
-//	void AnimationLogic(float dt);
-
-
 	bool Update(float dt);
 
 	bool CleanUp();

@@ -101,42 +101,11 @@ bool Wenem::Start() {
 
 
 
-//void Wenem::AnimationLogic(float dt) {
-//
-//	if (/*Player outside pathfinding range*/) {
-//
-//		if (/*player position < enemie position */)
-//		{
-//			currentAnim = &wl_idle;
-//		}
-//		if (/*player position > enemie position */)
-//		{
-//			currentAnim = &wr_idle;
-//		}
-//	}
-//
-//
-//
-//	if (/*Player inside pathfinding range*/) {
-//
-//
-//		if(/*enem posx -- */){
-//		
-//			currentAnim = &wleftmov;
-//		}
-//		if (/*enem posx ++ */) {
-//
-//			currentAnim = &wrigthmov;
-//		}
-//	}
-//}
-
 bool Wenem::Update(float dt)
 {
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
-	//AnimationLogic(dt);
 	
 	
 	return true;
