@@ -21,13 +21,12 @@ public:
 
 	bool Start();
 
-	void AnimationLogic(float dt);
+//	void AnimationLogic(float dt);
 
-	void IsDead();
 
-	//bool Update(float dt);
+	bool Update(float dt);
 
-	//bool CleanUp();
+	bool CleanUp();
 
 
 
@@ -37,7 +36,9 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
+	int width = 32, height = 18;
 
+	iPoint spawn;
 
 private:
 	Animation* currentAnim = nullptr;

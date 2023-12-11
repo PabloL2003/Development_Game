@@ -108,3 +108,25 @@ bool Flyenem::Start() {
 
 	return true;
 }
+
+
+bool Flyenem::Update(float dt)
+{
+	currentAnim->Update();
+	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
+
+	//AnimationLogic(dt);
+
+
+	return true;
+}
+
+
+bool Flyenem::CleanUp()
+{
+
+	texturePath = nullptr;
+	currentAnim = nullptr;
+
+	return true;
+}

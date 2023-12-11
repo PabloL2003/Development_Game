@@ -99,6 +99,8 @@ bool Wenem::Start() {
 	return true;
 }
 
+
+
 //void Wenem::AnimationLogic(float dt) {
 //
 //	if (/*Player outside pathfinding range*/) {
@@ -128,3 +130,25 @@ bool Wenem::Start() {
 //		}
 //	}
 //}
+
+bool Wenem::Update(float dt)
+{
+	currentAnim->Update();
+	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
+
+	//AnimationLogic(dt);
+	
+	
+	return true;
+}
+
+
+
+bool Wenem::CleanUp()
+{
+
+	texturePath = nullptr;
+	currentAnim = nullptr;
+
+	return true;
+}

@@ -20,13 +20,12 @@ class Wenem : public Entity
 
 		bool Start();
 
-		void AnimationLogic(float dt);
+	//	void AnimationLogic(float dt);
 
-		void IsDead();
 
-		//bool Update(float dt);
+		bool Update(float dt);
 
-		//bool CleanUp();
+		bool CleanUp();
 
 		
 
@@ -35,8 +34,9 @@ class Wenem : public Entity
 		const char* texturePath;
 		SDL_Texture* texture = NULL;
 		PhysBody* pbody;
-		
+		int width = 34, height = 16;
 
+		iPoint spawn;
 
 private:
 	Animation* currentAnim = nullptr;
