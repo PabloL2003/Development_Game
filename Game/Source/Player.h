@@ -6,6 +6,13 @@
 #include "SDL/include/SDL.h"
 #include "Anim.h"
 
+enum class PlayerState
+{
+	IDLE,
+	RUN,
+	JUMP,
+	DEATH,
+};
 
 struct SDL_Texture;
 
@@ -72,6 +79,7 @@ private:
 
 	Animation leftDeath, rightDeath;
 
+	PlayerState currentState = PlayerState::IDLE;
 };
 
 #endif // __PLAYER_H__

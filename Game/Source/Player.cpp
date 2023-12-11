@@ -186,6 +186,10 @@ void Player::AnimationLogic(float dt) {
 		{
 			currentAnim = &leftRun;
 		}
+		if (jumping == true)
+		{
+			currentAnim = &rightJump;
+		}
 	}
 	
 	if (currentAnim == &leftRun)
@@ -202,16 +206,61 @@ void Player::AnimationLogic(float dt) {
 		{
 			currentAnim = &rightRun;
 		}
+		if (jumping == true)
+		{
+			currentAnim = &leftJump;
+		}
 	}
 	//Jump
 	
 	if (currentAnim == &rightJump)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
-			
+			currentAnim = &leftJump;
+		}
+		if (jumping == false)
+		{
+			currentAnim = &rightIdle;
+		}
+		if (isKilled == true)
+		{
+			currentAnim = &rightDeath;
 		}
 	}
+
+	if (currentAnim == &leftJump)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			currentAnim = &rightJump;
+		}
+		if (jumping == false)
+		{
+			currentAnim = &leftIdle;
+		}
+	}
+
+	//Death
+
+	if (currentAnim == &rightDeath && currentAnim->HasFinished())
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			currentAnim = &rightIdle;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			currentAnim = &leftIdle;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			currentAnim = &rightJump;
+		}
+	}
+
+	
+
 }
 
 void Player::MovementLogic(float dt) {
@@ -301,8 +350,12 @@ void Player::IsDead()
 {
 	if (isKilled) 
 	{
+		currentAnim = &rightDeath;
+		app->audio->PlayFx(isKilledFx);
 		TeleportTo(spawn);
 	}
+	isKilled = false;
+	
 }
 
 void Player::SetSpawnPoint(iPoint pos)
@@ -328,13 +381,12 @@ void Player::TeleportTo(iPoint pos)
 
 bool Player::Update(float dt)
 {
+	IsDead();
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x+5, position.y-8, &(currentAnim->GetCurrentFrame()));
 
 	AnimationLogic(dt);
 	MovementLogic(dt);
-	IsDead();
-	isKilled = false;
 
 	return true;
 }
@@ -373,9 +425,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!app->debug->debug)
 		{
 			isKilled = true;
-			app->audio->PlayFx(isKilledFx);
 		}
 		break;
+
+	case ColliderType::ENEMIE:
+		LOG("Collision Enemy");
+		isKilled = true;
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
