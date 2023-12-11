@@ -64,36 +64,36 @@ bool Flyenem::Awake() {
 	return true;
 }
 
-
-void Flyenem::AnimationLogic(float dt) {
-
-	if (/*Player outside pathfinding range*/) {
-
-		if (/*player position < enemie position */)
-		{
-			currentAnim = &flyleftmov;
-		}
-		if (/*player position > enemie position */)
-		{
-			currentAnim = &flyrigthmov;
-		}
-	}
-
-
-
-	if (/*Player inside pathfinding range*/) {
-
-
-		if (/*enem posx -- */) {
-
-			currentAnim = &flyleftmov;
-		}
-		if (/*enem posx ++ */) {
-
-			currentAnim = &flyrigthmov;
-		}
-	}
-}
+//
+//void Flyenem::AnimationLogic(float dt) {
+//
+//	if (/*Player outside pathfinding range*/) {
+//
+//		if (/*player position < enemie position */)
+//		{
+//			currentAnim = &flyleftmov;
+//		}
+//		if (/*player position > enemie position */)
+//		{
+//			currentAnim = &flyrigthmov;
+//		}
+//	}
+//
+//
+//
+//	if (/*Player inside pathfinding range*/) {
+//
+//
+//		if (/*enem posx -- */) {
+//
+//			currentAnim = &flyleftmov;
+//		}
+//		if (/*enem posx ++ */) {
+//
+//			currentAnim = &flyrigthmov;
+//		}
+//	}
+//}
 
 bool Flyenem::Start() {
 

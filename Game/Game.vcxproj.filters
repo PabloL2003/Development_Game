@@ -57,6 +57,9 @@
     <ClCompile Include="WalkingEnemie.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="pathfinding.cpp">
+      <Filter>Application\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -140,6 +143,9 @@
       <Filter>Application\Entities</Filter>
     </ClInclude>
     <ClInclude Include="WalkingEnemie.h">
+      <Filter>Application\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="pathfinding.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
   </ItemGroup>

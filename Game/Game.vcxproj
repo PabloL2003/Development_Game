@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FlyingEnemie.cpp" />
+    <ClCompile Include="pathfinding.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="WalkingEnemie.cpp" />
     <ClInclude Include="FlyingEnemie.h" />
+    <ClInclude Include="pathfinding.h" />
     <ClInclude Include="Source\Anim.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Entity.h" />
