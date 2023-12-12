@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Item.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -105,7 +106,10 @@ bool Scene::Update(float dt)
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) return false;
+
+	//Probablemente lo meteré en debug
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
 	return true;
 }

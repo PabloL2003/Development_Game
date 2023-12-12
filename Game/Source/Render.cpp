@@ -173,7 +173,8 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		//Muteado de momento hasta que se arregle lo del mapa
+		/*LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());*/ 
 		ret = false;
 	}
 
@@ -260,4 +261,21 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+bool Render::LoadState(pugi::xml_node node)
+{
+	camera.x = node.child("camera").attribute("x").as_int();
+	camera.y = node.child("camera").attribute("y").as_int();
+
+	return true;
+}
+
+bool Render::SaveState(pugi::xml_node node) 
+{
+	pugi::xml_node camNode = node.append_child("camera");
+	camNode.append_attribute("x").set_value(camera.x);
+	camNode.append_attribute("y").set_value(camera.y);
+
+	return true;
 }

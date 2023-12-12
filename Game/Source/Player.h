@@ -40,6 +40,10 @@ public:
 
 	void IsDead();
 
+	bool LoadState(pugi::xml_node node);
+	
+	bool SaveState(pugi::xml_node node);
+
 	bool Update(float dt);
 
 	bool CleanUp();
