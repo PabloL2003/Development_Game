@@ -51,13 +51,13 @@
     <ClCompile Include="Source\Debug.cpp">
       <Filter>Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="FlyingEnemie.cpp">
+    <ClCompile Include="Source\FlyingEnemie.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="WalkingEnemie.cpp">
+    <ClCompile Include="Source\pathfinding.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="pathfinding.cpp">
+    <ClCompile Include="Source\WalkingEnemie.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -139,13 +139,13 @@
     <ClInclude Include="Source\Debug.h">
       <Filter>Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="FlyingEnemie.h">
+    <ClInclude Include="Source\FlyingEnemie.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="WalkingEnemie.h">
+    <ClInclude Include="Source\pathfinding.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="pathfinding.h">
+    <ClInclude Include="Source\WalkingEnemie.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
   </ItemGroup>
