@@ -1,9 +1,9 @@
 #ifndef __WALKENEM_H__
 #define __WALKENEM_H__
 
-#include "../Entity.h"
+#include "Entity.h"
 #include "SDL/include/SDL.h"
-#include "../Anim.h"
+#include "Anim.h"
 
 
 struct SDL_Texture;
