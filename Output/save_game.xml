@@ -5,11 +5,11 @@
 	<textures />
 	<audio />
 	<debug />
-	<:anonymous />
+	<physics />
 	<scene />
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="0" y="-500" />
+		<camera x="-405" y="-252" />
 	</renderer>
 </game_state>
