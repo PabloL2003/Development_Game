@@ -148,15 +148,22 @@ private:
 	bool LoadObject(pugi::xml_node& node, Objects* object);
 	bool LoadAllObjects(pugi::xml_node mapNode);
 
+
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+
 public: 
 
 	MapData mapData;
 	SString name;
 	SString path;
 
+	PathFinding* pathfinding;
+
 private:
 
 	bool mapLoaded;
+	MapLayer* navigationLayer;
+	int blockedGid = 124;
 };
 
 #endif // __MAP_H__
