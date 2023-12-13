@@ -34,6 +34,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	iPoint GetPLayerPosition();
+	iPoint GetenemiePosition();
+	iPoint Getenemie2Position();
+	iPoint Getenemie3Position();
+	iPoint Getenemie4Position();
+
 public:
 	Player* player;
 	Entity* enemie;

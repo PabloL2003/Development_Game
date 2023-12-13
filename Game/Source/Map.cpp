@@ -49,6 +49,8 @@ bool Map::Start() {
 
 bool Map::Update(float dt)
 {
+    bool ret = true;
+
     if(mapLoaded == false)
         return false;
 
@@ -154,6 +156,8 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
 bool Map::CleanUp()
 {
     LOG("Unloading map");
+
+    pathfinding->CleanUp();
 
 	ListItem<TileSet*>* item;
 	item = mapData.tilesets.start;

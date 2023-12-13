@@ -132,3 +132,23 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+iPoint Scene::GetPLayerPosition() {
+	return player->position;
+}
+
+iPoint Scene::GetenemiePosition() {
+	return enemie->position;
+}
+
+iPoint Scene::Getenemie2Position() {
+	return enemie2->position;
+}
+
+iPoint Scene::Getenemie3Position() {
+	return enemie3->position;
+}
+
+iPoint Scene::Getenemie4Position() {
+	return enemie4->position;
+}

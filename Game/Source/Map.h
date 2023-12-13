@@ -134,6 +134,8 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
 
+void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+
 private:
 
 	bool LoadMap(pugi::xml_node mapFile);
@@ -149,7 +151,7 @@ private:
 	bool LoadAllObjects(pugi::xml_node mapNode);
 
 
-	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+	
 
 public: 
 
