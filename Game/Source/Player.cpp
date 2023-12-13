@@ -344,6 +344,7 @@ void Player::MovementLogic(float dt) {
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
 }
 
 void Player::IsDead()
@@ -379,23 +380,6 @@ void Player::TeleportTo(iPoint pos)
 	}
 }
 
-bool Player::LoadState(pugi::xml_node node)
-{
-	position.x = node.child("player").attribute("x").as_int();
-	position.y = node.child("player").attribute("y").as_int();
-
-	return true;
-}
-
-bool Player::SaveState(pugi::xml_node node)
-{
-	pugi::xml_node playerNode = node.append_child("player");
-	playerNode.append_attribute("x").set_value(position.x);
-	playerNode.append_attribute("y").set_value(position.y);
-
-	return true;
-}
-
 bool Player::Update(float dt)
 {
 	IsDead();
@@ -413,6 +397,7 @@ bool Player::CleanUp()
 
 	texturePath = nullptr;
 	currentAnim = nullptr;
+	delete pbody;
 
 	return true;
 }
@@ -444,12 +429,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			isKilled = true;
 		}
 		break;
-
-	case ColliderType::ENEMIE:
-		LOG("Collision Enemy");
-		isKilled = true;
-		break;
-
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

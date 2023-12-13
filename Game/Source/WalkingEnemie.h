@@ -10,31 +10,32 @@ struct SDL_Texture;
 
 class Wenem : public Entity
 {
-	public:
-		Wenem();
-		virtual ~Wenem();
+public:
+	Wenem();
+	virtual ~Wenem();
 
-		void InitAnims();
+	void InitAnims();
 
-		bool Awake();
+	bool Awake();
 
-		bool Start();
+	bool Start();
 
 
-		bool Update(float dt);
+	bool Update(float dt);
 
-		bool CleanUp();
+	bool CleanUp();
 
-		
+	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	public:
+public:
 
-		const char* texturePath;
-		SDL_Texture* texture = NULL;
-		PhysBody* pbody;
-		int width = 34, height = 16;
+	const char* texturePath;
+	SDL_Texture* texture = NULL;
+	PhysBody* pbody;
+	int width = 34, height = 16;
 
-		iPoint spawn;
+	iPoint spawn;
+	bool isDead = false;
 
 private:
 	Animation* currentAnim = nullptr;

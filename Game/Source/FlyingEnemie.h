@@ -25,7 +25,7 @@ public:
 
 	bool CleanUp();
 
-
+	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 
 public:
@@ -36,6 +36,7 @@ public:
 	int width = 32, height = 18;
 
 	iPoint spawn;
+	bool isDead = false;
 
 private:
 	Animation* currentAnim = nullptr;

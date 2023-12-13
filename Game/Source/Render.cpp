@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Physics.h"
 #include "Debug.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"

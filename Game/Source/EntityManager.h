@@ -33,6 +33,12 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	void ReviveAllEntitites();
+
+	void NeedsToSpawnAllEntities();
+
+	void ActivateEnemies();
+
 public:
 
 	List<Entity*> entities;

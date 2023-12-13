@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
+#include "FlyingEnemie.h"
+#include "WalkingEnemie.h"
 
 struct SDL_Texture;
 
@@ -34,6 +36,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool LoadState(pugi::xml_node node);
+
+	bool SaveState(pugi::xml_node node);
+
 	iPoint GetPLayerPosition();
 	iPoint GetenemiePosition();
 	iPoint Getenemie2Position();
@@ -42,10 +48,10 @@ public:
 
 public:
 	Player* player;
-	Entity* enemie;
-	Entity* enemie2;
-	Entity* enemie3;
-	Entity* enemie4;
+	Flyenem* enemie;
+	Flyenem* enemie2;
+	Wenem* enemie3;
+	Wenem* enemie4;
 
 	List<PhysBody*> boxes;
 	List<PhysBody*> spikes;

@@ -22,8 +22,6 @@ Wenem::~Wenem() {
 
 void Wenem::InitAnims() {
 
-
-
 	//R.Idle
 	for (pugi::xml_node node = parameters.child("wr_idle").child("pushback");
 		node; node = node.next_sibling("pushback")) {
@@ -67,12 +65,8 @@ void Wenem::InitAnims() {
 	wleftmov.speed = parameters.child("wleftmov").attribute("animspeed").as_float();
 	wleftmov.loop = parameters.child("wleftmov").attribute("loop").as_bool();
 
-	currentAnim = &wl_idle;
+	currentAnim = &wleftmov;
 }
-
-
-
-
 
 
 bool Wenem::Awake() {
@@ -80,7 +74,7 @@ bool Wenem::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	//InitAnims();
+	InitAnims();
 
 	return true;
 }
@@ -90,11 +84,9 @@ bool Wenem::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 17, position.y, 10, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
-
-	
 
 	return true;
 }
@@ -106,18 +98,41 @@ bool Wenem::Update(float dt)
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
-	
+	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 	
 	return true;
 }
 
-
-
 bool Wenem::CleanUp()
 {
-
+	delete pbody;
 	texturePath = nullptr;
 	currentAnim = nullptr;
 
 	return true;
+}
+
+void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	if (physB->ctype == ColliderType::PLAYER)
+	{
+		LOG("Collision ENEMY");
+
+		if (!app->debug->godMode) 
+		{
+			if (physB->body->GetLinearVelocity().y > 0)
+			{
+				isDead = true;
+			}
+
+			else 
+			{
+				app->scene->player->isKilled = true;
+			}
+
+		}
+	}
 }

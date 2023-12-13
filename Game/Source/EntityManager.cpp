@@ -88,10 +88,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Item();
 		break;
 	case EntityType::FLYENEM:
-		entity = new Item();
+		entity = new Flyenem();
 		break;
 	case EntityType::WALKENEM:
-		entity = new Item();
+		entity = new Wenem();
 		break;
 	default:
 		break;
@@ -115,6 +115,30 @@ void EntityManager::DestroyEntity(Entity* entity)
 void EntityManager::AddEntity(Entity* entity)
 {
 	if ( entity != nullptr) entities.Add(entity);
+}
+
+void EntityManager::ReviveAllEntitites()
+{
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+	for (item = entities.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+		pEntity->isKilled = false;
+	}
+}
+
+void EntityManager::NeedsToSpawnAllEntities() {
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+	for (item = entities.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity != app->scene->player)
+		{
+			pEntity->needsToSpawn = true;
+		}
+	}
 }
 
 bool EntityManager::Update(float dt)

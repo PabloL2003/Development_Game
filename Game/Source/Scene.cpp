@@ -7,6 +7,8 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Item.h"
+#include "Player.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -37,22 +39,17 @@ bool Scene::Awake(pugi::xml_node& config)
 	}
 	// declare awake of enemies
 
-
-	enemie = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie = (Flyenem*)app->entityManager->CreateEntity(EntityType::FLYENEM);
 	enemie->parameters = config.child("flyenem");
 
-	enemie2 = (Entity*)app->entityManager->CreateEntity(EntityType::FLYENEM);
+	enemie2 = (Flyenem*)app->entityManager->CreateEntity(EntityType::FLYENEM);
 	enemie2->parameters = config.child("flyenem2");
 
-	enemie3 = (Entity*)app->entityManager->CreateEntity(EntityType::WALKENEM);
+	enemie3 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie3->parameters = config.child("wenem");
 
-	enemie4 = (Entity*)app->entityManager->CreateEntity(EntityType::WALKENEM);
+	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
-
-
-
-
 
 
 	if (config.child("map")) {
@@ -131,6 +128,31 @@ bool Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+bool Scene::SaveState(pugi::xml_node node)
+{
+	pugi::xml_node playernode = node.append_child("player");
+
+	playernode.append_attribute("x") = player->position.x;
+	playernode.append_attribute("y") = player->position.y;
+	
+	return true;
+}
+
+bool Scene::LoadState(pugi::xml_node node)
+{
+	//Player Load/Save state
+	player->position.x = node.child("player").attribute("x").as_int();
+	player->position.y = node.child("player").attribute("y").as_int();
+
+	player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y)), 0);
+	player->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	//Enemies Load/Save state
+
+	return true;
+	
 }
 
 iPoint Scene::GetPLayerPosition() {

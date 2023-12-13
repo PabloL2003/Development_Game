@@ -80,6 +80,9 @@ public:
 	SString name;
 	EntityType type;
 	bool active = true;
+	bool isKilled;
+	bool needsToSpawn = false;
+	bool pendingToDelete = false;
 	pugi::xml_node parameters; 
 
 	// Possible properties, it depends on how generic we

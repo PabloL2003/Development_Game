@@ -6,10 +6,12 @@
 	<audio />
 	<debug />
 	<physics />
-	<scene />
+	<scene>
+		<player x="1287" y="1103" />
+	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="-405" y="-252" />
+		<camera x="-787" y="-500" />
 	</renderer>
 </game_state>

@@ -44,6 +44,8 @@ void Flyenem::InitAnims() {
 	}
 	flyleftmov.speed = parameters.child("flyleftmov").attribute("animspeed").as_float();
 	flyleftmov.loop = parameters.child("flyleftmov").attribute("loop").as_bool();
+
+	currentAnim = &flyleftmov;
 	
 }
 
@@ -52,7 +54,7 @@ bool Flyenem::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	//InitAnims();
+	InitAnims();
 
 	return true;
 }
@@ -63,7 +65,7 @@ bool Flyenem::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 
@@ -76,9 +78,7 @@ bool Flyenem::Start() {
 bool Flyenem::Update(float dt)
 {
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
-
-
+	app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
 
 	return true;
 }
@@ -86,9 +86,19 @@ bool Flyenem::Update(float dt)
 
 bool Flyenem::CleanUp()
 {
-
+	delete pbody;
 	texturePath = nullptr;
 	currentAnim = nullptr;
 
 	return true;
+}
+
+void Flyenem::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	if (physB->ctype == ColliderType::PLAYER)
+	{
+		if (!app->debug->godMode) app->scene->player->isKilled = true;
+
+		//para que se muera, quizá velocidad lineal de jugador de y menor que 0 o algo.
+	}
 }

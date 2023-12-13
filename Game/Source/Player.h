@@ -82,8 +82,6 @@ private:
 	Animation leftJump, rightJump;
 
 	Animation leftDeath, rightDeath;
-
-	PlayerState currentState = PlayerState::IDLE;
 };
 
 #endif // __PLAYER_H__
