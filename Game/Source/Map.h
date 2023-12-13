@@ -6,6 +6,7 @@
 #include "Point.h"
 
 #include "PugiXml\src\pugixml.hpp"
+#include "pathfinding.h"
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
