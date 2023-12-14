@@ -18,7 +18,6 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
-class PathFinding;
 class Physics;
 class Debug;
 
@@ -92,7 +91,6 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
-	PathFinding* pathfinding;
 	Physics* physics;
 	Debug* debug;
 

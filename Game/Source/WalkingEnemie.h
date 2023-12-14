@@ -4,8 +4,6 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 #include "Anim.h"
-#include "Point.h"
-#include "DynArray.h"
 
 
 struct SDL_Texture;
@@ -22,7 +20,6 @@ public:
 
 	bool Start();
 
-	void TeleportTo(iPoint position);
 
 	bool Update(float dt);
 
@@ -46,8 +43,5 @@ private:
 	Animation wr_idle, wrigthmov;
 
 	Animation wl_idle, wleftmov;
-
-	float speedCap = 3.0f;
-	DynArray<iPoint> pathToPlayer;
 };
 #endif
