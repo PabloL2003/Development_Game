@@ -1,3 +1,4 @@
+
 #include "WalkingEnemie.h"
 #include "App.h"
 #include "Textures.h"
@@ -9,6 +10,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Debug.h"
+#include "Player.h"
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {
@@ -84,17 +86,25 @@ bool Wenem::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 17, position.y, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 17, position.y, width, height, bodyType::DYNAMIC);
+	spawn.x = parameters.attribute("x").as_int();
+	spawn.y = parameters.attribute("y").as_int();
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
+	SetSpawnPoint(spawn);
+
+	//Killed fx
 
 	return true;
 }
 
-
-
 bool Wenem::Update(float dt)
 {
+	IsDead();
+
+	if (isKilled)
+		return true;
+
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
@@ -102,15 +112,56 @@ bool Wenem::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-	
+
+	if (pendingToDelete)
+	{
+		isKilled = true;
+		CleanUp();
+	}
+
 	return true;
+}
+
+void Wenem::TeleportTo(iPoint pos)
+{
+	// Detén la velocidad actual del enemigo
+	pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+	// Establece la posición del cuerpo físico del enemigo en el punto de destino
+	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(pos.x), PIXEL_TO_METERS(pos.y)), 0.0f);
+
+	// Actualiza la posición del enemigo
+	position.x = pos.x;
+	position.y = pos.y;
+
+}
+
+void Wenem::SetSpawnPoint(iPoint pos)
+{
+	spawn = pos;
+}
+
+void Wenem::IsDead()
+{
+	if (app->scene->player->isKilled)
+	{
+		TeleportTo(spawn);
+	}
 }
 
 bool Wenem::CleanUp()
 {
-	delete pbody;
-	texturePath = nullptr;
-	currentAnim = nullptr;
+	app->tex->UnLoad(texture);
+	texture = nullptr;
+
+	if (pbody)
+	{
+		app->physics->DestroyBody(pbody);
+		pbody = nullptr;
+	}
+
+	pendingToDelete = false;
+	active = false;
 
 	return true;
 }
@@ -121,14 +172,16 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 	{
 		LOG("Collision ENEMY");
 
-		if (!app->debug->godMode) 
+		if (!app->debug->godMode)
 		{
-			if (physB->body->GetLinearVelocity().y > 0)
+			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
-				isDead = true;
+				LOG("ENEMY KILLED");
+				pendingToDelete = true;
+
 			}
 
-			else 
+			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
 				app->scene->player->isKilled = true;
 			}

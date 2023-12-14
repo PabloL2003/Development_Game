@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "Player.h"
 #include "Physics.h"
+#include "WalkingEnemie.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -98,11 +99,9 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
-
 
 	//Probablemente lo meteré en debug
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();

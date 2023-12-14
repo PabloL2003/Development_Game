@@ -73,6 +73,20 @@ bool Physics::PreUpdate()
 	return ret;
 }
 
+void Physics::DestroyBody(PhysBody* body)
+{
+	if (body && body->body)
+	{
+		b2Body* box2DBody = body->body;
+
+		// Remove the body from the world
+		world->DestroyBody(box2DBody);
+
+		// Delete the PhysBody structure
+		delete body;
+	}
+}
+
 PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType type)
 {
 	b2BodyDef body;

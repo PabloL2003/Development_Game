@@ -20,12 +20,17 @@ public:
 
 	bool Start();
 
+	void TeleportTo(iPoint pos);
+
+	void SetSpawnPoint(iPoint pos);
 
 	bool Update(float dt);
 
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+
+	void IsDead();
 
 public:
 
@@ -35,7 +40,7 @@ public:
 	int width = 34, height = 16;
 
 	iPoint spawn;
-	bool isDead = false;
+	bool isKilled = false;
 
 private:
 	Animation* currentAnim = nullptr;

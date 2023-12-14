@@ -33,6 +33,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics();
 	scene = new Scene();
 	map = new Map();
+	pathfinding = new PathFinding();
 	entityManager = new EntityManager();
 	debug = new Debug();
 
@@ -47,6 +48,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(scene);
 	AddModule(map);
+	AddModule(pathfinding);
 	AddModule(entityManager);
 
 	// Render last to swap buffer

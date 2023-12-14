@@ -125,8 +125,8 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
-	spawn.x = 100;
-	spawn.y = 1100;
+	spawn.x = parameters.attribute("x").as_int();
+	spawn.y = parameters.attribute("y").as_int();
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
