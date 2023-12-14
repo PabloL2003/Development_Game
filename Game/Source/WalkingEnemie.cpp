@@ -122,6 +122,15 @@ bool Wenem::Update(float dt)
 	return true;
 }
 
+void Wenem::IsDead()
+{
+	if (killedPlayer)
+	{
+		TeleportTo(spawn);
+	}
+	killedPlayer = false;
+}
+
 void Wenem::TeleportTo(iPoint pos)
 {
 	// Detén la velocidad actual del enemigo
@@ -139,14 +148,6 @@ void Wenem::TeleportTo(iPoint pos)
 void Wenem::SetSpawnPoint(iPoint pos)
 {
 	spawn = pos;
-}
-
-void Wenem::IsDead()
-{
-	if (app->scene->player->isKilled)
-	{
-		TeleportTo(spawn);
-	}
 }
 
 bool Wenem::CleanUp()
@@ -184,6 +185,7 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
 				app->scene->player->isKilled = true;
+				killedPlayer = true;
 			}
 
 		}
