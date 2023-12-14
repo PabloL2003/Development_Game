@@ -7,7 +7,9 @@
 
 PathFinding::PathFinding()
 {
+	name.Create("pathfinding");
 	map = NULL;
+	lastPath = DEFAULT_PATH_LENGTH;
 	width = 0;
 	height = 0;
 }
@@ -32,12 +34,12 @@ bool PathFinding::CleanUp()
 // Sets up the navigation map
 void PathFinding::SetNavigationMap(uint w, uint h, uchar* data)
 {
-	/*width = w;
+	width = w;
 	height = h;
 
 	RELEASE_ARRAY(map);
 	map = new uchar[width * height];
-	memcpy(map, data, width * height);*/
+	memcpy(map, data, width * height);
 }
 
 // Utility: return true if pos is inside the map boundaries

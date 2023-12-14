@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Debug.h"
+#include "pathfinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -33,6 +34,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics();
 	scene = new Scene();
 	map = new Map();
+	pathfinding = new PathFinding();
 	entityManager = new EntityManager();
 	debug = new Debug();
 
@@ -48,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(pathfinding);
 
 	// Render last to swap buffer
 	AddModule(render);

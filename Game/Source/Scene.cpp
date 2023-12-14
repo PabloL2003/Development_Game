@@ -64,6 +64,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+	/*bool retLoad = app->map->Load("Mapa_Dungen_dev.tmx");*/
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 	
@@ -85,6 +86,17 @@ bool Scene::Start()
 		app->map->mapData.tileWidth,
 		app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.Count());
+
+	/*if (retLoad)
+	{
+		int w, h;
+		uchar* data = NULL;
+
+		bool retWalkMap = app->map->CreateNavigationMap(w, h, &data);
+		if (retWalkMap) app->pathfinding->SetNavigationMap(w, h, data);
+
+		RELEASE_ARRAY(data);
+	}*/
 
 	return true;
 }
