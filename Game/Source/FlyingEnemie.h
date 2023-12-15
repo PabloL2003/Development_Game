@@ -29,7 +29,7 @@ public:
 
 
 public:
-
+	pugi::xml_node config;
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
@@ -40,6 +40,7 @@ public:
 
 private:
 	Animation* currentAnim = nullptr;
+	SDL_Texture* mouseTileTex;
 
 	Animation flyrigthmov;
 
