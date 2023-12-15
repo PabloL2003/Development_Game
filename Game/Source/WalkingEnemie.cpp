@@ -107,7 +107,7 @@ bool Wenem::Update(float dt)
 		return true;
 
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x , position.y - 8, &(currentAnim->GetCurrentFrame()));
 
 	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
 
