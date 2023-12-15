@@ -79,7 +79,7 @@
 	  <item x="50" y="45" texturepath="Assets/Textures/espada.png"/>
 
 
-	  <flyenem x="1400" y="850" texturepath="Assets/Textures/bat anmation.png">
+	  <flyenem x="1500" y="950" texturepath="Assets/Textures/bat anmation.png">
 
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 		  
@@ -98,7 +98,7 @@
 		  
 	  </flyenem>
 	  
-	  <flyenem2 x="1200" y="50" texturepath="Assets/Textures/bat anmation.png">
+	  <flyenem2 x="1300" y="100" texturepath="Assets/Textures/bat anmation.png">
 		  
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 		  

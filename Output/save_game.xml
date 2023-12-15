@@ -7,7 +7,7 @@
 	<debug />
 	<physics />
 	<scene>
-		<player x="66" y="1103" />
+		<player x="214" y="1103" />
 	</scene>
 	<:anonymous />
 	<pathfinding />

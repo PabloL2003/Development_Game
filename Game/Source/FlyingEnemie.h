@@ -34,7 +34,7 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
-	int width = 32, height = 18;
+	uint width , height ;
 
 	iPoint spawn;
 	bool isDead = false;

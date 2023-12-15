@@ -65,8 +65,10 @@ bool Flyenem::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+	app->tex->GetSize(texture, width, height);
 
-	pbody = app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x, position.y,10, bodyType::DYNAMIC);
+	pbody->body->SetGravityScale(0);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 
@@ -78,12 +80,24 @@ bool Flyenem::Start() {
 
 bool Flyenem::Update(float dt)
 {
+	b2Transform pbodyPos = pbody->body->GetTransform();
+	position.x = METERS_TO_PIXELS(pbodyPos.p.x) - width / 2;
+	position.y = METERS_TO_PIXELS(pbodyPos.p.y) - height / 2;
 
-
-	if (true) {
-		iPoint origin = app->map->WorldToMap(app->scene->enemie->position.x, app->scene->enemie->position.y);
+	if (app->scene->player->position.x > position.y - 50) {
+		iPoint origin = app->map->WorldToMap(position.x+(width / 2),position.y+ (height / 2));
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
-		/*app->map->pathfinding->CreatePath(iPoint(6,32), iPoint(7,32));*/
+		app->map->pathfinding->CreatePath(origin, destiny);
+
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
+
+			iPoint enemypos = app->map->MapToWorld(movePath->At(2)->x, movePath->At(2)->y);
+			b2Vec2 movepos(PIXEL_TO_METERS(enemypos.x), PIXEL_TO_METERS(enemypos.y));
+			pbody->body->SetTransform(movepos, 0);
+		}
+
 
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
