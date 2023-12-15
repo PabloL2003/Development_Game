@@ -135,7 +135,7 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
 
-void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+    bool CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
 private:
 

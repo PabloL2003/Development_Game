@@ -1,4 +1,4 @@
-
+#include "DynArray.h"
 #include "WalkingEnemie.h"
 #include "App.h"
 #include "Textures.h"
@@ -11,6 +11,8 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "Player.h"
+#include "Map.h"
+#include "pathfinding.h"
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {
@@ -112,6 +114,45 @@ bool Wenem::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+	//pathfinding
+
+	//iPoint entityTile = app->map->WorldToMap(METERS_TO_PIXELS(this->pbody->body->GetPosition().x), METERS_TO_PIXELS(this->pbody->body->GetPosition().y));
+	//iPoint playerTile = app->map->WorldToMap(METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().x), METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().y));
+
+	//app->pathfinding->CreatePath(entityTile, playerTile);
+	//pathToPlayer.Clear();
+
+
+	//const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+	//for (uint i = 0; i < path->Count(); i++)
+	//{
+	//	pathToPlayer.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
+	//}
+
+	////codigo de debug
+
+	//if (pathToPlayer.Count() > 1 && app->scene->player->position.y > 80)
+	//{
+	//	int directionX = pathToPlayer.At(1)->x - pathToPlayer.At(0)->x;
+
+	//	if (directionX > 0)
+	//	{
+	//		if (pbody->body->GetLinearVelocity().x < speedCap)
+	//		{
+	//			if (currentAnim != &wrigthmov) currentAnim = &wrigthmov;
+	//			pbody->body->ApplyForce(b2Vec2(2.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+	//		}
+	//	}
+	//	else if (directionX < 0)
+	//	{
+	//		if (pbody->body->GetLinearVelocity().x > -speedCap)
+	//		{
+	//			if (currentAnim != &wleftmov) currentAnim = &wleftmov;
+	//			pbody->body->ApplyForce(b2Vec2(-2.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+	//		}
+	//	}
+	//}
 
 	if (pendingToDelete)
 	{

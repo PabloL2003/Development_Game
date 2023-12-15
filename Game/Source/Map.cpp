@@ -182,7 +182,7 @@ bool Map::CleanUp()
     return true;
 }
 
-// Load new map
+// Load new mapF
 bool Map::Load(SString mapFileName)
 {
     bool ret = true;
@@ -512,7 +512,7 @@ Properties::Property* Properties::GetProperty(const char* name)
 }
 
 
-void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
+bool Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
     bool ret = false;
 
@@ -536,10 +536,13 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
             if (gid == blockedGid) navigationMap[i] = 0;
             else navigationMap[i] = 1;
         }
+
+        *buffer = navigationMap;
+        width = mapData.width;
+        height = mapData.height;
+
+        ret = true;
     }
 
-    *buffer = navigationMap;
-    width = mapData.width;
-    height = mapData.height;
-
+    return ret;
 }
