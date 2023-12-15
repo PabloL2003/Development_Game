@@ -43,6 +43,8 @@ public:
 	bool isKilled = false;
 
 private:
+	SDL_Texture* mouseTileTex;
+
 	Animation* currentAnim = nullptr;
 
 	Animation wr_idle, wrigthmov;

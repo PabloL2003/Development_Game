@@ -7,12 +7,16 @@
 	<debug />
 	<physics />
 	<scene>
-		<player x="66" y="1103" />
+		<player x="814" y="1071" />
+		<flyenem1 x="1400" y="850" isKilled="false" />
+		<flyenem2 x="1200" y="50" isKilled="false" />
+		<wenem1 x="1600" y="1048" isKilled="true" />
+		<wenem2 x="801" y="150" isKilled="false" />
 	</scene>
 	<:anonymous />
 	<pathfinding />
 	<entitymanager />
 	<renderer>
-		<camera x="0" y="-500" />
+		<camera x="-302" y="-500" />
 	</renderer>
 </game_state>
