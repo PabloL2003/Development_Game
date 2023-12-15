@@ -105,8 +105,7 @@ iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
 
-    ret.x = x / mapData.tileWidth;
-    ret.y = y / mapData.tileHeight;
+    //
 
     return ret;
 }
