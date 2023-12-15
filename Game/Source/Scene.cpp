@@ -148,27 +148,7 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	playernode.append_attribute("x") = player->position.x;
 	playernode.append_attribute("y") = player->position.y;
-
-	/*pugi::xml_node enemynode1 = node.append_child("flyenem1");
-	enemynode1.append_attribute("x") = enemie->position.y;
-	enemynode1.append_attribute("y") = enemie->position.y;
-	enemynode1.append_attribute("enable") = enemie->active;
-
-	pugi::xml_node enemynode2 = node.append_child("flyenem2");
-	enemynode2.append_attribute("x") = enemie2->position.y;
-	enemynode2.append_attribute("y") = enemie2->position.y;
-	enemynode2.append_attribute("enable") = enemie2->active;
-
-	pugi::xml_node enemynode3 = node.append_child("wenem1");
-	enemynode3.append_attribute("x") = enemie3->position.y;
-	enemynode3.append_attribute("y") = enemie3->position.y;
-	enemynode3.append_attribute("enable") = enemie3->active;
-
-	pugi::xml_node enemynode4 = node.append_child("wenem2");
-	enemynode4.append_attribute("x") = enemie4->position.y;
-	enemynode4.append_attribute("y") = enemie4->position.y;
-	enemynode4.append_attribute("enable") = enemie4->active;*/
-
+	
 	return true;
 }
 
@@ -182,34 +162,6 @@ bool Scene::LoadState(pugi::xml_node node)
 	player->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
 	//Enemies Load/Save state
-
-	////flyenem 1
-	//enemie->position.x = node.child("flyenem1").attribute("x").as_int();
-	//enemie->position.y = node.child("flyenem1").attribute("y").as_int();
-
-	//enemie->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie->position.x), PIXEL_TO_METERS(enemie->position.y)), 0);
-	//enemie->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
-
-	////flyenem 2
-	//enemie2->position.x = node.child("flyenem2").attribute("x").as_int();
-	//enemie2->position.y = node.child("flyenem2").attribute("y").as_int();
-	//	  
-	//enemie2->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie2->position.x), PIXEL_TO_METERS(enemie2->position.y)), 0);
-	//enemie2->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
-
-	////wenem 1 
-	//enemie3->position.x = node.child("flyenem3").attribute("x").as_int();
-	//enemie3->position.y = node.child("flyenem3").attribute("y").as_int();
-	//	  
-	//enemie3->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie3->position.x), PIXEL_TO_METERS(enemie3->position.y)), 0);
-	//enemie3->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
-
-	////wenem 2
-	//enemie4->position.x = node.child("flyenem3").attribute("x").as_int();
-	//enemie4->position.y = node.child("flyenem3").attribute("y").as_int();
-	//	  
-	//enemie4->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie4->position.x), PIXEL_TO_METERS(enemie4->position.y)), 0);
-	//enemie4->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
 	return true;
 	
