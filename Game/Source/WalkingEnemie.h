@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 #include "Anim.h"
-#include "DynArray.h"
 
 
 struct SDL_Texture;
@@ -50,8 +49,5 @@ private:
 	Animation wr_idle, wrigthmov;
 
 	Animation wl_idle, wleftmov;
-
-	float speedCap = 3.0f;
-	DynArray<iPoint> pathToPlayer;
 };
 #endif

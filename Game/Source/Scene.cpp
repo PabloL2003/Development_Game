@@ -99,22 +99,9 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	//bool retLoad = app->map->Load("Mapa_Dungen_dev.tmx");
-	//	
-	//// Renders the image in the center of the screen 
-	////app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
-	///*app->map->Load();*/
-
-	//if (retLoad)
-	//{
-	//	int w, h;
-	//	uchar* data = NULL;
-
-	//	bool retWalkMap = app->map->CreateNavigationMap(w, h, &data);
-	//	if (retWalkMap) app->pathfinding->SetNavigationMap(w, h, data);
-
-	//	RELEASE_ARRAY(data);
-	//}
+	// Renders the image in the center of the screen 
+	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
+	/*app->map->Load();*/
 
 	//Probablemente lo meteré en debug
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
