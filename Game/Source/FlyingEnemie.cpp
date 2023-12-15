@@ -70,7 +70,7 @@ bool Flyenem::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 
-	mouseTileTex = app->tex->Load(config.child("pathtile").attribute("texturepath").as_string());
+	mouseTileTex = app->tex->Load("Assets/Textures/tiletext.png");
 
 	return true;
 }
@@ -79,18 +79,18 @@ bool Flyenem::Start() {
 bool Flyenem::Update(float dt)
 {
 	if (true) {
-		iPoint origin = app->map->WorldToMap(app->scene->enemie2->position.x, app->scene->enemie2->position.y);
+		iPoint origin = app->map->WorldToMap(app->scene->enemie->position.x, app->scene->enemie->position.y);
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
-		app->map->pathfinding->CreatePath(origin, destiny);
+		app->map->pathfinding->CreatePath(iPoint(6,34), iPoint(12,30));
 
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+		
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 			for (uint i = 0; i < path->Count(); i++) {
 				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 				app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
 			}
 		}
-	}
+	
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
 
