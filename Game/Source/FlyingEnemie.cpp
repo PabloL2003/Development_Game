@@ -70,7 +70,7 @@ bool Flyenem::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 
-	mouseTileTex = app->tex->Load(config.child("pathtile").attribute("texturepath").as_string());
+	mouseTileTex = app->tex->Load("Assets/Textures/tiletext.png");
 
 	return true;
 }
@@ -79,7 +79,7 @@ bool Flyenem::Start() {
 bool Flyenem::Update(float dt)
 {
 	if (true) {
-		iPoint origin = app->map->WorldToMap(app->scene->enemie2->position.x, app->scene->enemie2->position.y);
+		iPoint origin = app->map->WorldToMap(app->scene->enemie2->position.x, app->scene->enemie->position.y);
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 		app->map->pathfinding->CreatePath(origin, destiny);
 
