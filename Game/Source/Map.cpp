@@ -105,7 +105,8 @@ iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
 
-    //
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
 
     return ret;
 }
@@ -224,7 +225,7 @@ bool Map::Load(SString mapFileName)
     if(ret == true)
     {
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
-        LOG("width : %d height : %d",mapData.width,mapData.height);
+        LOG("width : %d : %d",mapData.width,mapData.height);
         LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
         
         LOG("Tilesets----");
