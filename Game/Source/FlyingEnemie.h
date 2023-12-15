@@ -30,6 +30,7 @@ public:
 
 public:
 
+
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
@@ -39,6 +40,9 @@ public:
 	bool isDead = false;
 
 private:
+
+	SDL_Texture* mouseTileTex;
+
 	Animation* currentAnim = nullptr;
 
 	Animation flyrigthmov;
