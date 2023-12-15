@@ -41,7 +41,6 @@ public:
 
 	iPoint spawn;
 	bool isKilled = false;
-	bool killedPlayer = false;
 
 private:
 	Animation* currentAnim = nullptr;
