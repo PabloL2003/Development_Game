@@ -89,7 +89,8 @@ bool Flyenem::Update(float dt)
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 		app->map->pathfinding->CreatePath(origin, destiny);
 
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		
+		if(destiny.DistanceTo(origin)<12)
 		{
 			const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
 

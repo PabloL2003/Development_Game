@@ -7,12 +7,12 @@
 	<debug />
 	<physics />
 	<scene>
-		<player x="214" y="1103" />
+		<player x="1613" y="1040" />
 	</scene>
 	<:anonymous />
 	<pathfinding />
 	<entitymanager />
 	<renderer>
-		<camera x="0" y="-500" />
+		<camera x="-895" y="-500" />
 	</renderer>
 </game_state>
