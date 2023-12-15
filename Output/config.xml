@@ -151,7 +151,7 @@
 	  </wenem>
 	  
 	  
-	  <wenem2 x="800" y="150" texturepath="Assets/Textures/spideranim2.png">
+	  <wenem2 x="1050" y="150" texturepath="Assets/Textures/spideranim2.png">
 
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 

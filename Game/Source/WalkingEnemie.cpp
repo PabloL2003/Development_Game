@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "Player.h"
+#include "Map.h"
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {
@@ -94,7 +95,7 @@ bool Wenem::Start() {
 	SetSpawnPoint(spawn);
 
 	//Killed fx
-
+	mouseTileTex = app->tex->Load("Assets/Textures/tiletext.png");
 	return true;
 }
 
@@ -113,11 +114,39 @@ bool Wenem::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (pendingToDelete)
+	if (app->scene->player->position.x > position.y - 50) {
+
+		iPoint origin = app->map->WorldToMap(position.x + (width / 2), position.y + (height / 2));
+		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+		app->map->pathfinding->CreatePath(origin, destiny);
+
+
+		if ((destiny.y == origin.y)&&(destiny.DistanceTo(origin) < 8))
+		{
+			const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
+
+			iPoint enemypos = app->map->MapToWorld(movePath->At(2)->x, movePath->At(2)->y);
+			b2Vec2 movepos(PIXEL_TO_METERS(enemypos.x), PIXEL_TO_METERS(enemypos.y));
+			pbody->body->SetTransform(movepos, 0);
+		}
+
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+			for (uint i = 0; i < path->Count(); i++) {
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+			}
+		}
+	}
+	currentAnim->Update();
+	app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
+
+	/*if (pendingToDelete)
 	{
 		isKilled = true;
 		CleanUp();
-	}
+	}*/
 
 	return true;
 }
