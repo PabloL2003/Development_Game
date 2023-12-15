@@ -81,8 +81,6 @@
 
 	  <flyenem x="1400" y="850" texturepath="Assets/Textures/bat anmation.png">
 
-		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
-		  
 		  <flyrigthmov animspeed ="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 			  <pushback x="32" y="0" width="32" height="32"/>
@@ -100,8 +98,6 @@
 	  
 	  <flyenem2 x="1150" y="10" texturepath="Assets/Textures/bat anmation.png">
 
-		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
-		  
 		  <flyrigthmov animspeed ="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 			  <pushback x="32" y="0" width="32" height="32"/>
@@ -120,8 +116,6 @@
 
 
 	  <wenem x="1600" y="1050" texturepath="Assets/Textures/spideranim2.png">
-		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
-		  
 		  <wr_idle>
 			  <pushback x="0" y="0" width="32" height="32"/>
 		  </wr_idle>
@@ -152,7 +146,6 @@
 	  
 	  <wenem2 x="800" y="150" texturepath="Assets/Textures/spideranim2.png">
 
-		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 
 		  <wr_idle>
 			  <pushback x="0" y="0" width="32" height="32"/>
