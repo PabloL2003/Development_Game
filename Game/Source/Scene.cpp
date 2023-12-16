@@ -125,7 +125,13 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
+	player = nullptr;
+	enemie = nullptr;
+	enemie2 = nullptr;
+	enemie3 = nullptr;
+	enemie4 = nullptr;
+	boxes.Clear();
+	spikes.Clear();
 	return true;
 }
 

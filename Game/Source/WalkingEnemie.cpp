@@ -120,8 +120,8 @@ bool Wenem::Update(float dt)
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 		app->map->pathfinding->CreatePath(origin, destiny);
 
-
-		if ((destiny.y == origin.y)&&(destiny.DistanceTo(origin) < 8))
+		//Movement//
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
 
@@ -130,7 +130,7 @@ bool Wenem::Update(float dt)
 			pbody->body->SetTransform(movepos, 0);
 		}
 
-
+		//path drawing//
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 			for (uint i = 0; i < path->Count(); i++) {

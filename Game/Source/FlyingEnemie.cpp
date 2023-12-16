@@ -90,7 +90,7 @@ bool Flyenem::Update(float dt)
 		app->map->pathfinding->CreatePath(origin, destiny);
 
 		
-		if(destiny.DistanceTo(origin)<12)
+		if(app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
 
@@ -109,7 +109,7 @@ bool Flyenem::Update(float dt)
 		}
 	}
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x +27, position.y +2, &(currentAnim->GetCurrentFrame()));
 
 	return true;
 }
@@ -117,7 +117,11 @@ bool Flyenem::Update(float dt)
 
 bool Flyenem::CleanUp()
 {
-	delete pbody;
+	if (pbody)
+	{
+		app->physics->DestroyBody(pbody);
+		pbody = nullptr;
+	}
 	texturePath = nullptr;
 	currentAnim = nullptr;
 

@@ -397,7 +397,11 @@ bool Player::CleanUp()
 
 	texturePath = nullptr;
 	currentAnim = nullptr;
-	delete pbody;
+	if (pbody)
+	{
+		app->physics->DestroyBody(pbody);
+		pbody = nullptr;
+	}
 
 	return true;
 }

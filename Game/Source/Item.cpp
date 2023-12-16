@@ -49,5 +49,10 @@ bool Item::Update(float dt)
 
 bool Item::CleanUp()
 {
+	if (pbody)
+	{
+		app->physics->DestroyBody(pbody);
+		pbody = nullptr;
+	}
 	return true;
 }
