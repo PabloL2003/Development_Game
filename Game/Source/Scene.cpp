@@ -125,6 +125,13 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+	player = nullptr;
+	enemie = nullptr;
+	enemie2 = nullptr;
+	enemie3 = nullptr;
+	enemie4 = nullptr;
+	boxes.Clear();
+	spikes.Clear();
 
 	return true;
 }
@@ -180,23 +187,23 @@ bool Scene::LoadState(pugi::xml_node node)
 	enemie->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie->position.x), PIXEL_TO_METERS(enemie->position.y)), 0);
 	enemie->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
-	enemie2->position.x = node.child("flyenem1").attribute("x").as_int();
-	enemie2->position.y = node.child("flyenem1").attribute("y").as_int();
-	enemie2->position.y = node.child("flyenem1").attribute("isKilled").as_bool();
+	enemie2->position.x = node.child("flyenem2").attribute("x").as_int();
+	enemie2->position.y = node.child("flyenem2").attribute("y").as_int();
+	enemie2->position.y = node.child("flyenem2").attribute("isKilled").as_bool();
 
 	enemie2->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie2->position.x), PIXEL_TO_METERS(enemie2->position.y)), 0);
 	enemie2->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
-	enemie3->position.x = node.child("flyenem1").attribute("x").as_int();
-	enemie3->position.y = node.child("flyenem1").attribute("y").as_int();
-	enemie3->position.y = node.child("flyenem1").attribute("isKilled").as_bool();
+	enemie3->position.x = node.child("wenem1").attribute("x").as_int();
+	enemie3->position.y = node.child("wenem1").attribute("y").as_int();
+	enemie3->position.y = node.child("wenem1").attribute("isKilled").as_bool();
 
 	enemie3->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie3->position.x), PIXEL_TO_METERS(enemie3->position.y)), 0);
 	enemie3->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
-	enemie4->position.x = node.child("flyenem1").attribute("x").as_int();
-	enemie4->position.y = node.child("flyenem1").attribute("y").as_int();
-	enemie4->position.y = node.child("flyenem1").attribute("isKilled").as_bool();
+	enemie4->position.x = node.child("wenem2").attribute("x").as_int();
+	enemie4->position.y = node.child("wenem2").attribute("y").as_int();
+	enemie4->position.y = node.child("wenem2").attribute("isKilled").as_bool();
 
 	enemie4->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie4->position.x), PIXEL_TO_METERS(enemie4->position.y)), 0);
 	enemie4->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
