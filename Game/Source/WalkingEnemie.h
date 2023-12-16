@@ -32,6 +32,8 @@ public:
 
 	void IsDead();
 
+	void KilledPlayer();
+
 public:
 
 	const char* texturePath;
@@ -40,7 +42,9 @@ public:
 	int width = 34, height = 16;
 
 	iPoint spawn;
+	iPoint despawn;
 	bool isKilled = false;
+	bool killedPlayer = false;
 
 private:
 	SDL_Texture* mouseTileTex;

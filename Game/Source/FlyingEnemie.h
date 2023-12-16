@@ -33,6 +33,8 @@ public:
 
 	void IsDead();
 
+	void KilledPlayer();
+
 
 public:
 
@@ -43,7 +45,9 @@ public:
 	int width = 32, height = 18;
 
 	iPoint spawn;
+	iPoint despawn;
 	bool isKilled = false;
+	bool killedPlayer = false;
 
 private:
 

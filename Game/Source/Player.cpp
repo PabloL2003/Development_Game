@@ -428,6 +428,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			isKilled = true;
 		}
+		//lo ponemos solo si no hay debug?
+		app->scene->enemie->killedPlayer = true;
+		app->scene->enemie2->killedPlayer = true;
+		app->scene->enemie3->killedPlayer = true;
+		app->scene->enemie4->killedPlayer = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

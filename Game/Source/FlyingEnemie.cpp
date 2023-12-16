@@ -20,7 +20,6 @@ Flyenem::~Flyenem() {
 
 }
 
-
 void Flyenem::InitAnims() {
 
 	//R.mov
@@ -67,8 +66,13 @@ bool Flyenem::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC);
+	spawn.x = parameters.attribute("x").as_int();
+	spawn.y = parameters.attribute("y").as_int();
+	despawn.x = 3000;
+	despawn.y = 3000;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
+	SetSpawnPoint(spawn);
 
 	mouseTileTex = app->tex->Load("Assets/Textures/tiletext.png");
 
@@ -78,10 +82,11 @@ bool Flyenem::Start() {
 
 bool Flyenem::Update(float dt)
 {
+	KilledPlayer();
 	IsDead();
 
-	if (isKilled)
-		return true;
+	/*if (isKilled)
+		return true;*/
 
 	if (true) {
 		iPoint origin = app->map->WorldToMap(app->scene->enemie->position.x, app->scene->enemie->position.y);
@@ -97,13 +102,17 @@ bool Flyenem::Update(float dt)
 		}
 	}
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x, position.y - 12, &(currentAnim->GetCurrentFrame()));
 
-	if (pendingToDelete)
+	/*if (pendingToDelete)
 	{
 		isKilled = true;
 		CleanUp();
-	}
+	}*/
+
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	return true;
 }
@@ -129,10 +138,20 @@ void Flyenem::SetSpawnPoint(iPoint pos)
 
 void Flyenem::IsDead()
 {
-	if (app->scene->player->isKilled)
+	if (isKilled == true)
+	{
+		TeleportTo(despawn);
+	}
+	isKilled = false;
+}
+
+void Flyenem::KilledPlayer()
+{
+	if (killedPlayer == true)
 	{
 		TeleportTo(spawn);
 	}
+	killedPlayer = false;
 }
 
 bool Flyenem::CleanUp()
@@ -163,13 +182,14 @@ void Flyenem::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
 				LOG("ENEMY KILLED");
-				pendingToDelete = true;
+				isKilled = true;
 
 			}
 
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
 				app->scene->player->isKilled = true;
+				killedPlayer = true;
 			}
 
 		}

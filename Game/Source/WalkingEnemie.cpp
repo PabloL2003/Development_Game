@@ -89,35 +89,38 @@ bool Wenem::Start() {
 	pbody = app->physics->CreateRectangle(position.x + 17, position.y, width, height, bodyType::DYNAMIC);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
+	despawn.x = spawn.x + 4000;
+	despawn.y = spawn.y + 4000;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 	SetSpawnPoint(spawn);
 
-	//Killed fx
+	//Killed f
 
 	return true;
 }
 
 bool Wenem::Update(float dt)
 {
+	KilledPlayer();
 	IsDead();
 
-	if (isKilled)
-		return true;
+	/*if (isKilled)
+		return true;*/
 
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
 	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (pendingToDelete)
+	/*if (pendingToDelete)
 	{
 		isKilled = true;
 		CleanUp();
-	}
+	}*/
 
 	return true;
 }
@@ -141,12 +144,22 @@ void Wenem::SetSpawnPoint(iPoint pos)
 	spawn = pos;
 }
 
-void Wenem::IsDead()
+void Wenem::KilledPlayer()
 {
-	if (app->scene->player->isKilled)
+	if (killedPlayer == true)
 	{
 		TeleportTo(spawn);
 	}
+	killedPlayer = false;
+}
+
+void Wenem::IsDead()
+{
+	if (isKilled == true)
+	{
+		TeleportTo(despawn);
+	}
+	isKilled = false;
 }
 
 bool Wenem::CleanUp()
@@ -177,13 +190,14 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
 				LOG("ENEMY KILLED");
-				pendingToDelete = true;
+				isKilled = true;
 
 			}
 
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
 				app->scene->player->isKilled = true;
+				killedPlayer = true;
 			}
 
 		}
