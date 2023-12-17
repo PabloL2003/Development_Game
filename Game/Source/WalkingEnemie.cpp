@@ -132,14 +132,7 @@ void Wenem::MovementLogic(float dt) {
 		}
 	}
 
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-
 }
-
-
-
 
 bool Wenem::Update(float dt)
 {
@@ -154,10 +147,6 @@ bool Wenem::Update(float dt)
 
 	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
 
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-
 	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x,app->scene->player->position.y);
 	iPoint origin = app->map->WorldToMap(position.x, position.y);
 
@@ -171,6 +160,8 @@ bool Wenem::Update(float dt)
 		MovementLogic(dt);
 	}
 	
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	return true;
 }

@@ -83,66 +83,9 @@ bool Flyenem::Start() {
 
 void Flyenem::MovementLogic(float dt) {
 
-	for (int i = 0; i < 10; i++) {
-
-		if (i<4)
-		{
-
-			if (pbody->body->GetLinearVelocity().x > 0.5f)
-			{
-				pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().x > -maxVel)
-				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
-
-		if (i == 5) {
-
-			if (pbody->body->GetLinearVelocity().y < -0.5f)
-			{
-				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().y < maxVel)
-					pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
-
-
-
-		if (i>5 && i<9)
-		{
-			if (pbody->body->GetLinearVelocity().x < -0.5f)
-			{
-				pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().x < maxVel)
-					pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
-
-		if (i == 10) {
-
-			if (pbody->body->GetLinearVelocity().y > 0.5f)
-			{
-				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().y > -maxVel)
-					pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
-
-		
+	if (position.x < spawn.x + 100)
+	{
+		pbody->body->ApplyForce(b2Vec2(5, 0), pbody->body->GetWorldCenter(), true);
 	}
 
 }
@@ -156,7 +99,7 @@ bool Flyenem::Update(float dt)
 	iPoint origin = app->map->WorldToMap(position.x, position.y);
 
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x-15, position.y - 30, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x, position.y - 15, &(currentAnim->GetCurrentFrame()));
 
 	if (destiny.DistanceTo(origin) < 12) {
 
@@ -190,9 +133,9 @@ bool Flyenem::Update(float dt)
 	//	CleanUp();
 	//}*/
 
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	//position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	//position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	return true;
 }
