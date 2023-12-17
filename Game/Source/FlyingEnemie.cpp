@@ -66,7 +66,7 @@ bool Flyenem::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	FlyFx = app->audio->LoadFx("Assets/Audio/Fx/bat-sound-effect.wav");
+	isDeadFx = app->audio->LoadFx("Assets/Audio/Fx/bat-fx.wav");
 	pbody = app->physics->CreateCircle(position.x, position.y, 7, bodyType::DYNAMIC);
 	pbody->body->SetGravityScale(0);
 	
@@ -223,7 +223,7 @@ void Flyenem::OnCollision(PhysBody* physA, PhysBody* physB)
 			{
 				LOG("ENEMY KILLED");
 				isKilled = true;
-
+				app->audio->PlayFx(isDeadFx);
 			}
 
 			else if (physB->body->GetLinearVelocity().y < 0.5)
