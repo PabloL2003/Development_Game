@@ -54,6 +54,8 @@ bool Flyenem::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	spawn.x = parameters.attribute("x").as_int();
+	spawn.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	InitAnims();
 
@@ -68,8 +70,7 @@ bool Flyenem::Start() {
 	FlyFx = app->audio->LoadFx("Assets/Audio/Fx/bat-sound-effect.wav");
 	pbody = app->physics->CreateCircle(position.x, position.y, 7, bodyType::DYNAMIC);
 	pbody->body->SetGravityScale(0);
-	spawn.x = parameters.attribute("x").as_int();
-	spawn.y = parameters.attribute("y").as_int();
+	
 	despawn.x = 3000;
 	despawn.y = 3000;
 	pbody->listener = this;
@@ -84,18 +85,18 @@ bool Flyenem::Start() {
 
 void Flyenem::MovementLogic(float dt) {
 
-	if (position.x == spawn.x && position.y == spawn.y)
+	if (position.x < spawn.x+1)
 	{
-		pbody->body->ApplyForce(b2Vec2(0.5f, 0), pbody->body->GetWorldCenter(), true);
+		pbody->body->SetLinearVelocity(b2Vec2(1.0f, 0));
+		
 	}
 
-	if (position.x == spawn.x + 30 && position.y == spawn.y) {
-		pbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		pbody->body->ApplyForce(b2Vec2(0, 1.f), pbody->body->GetWorldCenter(), true);
+	if (position.x > spawn.x + 120)
+	{
+		pbody->body->SetLinearVelocity(b2Vec2(-1.0f,0));
+
 	}
 
-	
-	
 }
 
 bool Flyenem::Update(float dt)
@@ -109,11 +110,9 @@ bool Flyenem::Update(float dt)
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x, position.y - 15, &(currentAnim->GetCurrentFrame()));
 
-	if (destiny.DistanceTo(origin) < 12) {
 		/*app->audio->PlayFx(FlyFx); */
-
 		MovementLogic(dt);
-	}
+	
 	
 	// In the future, managing dynamic spawn/despawn enemy
 	/*if (isKilled)
