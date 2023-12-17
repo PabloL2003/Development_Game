@@ -66,6 +66,7 @@ bool Flyenem::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC);
+	pbody->body->SetGravityScale(0);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
 	despawn.x = 3000;
@@ -82,37 +83,67 @@ bool Flyenem::Start() {
 
 void Flyenem::MovementLogic(float dt) {
 
+	for (int i = 0; i < 10; i++) {
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
+		if (i<4)
+		{
 
-		if (pbody->body->GetLinearVelocity().x > 0.5f)
-		{
-			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-		}
-		else
-		{
-			if (pbody->body->GetLinearVelocity().x > -maxVel)
+			if (pbody->body->GetLinearVelocity().x > 0.5f)
+			{
+				pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+			else
+			{
+				if (pbody->body->GetLinearVelocity().x > -maxVel)
 				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
 		}
-	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		if (pbody->body->GetLinearVelocity().x < -0.5f)
+		if (i == 5) {
+
+			if (pbody->body->GetLinearVelocity().y < -0.5f)
+			{
+				//Opposite direction dampening
+				pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+			else
+			{
+				if (pbody->body->GetLinearVelocity().y < maxVel)
+					pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+		}
+
+
+
+		if (i>5 && i<9)
 		{
-			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			if (pbody->body->GetLinearVelocity().x < -0.5f)
+			{
+				pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+			else
+			{
+				if (pbody->body->GetLinearVelocity().x < maxVel)
+					pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
 		}
-		else
-		{
-			if (pbody->body->GetLinearVelocity().x < maxVel)
-				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+
+		if (i == 10) {
+
+			if (pbody->body->GetLinearVelocity().y > 0.5f)
+			{
+				//Opposite direction dampening
+				pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+			else
+			{
+				if (pbody->body->GetLinearVelocity().y > -maxVel)
+					pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
 		}
+
+		
 	}
-
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
 
 }
 
@@ -122,6 +153,7 @@ bool Flyenem::Update(float dt)
 	IsDead();
 
 	MovementLogic(dt);
+
 	/*if (isKilled)
 		return true;*/
 
