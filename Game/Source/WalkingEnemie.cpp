@@ -12,6 +12,7 @@
 #include "Debug.h"
 #include "Player.h"
 #include "Map.h"
+#include "Debug.h"
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {

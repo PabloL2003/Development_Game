@@ -44,6 +44,10 @@ bool Debug::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		{
 			app->scene->player->TeleportTo(app->scene->player->spawn);
+			app->scene->enemie->TeleportTo(app->scene->enemie->spawn);
+			app->scene->enemie2->TeleportTo(app->scene->enemie2->spawn);
+			app->scene->enemie3->TeleportTo(app->scene->enemie3->spawn);
+			app->scene->enemie4->TeleportTo(app->scene->enemie4->spawn);
 		}
 
 		//Enable/Disable hitboxes

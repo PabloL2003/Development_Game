@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "Map.h"
+#include "Debug.h"
 
 Flyenem::Flyenem() : Entity(EntityType::FLYENEM)
 {
@@ -102,13 +103,12 @@ bool Flyenem::Update(float dt)
 	app->render->DrawTexture(texture, position.x, position.y - 15, &(currentAnim->GetCurrentFrame()));
 
 	if (destiny.DistanceTo(origin) < 12) {
-
-		//app->audio->PlayFx(FlyFx);       hay que poner que se borre
+		/*app->audio->PlayFx(FlyFx); */
 
 		MovementLogic(dt);
 	}
 	
-
+	// In the future, managing dynamic spawn/despawn enemy
 	/*if (isKilled)
 		return true;*/
 
