@@ -86,7 +86,7 @@ bool Wenem::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
+	isDeaddFx = app->audio->LoadFx("Assets/Audio/Fx/Spider_death.wav");
 	pbody = app->physics->CreateRectangle(position.x + 17, position.y, width, height, bodyType::DYNAMIC);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
@@ -168,13 +168,8 @@ bool Wenem::Update(float dt)
 	}*/
 
 	if(destiny.DistanceTo(origin)<9){
-		
 		MovementLogic(dt);
 	}
-		
-	
-		
-	
 	
 
 	return true;
@@ -212,6 +207,7 @@ void Wenem::IsDead()
 {
 	if (isKilled == true)
 	{
+		/*app->audio->PlayFx("Assets/Audio/Fx/Spider_death);*/
 		TeleportTo(despawn);
 	}
 	isKilled = false;
@@ -246,7 +242,7 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 			{
 				LOG("ENEMY KILLED");
 				isKilled = true;
-
+				app->audio->PlayFx(isDeaddFx);
 			}
 
 			else if (physB->body->GetLinearVelocity().y < 0.5)

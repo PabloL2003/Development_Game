@@ -42,7 +42,7 @@ public:
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 	int width = 34, height = 16;
-
+	int isDeaddFx;
 	iPoint spawn;
 	iPoint despawn;
 	bool isKilled = false;
