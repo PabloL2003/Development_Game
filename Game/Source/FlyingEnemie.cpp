@@ -79,49 +79,49 @@ bool Flyenem::Start() {
 	return true;
 }
 
-//
-//void Flyenem::MovementLogic(float dt) {
-//
-//
-//	if ()
-//	{
-//
-//		if (pbody->body->GetLinearVelocity().x > 0.5f)
-//		{
-//			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-//		}
-//		else
-//		{
-//			if (pbody->body->GetLinearVelocity().x > -maxVel)
-//				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-//		}
-//	}
-//
-//	if ()
-//	{
-//		if (pbody->body->GetLinearVelocity().x < -0.5f)
-//		{
-//			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-//		}
-//		else
-//		{
-//			if (pbody->body->GetLinearVelocity().x < maxVel)
-//				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-//		}
-//	}
-//
-//	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-//	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-//
-//
-//}
+
+void Flyenem::MovementLogic(float dt) {
+
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+
+		if (pbody->body->GetLinearVelocity().x > 0.5f)
+		{
+			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+		else
+		{
+			if (pbody->body->GetLinearVelocity().x > -maxVel)
+				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		if (pbody->body->GetLinearVelocity().x < -0.5f)
+		{
+			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+		else
+		{
+			if (pbody->body->GetLinearVelocity().x < maxVel)
+				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+	}
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+
+}
 
 bool Flyenem::Update(float dt)
 {
 	KilledPlayer();
 	IsDead();
 
-	/*MovementLogic(dt);*/
+	MovementLogic(dt);
 	/*if (isKilled)
 		return true;*/
 
