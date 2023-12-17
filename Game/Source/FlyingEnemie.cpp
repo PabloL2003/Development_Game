@@ -84,11 +84,18 @@ bool Flyenem::Start() {
 
 void Flyenem::MovementLogic(float dt) {
 
-	if (position.x < spawn.x + 100)
+	if (position.x == spawn.x && position.y == spawn.y)
 	{
-		pbody->body->ApplyForce(b2Vec2(5, 0), pbody->body->GetWorldCenter(), true);
+		pbody->body->ApplyForce(b2Vec2(0.5f, 0), pbody->body->GetWorldCenter(), true);
 	}
 
+	if (position.x == spawn.x + 30 && position.y == spawn.y) {
+		pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+		pbody->body->ApplyForce(b2Vec2(0, 1.f), pbody->body->GetWorldCenter(), true);
+	}
+
+	
+	
 }
 
 bool Flyenem::Update(float dt)

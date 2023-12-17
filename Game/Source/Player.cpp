@@ -131,6 +131,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
 
+	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
 
@@ -255,6 +256,7 @@ void Player::AnimationLogic(float dt) {
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
+			
 			currentAnim = &rightJump;
 		}
 	}
@@ -297,11 +299,13 @@ void Player::MovementLogic(float dt) {
 	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && jumps > 0)
-	{
+	{	
+		app->audio->PlayFx(saltoFx);
 		pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
 		pbody->body->ApplyForce(b2Vec2(0, -18.0f*dt), pbody->body->GetWorldCenter(), true);
 		jumping = true;
 		jumps--;
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 

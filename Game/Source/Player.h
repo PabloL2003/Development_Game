@@ -57,6 +57,7 @@ public:
 	PhysBody* pbody;
 	int pickSwordFx;
 	int isKilledFx;
+	int saltoFx;
 	int width = 24, height = 43;
 
 	iPoint spawn;
