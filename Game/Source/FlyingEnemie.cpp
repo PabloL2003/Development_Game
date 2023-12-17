@@ -221,6 +221,7 @@ void Flyenem::OnCollision(PhysBody* physA, PhysBody* physB)
 
 		if (!app->debug->godMode)
 		{
+			//If the player position in y is greater than the enemy's
 			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
 				LOG("ENEMY KILLED");
@@ -228,8 +229,10 @@ void Flyenem::OnCollision(PhysBody* physA, PhysBody* physB)
 				app->audio->PlayFx(isDeadFx);
 			}
 
+			//If the enemy position in y is greater than the player's
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
+				//Teleport the enemy to its original position
 				app->scene->player->isKilled = true;
 				killedPlayer = true;
 			}
