@@ -50,7 +50,7 @@ public:
 
 private:
 
-	float movementForce = 1.5f;
+	float movementForce = 2.0f;
 	float movementDampen = 3.0;
 	float maxVel = 3;
 
