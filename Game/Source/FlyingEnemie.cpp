@@ -64,8 +64,8 @@ bool Flyenem::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
-	pbody = app->physics->CreateCircle(position.x, position.y, 10, bodyType::DYNAMIC);
+	FlyFx = app->audio->LoadFx("Assets/Audio/Fx/bat-sound-effect.wav");
+	pbody = app->physics->CreateCircle(position.x, position.y, 7, bodyType::DYNAMIC);
 	pbody->body->SetGravityScale(0);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
@@ -155,12 +155,16 @@ bool Flyenem::Update(float dt)
 	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 	iPoint origin = app->map->WorldToMap(position.x, position.y);
 
-	
+	currentAnim->Update();
+	app->render->DrawTexture(texture, position.x-15, position.y - 30, &(currentAnim->GetCurrentFrame()));
 
 	if (destiny.DistanceTo(origin) < 12) {
 
+		//app->audio->PlayFx(FlyFx);       hay que poner que se borre
+
 		MovementLogic(dt);
 	}
+	
 
 	/*if (isKilled)
 		return true;*/
@@ -178,8 +182,7 @@ bool Flyenem::Update(float dt)
 	//		}
 	//	}
 	//}
-	//currentAnim->Update();
-	//app->render->DrawTexture(texture, position.x, position.y - 12, &(currentAnim->GetCurrentFrame()));
+	
 
 	///*if (pendingToDelete)
 	//{
