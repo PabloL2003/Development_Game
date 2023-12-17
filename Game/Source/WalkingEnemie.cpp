@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "Player.h"
+#include "Map.h"
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {
@@ -119,6 +120,7 @@ void Wenem::MovementLogic(float dt) {
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
+		
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
 		{
 			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
@@ -155,13 +157,23 @@ bool Wenem::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
+	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x,app->scene->player->position.y);
+	iPoint origin = app->map->WorldToMap(position.x, position.y);
+
 	/*if (pendingToDelete)
 	{
 		isKilled = true;
 		CleanUp();
 	}*/
 
+	if((destiny.y>= origin.y) && (destiny.DistanceTo(origin)<12)){
+
 		MovementLogic(dt);
+	}
+		
+	
+		
 	
 	
 
