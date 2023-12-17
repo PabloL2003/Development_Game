@@ -185,70 +185,87 @@ void Player::AnimationLogic(float dt) {
 		}
 	}
 
-	//logic for animatiosn in the case it is 
+	//logic for animations in the case it is rightRun
 	if (currentAnim == &rightRun)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT)
 			{
+				//if the player does not press any key
 				currentAnim = &rightIdle;
 			}
+			//if the player changes movement direction
 			else currentAnim = &leftRun;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
+			//double check if the player changes movement direction
 			currentAnim = &leftRun;
 		}
 		if (jumping == true)
 		{
+			//if the player jumps
 			currentAnim = &rightJump;
 		}
 	}
 	
+	//logic for animations in the case it is lefRun
 	if (currentAnim == &leftRun)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
 			{
+				//if the player does not press any key
 				currentAnim = &leftIdle;
 			}
+			//if the player changes movement direction
 			else currentAnim = &rightRun;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		{
+			//double check if the player changes movement direction
 			currentAnim = &rightRun;
 		}
 		if (jumping == true)
 		{
+			//if the player jumps
 			currentAnim = &leftJump;
 		}
 	}
 	//Jump
 	
+
+	//logic for animations in the case it is righJump
 	if (currentAnim == &rightJump)
 	{
+		//if the player changes movement direction
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		{
 			currentAnim = &leftJump;
 		}
+		//return to Idle if not jumping
 		if (jumping == false)
 		{
 			currentAnim = &rightIdle;
 		}
 		if (isKilled == true)
 		{
+			//making sure the death animations plays even if jumping
 			currentAnim = &rightDeath;
 		}
 	}
 
+	//logic for animations in the case it is leftJump
 	if (currentAnim == &leftJump)
 	{
+		//if the player changes movement direction
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		{
 			currentAnim = &rightJump;
 		}
+		//return to Idle if not jumping
 		if (jumping == false)
 		{
 			currentAnim = &leftIdle;
@@ -257,8 +274,10 @@ void Player::AnimationLogic(float dt) {
 
 	//Death
 
+	//logic for animations in the case it is rightDeath and ensuring it plays 
 	if (currentAnim == &rightDeath && currentAnim->HasFinished())
 	{
+		//return to previous animations 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		{
 			currentAnim = &rightIdle;
@@ -269,7 +288,6 @@ void Player::AnimationLogic(float dt) {
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			
 			currentAnim = &rightJump;
 		}
 	}
@@ -280,6 +298,7 @@ void Player::AnimationLogic(float dt) {
 
 void Player::MovementLogic(float dt) {
 
+	//Forces application for debug mode, ensuring the player can move freely 
 	if (app->debug->godMode) {
 
 		pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
@@ -311,6 +330,7 @@ void Player::MovementLogic(float dt) {
 	//Gravity application
 	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y*dt), pbody->body->GetWorldCenter(), true);
 
+	//Jump Logic, preventing the player to jump infinitely
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && jumps > 0)
 	{	
 		app->audio->PlayFx(saltoFx);
@@ -321,9 +341,10 @@ void Player::MovementLogic(float dt) {
 		
 	}
 
+	//Moving left logic
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
 	{
-
+		//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
 		if (pbody->body->GetLinearVelocity().x > 0.5f)
 		{
 			//Opposite direction dampening
@@ -336,8 +357,10 @@ void Player::MovementLogic(float dt) {
 		}
 	}
 
+	//Moving right logic
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
+		//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
 		{
 			//Opposite direction dampening
@@ -350,11 +373,12 @@ void Player::MovementLogic(float dt) {
 		}
 	}
 
+	//Applying the dampening when the movement is idle
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE) {
 		b2Vec2 velocity = pbody->body->GetLinearVelocity();
 		float frictionForce = -velocity.x * idleDampenMultiplier;
 
-		// Aplicar fricción en dirección opuesta al movimiento actual
+		//Applying the dampening in the opposite direction
 		pbody->body->ApplyForce(b2Vec2(frictionForce, 0.0f), pbody->body->GetWorldCenter(), true);
 	}
 
@@ -364,6 +388,7 @@ void Player::MovementLogic(float dt) {
 
 }
 
+//Logic of the death of the player
 void Player::IsDead()
 {
 	if (isKilled) 
@@ -399,7 +424,10 @@ void Player::TeleportTo(iPoint pos)
 
 bool Player::Update(float dt)
 {
+	//We first check if the player is dead
 	IsDead();
+
+	//Then we perform the necessary updates
 	currentAnim->Update();
 	app->render->DrawTexture(texture, position.x+5, position.y-8, &(currentAnim->GetCurrentFrame()));
 
@@ -433,6 +461,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		//We ensure the player does not regain its jumps when collidin with a platform from below
 		if (pbody->body->GetLinearVelocity().y > 0.0f)
 		{
 			jumping = false;
@@ -445,7 +474,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			isKilled = true;
 		}
-		//lo ponemos solo si no hay debug?
+		//Enemies spawn reset
 		app->scene->enemie->killedPlayer = true;
 		app->scene->enemie2->killedPlayer = true;
 		app->scene->enemie3->killedPlayer = true;

@@ -25,6 +25,7 @@ Wenem::~Wenem() {
 
 
 void Wenem::InitAnims() {
+	//For each child in config, iterate to find the animation and load the values.
 
 	//R.Idle
 	for (pugi::xml_node node = parameters.child("wr_idle").child("pushback");
@@ -104,7 +105,7 @@ bool Wenem::Start() {
 
 void Wenem::MovementLogic(float dt) {
 
-
+	//movement logic to mimic the player's
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		currentAnim = &wleftmov;
@@ -238,7 +239,6 @@ void Wenem::IsDead()
 {
 	if (isKilled == true)
 	{
-		/*app->audio->PlayFx("Assets/Audio/Fx/Spider_death);*/
 		TeleportTo(despawn);
 	}
 	isKilled = false;
@@ -269,6 +269,7 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 
 		if (!app->debug->godMode)
 		{
+			//If the player position in y is greater than the enemy's
 			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
 				LOG("ENEMY KILLED");
@@ -276,8 +277,10 @@ void Wenem::OnCollision(PhysBody* physA, PhysBody* physB)
 				app->audio->PlayFx(isDeaddFx);
 			}
 
+			//If the enemy position in y is greater than the player's
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
+				//Teleport the enemy to its original position
 				app->scene->player->isKilled = true;
 				killedPlayer = true;
 			}

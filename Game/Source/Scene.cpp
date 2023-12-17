@@ -106,6 +106,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	//Checks to ensure the positions of the enemies reset
 	if (enemie->killedPlayer == true)
 	{
 		enemie3->killedPlayer = true;
@@ -160,6 +161,7 @@ bool Scene::CleanUp()
 
 bool Scene::SaveState(pugi::xml_node node)
 {
+	//Introducing the positions of the entities into the save_game xml
 	pugi::xml_node playernode = node.append_child("player");
 
 	playernode.append_attribute("x") = player->position.x;

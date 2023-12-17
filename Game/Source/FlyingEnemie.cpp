@@ -21,6 +21,7 @@ Flyenem::~Flyenem() {
 }
 
 void Flyenem::InitAnims() {
+	//For each child in config, iterate to find the animation and load the values.
 
 	//R.mov
 	for (pugi::xml_node node = parameters.child("flyrigthmov").child("pushback");
@@ -84,6 +85,7 @@ bool Flyenem::Start() {
 
 void Flyenem::MovementLogic(float dt) {
 
+	//Path of the bat's movement
 	if (position.x < spawn.x+1)
 	{
 		pbody->body->SetLinearVelocity(b2Vec2(1.0f, 0));
