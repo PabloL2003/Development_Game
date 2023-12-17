@@ -106,7 +106,7 @@ void Wenem::MovementLogic(float dt) {
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-
+		currentAnim = &wleftmov;
 		if (pbody->body->GetLinearVelocity().x > 0.5f)
 		{
 			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
@@ -120,7 +120,7 @@ void Wenem::MovementLogic(float dt) {
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		
+		currentAnim = &wrigthmov;
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
 		{
 			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
