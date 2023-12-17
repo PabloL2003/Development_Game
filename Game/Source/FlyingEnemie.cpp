@@ -119,7 +119,7 @@ bool Flyenem::Update(float dt)
 
 
 		// This big if would implement the pathfinding and the showing of the path whle pressing the mouse button 
-		// And also would make th enemies move stoward the players if you used the M key 
+		// And also would make th enemies move towards the players if you used the M key 
 		// This code has been tested in a different branch but due to what we think were memory leaks 
 		// the code would crash 95% of the times that it created the paths, you can see the paths in the video we send
 

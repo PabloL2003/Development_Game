@@ -164,6 +164,44 @@ bool Wenem::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
+
+	// This big if would implement the pathfinding and the showing of the path whle pressing the mouse button 
+	// And also would make th enemies move towards the players if you used the M key 
+	// This code has been tested in a different branch but due to what we think were memory leaks 
+	// the code would crash 95% of the times that it created the paths, you can see the paths in the video we send
+
+	//if (app->scene->player->position.x > position.y - 50) {
+
+//	iPoint origin = app->map->WorldToMap(position.x + (width / 2), position.y + (height / 2));
+//	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+//	app->map->pathfinding->CreatePath(origin, destiny);
+
+//	//Movement//
+//	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+//	{
+//		const DynArray<iPoint>* movePath = app->map->pathfinding->GetLastPath();
+
+//		iPoint enemypos = app->map->MapToWorld(movePath->At(2)->x, movePath->At(2)->y);
+//		b2Vec2 movepos(PIXEL_TO_METERS(enemypos.x), PIXEL_TO_METERS(enemypos.y));
+//		pbody->body->SetTransform(movepos, 0);
+//	}
+
+//	//path drawing//
+//	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+//		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+//		for (uint i = 0; i < path->Count(); i++) {
+//			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+//			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+//		}
+//	}
+//}
+//currentAnim->Update();
+//app->render->DrawTexture(texture, position.x - 10, position.y - 40, &(currentAnim->GetCurrentFrame()));
+
+
+
+
 	return true;
 }
 
