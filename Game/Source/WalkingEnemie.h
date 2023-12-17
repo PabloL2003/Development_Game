@@ -24,6 +24,8 @@ public:
 
 	void SetSpawnPoint(iPoint pos);
 
+	void MovementLogic(float dt);
+
 	bool Update(float dt);
 
 	bool CleanUp();
@@ -47,6 +49,12 @@ public:
 	bool killedPlayer = false;
 
 private:
+
+	float movementForce = 1.5f;
+	float movementDampen = 3.0;
+	float maxVel = 3;
+
+
 	SDL_Texture* mouseTileTex;
 
 	Animation* currentAnim = nullptr;

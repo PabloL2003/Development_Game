@@ -79,40 +79,77 @@ bool Flyenem::Start() {
 	return true;
 }
 
+//
+//void Flyenem::MovementLogic(float dt) {
+//
+//
+//	if ()
+//	{
+//
+//		if (pbody->body->GetLinearVelocity().x > 0.5f)
+//		{
+//			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+//		}
+//		else
+//		{
+//			if (pbody->body->GetLinearVelocity().x > -maxVel)
+//				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+//		}
+//	}
+//
+//	if ()
+//	{
+//		if (pbody->body->GetLinearVelocity().x < -0.5f)
+//		{
+//			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+//		}
+//		else
+//		{
+//			if (pbody->body->GetLinearVelocity().x < maxVel)
+//				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+//		}
+//	}
+//
+//	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+//	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+//
+//
+//}
 
 bool Flyenem::Update(float dt)
 {
 	KilledPlayer();
 	IsDead();
 
+	/*MovementLogic(dt);*/
 	/*if (isKilled)
 		return true;*/
 
-	if (true) {
-		iPoint origin = app->map->WorldToMap(app->scene->enemie->position.x, app->scene->enemie->position.y);
-		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
-		/*app->map->pathfinding->CreatePath(iPoint(6,32), iPoint(7,32));*/
+	//if (true) {
+	//	iPoint origin = app->map->WorldToMap(app->scene->enemie->position.x, app->scene->enemie->position.y);
+	//	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+	//	/*app->map->pathfinding->CreatePath(iPoint(6,32), iPoint(7,32));*/
 
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
-			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-			for (uint i = 0; i < path->Count(); i++) {
-				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
-			}
-		}
-	}
-	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x, position.y - 12, &(currentAnim->GetCurrentFrame()));
+	//	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+	//		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	//		for (uint i = 0; i < path->Count(); i++) {
+	//			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+	//			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+	//		}
+	//	}
+	//}
+	//currentAnim->Update();
+	//app->render->DrawTexture(texture, position.x, position.y - 12, &(currentAnim->GetCurrentFrame()));
 
-	/*if (pendingToDelete)
-	{
-		isKilled = true;
-		CleanUp();
-	}*/
+	///*if (pendingToDelete)
+	//{
+	//	isKilled = true;
+	//	CleanUp();
+	//}*/
 
 
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	//position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	//position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	return true;
 }

@@ -29,6 +29,9 @@ public:
 
 	bool CleanUp();
 
+	void MovementLogic(float dt);
+
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	void IsDead();
@@ -50,6 +53,11 @@ public:
 	bool killedPlayer = false;
 
 private:
+
+
+	float movementForce = 1.5f;
+	float movementDampen = 3.0;
+	float maxVel = 3;
 
 	SDL_Texture* mouseTileTex;
 
