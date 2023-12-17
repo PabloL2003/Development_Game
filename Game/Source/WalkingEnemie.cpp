@@ -167,7 +167,7 @@ bool Wenem::Update(float dt)
 		CleanUp();
 	}*/
 
-	if(destiny.DistanceTo(origin)<12){
+	if(destiny.DistanceTo(origin)<9){
 		
 		MovementLogic(dt);
 	}
