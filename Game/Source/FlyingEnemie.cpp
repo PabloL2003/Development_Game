@@ -10,7 +10,6 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "Map.h"
-#include "Debug.h"
 
 Flyenem::Flyenem() : Entity(EntityType::FLYENEM)
 {

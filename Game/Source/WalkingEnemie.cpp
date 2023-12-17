@@ -12,7 +12,7 @@
 #include "Debug.h"
 #include "Player.h"
 #include "Map.h"
-#include "Debug.h"
+
 
 Wenem::Wenem() : Entity(EntityType::WALKENEM)
 {
@@ -193,6 +193,7 @@ void Wenem::KilledPlayer()
 		TeleportTo(spawn);
 	}
 	killedPlayer = false;
+
 }
 
 void Wenem::IsDead()

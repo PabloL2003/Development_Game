@@ -21,6 +21,8 @@ Player::~Player() {
 
 void Player::InitAnims() {
 
+	//For each child in config, iterate to find the animation and load the values.
+	
 	//R.Idle
 	for (pugi::xml_node node = parameters.child("right_idle").child("pushback");
 		node; node = node.next_sibling("pushback")) {
@@ -105,12 +107,14 @@ void Player::InitAnims() {
 	leftDeath.speed = parameters.child("left_death").attribute("animspeed").as_float();
 	leftDeath.loop = parameters.child("left_death").attribute("loop").as_bool();
 
+	//we set the default animation as rightIdle
+
 	currentAnim = &rightIdle;
 }
 
 
 bool Player::Awake() {
-
+	//initialising the animations and the intial positions.
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -124,6 +128,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
+	//declaring the spawn 
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
@@ -140,39 +145,47 @@ bool Player::Start() {
 
 void Player::AnimationLogic(float dt) {
 
-
+	//logic for animations in the case it is rightIdle
 	if (currentAnim == &rightIdle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
+			//if the player runs left 
 			currentAnim = &leftRun;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
+			//if the player runs right
 			currentAnim = &rightRun;
 		}
 		if (jumping == true)
 		{
+			//if the player jumps
 			currentAnim = &rightJump;
 		}
 	}
 
+	//logic for animations in the case it is leftIdle
 	if (currentAnim == &leftIdle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
+			//if the player runs left
 			currentAnim = &leftRun;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
+			//if the player runs right
 			currentAnim = &rightRun;
 		}
 		if (jumping == true)
 		{
+			//if the player jumps
 			currentAnim = &leftJump;
 		}
 	}
 
+	//logic for animatiosn in the case it is 
 	if (currentAnim == &rightRun)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)

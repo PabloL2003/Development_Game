@@ -103,10 +103,32 @@ bool Scene::Update(float dt)
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
 
-	//Probablemente lo meteré en debug
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	if (enemie->killedPlayer == true)
+	{
+		enemie3->killedPlayer = true;
+		enemie4->killedPlayer = true;
+	}
+
+	if (enemie2->killedPlayer == true)
+	{
+		enemie3->killedPlayer = true;
+		enemie4->killedPlayer = true;
+	}
+
+	if (enemie3->killedPlayer == true)
+	{
+		enemie->killedPlayer = true;
+		enemie2->killedPlayer = true;
+	}
+
+	if (enemie4->killedPlayer == true)
+	{
+		enemie->killedPlayer = true;
+		enemie2->killedPlayer = true;
+	}
 	return true;
 }
 
