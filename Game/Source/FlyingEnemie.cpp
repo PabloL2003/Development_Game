@@ -152,7 +152,15 @@ bool Flyenem::Update(float dt)
 	KilledPlayer();
 	IsDead();
 
-	MovementLogic(dt);
+	iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+	iPoint origin = app->map->WorldToMap(position.x, position.y);
+
+	
+
+	if (destiny.DistanceTo(origin) < 12) {
+
+		MovementLogic(dt);
+	}
 
 	/*if (isKilled)
 		return true;*/
