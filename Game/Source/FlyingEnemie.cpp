@@ -88,7 +88,7 @@ bool Flyenem::Update(float dt)
 		iPoint origin = app->map->WorldToMap(position.x+(width / 2),position.y+ (height / 2));
 		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 		app->map->pathfinding->CreatePath(origin, destiny);
-
+		
 		
 		if(app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
