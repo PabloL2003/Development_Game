@@ -53,8 +53,7 @@ public:
 	Wenem* enemie3;
 	Wenem* enemie4;
 
-	List<PhysBody*> boxes;
-	List<PhysBody*> spikes;
+
 
 private:
 	SDL_Texture* img;

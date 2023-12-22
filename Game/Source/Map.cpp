@@ -371,7 +371,7 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
                     collider.attribute("width").as_float(),
                     collider.attribute("height").as_float(), STATIC);
                 box->ctype = ColliderType::PLATFORM;
-                app->scene->boxes.Add(box);
+
 
             }
         }
@@ -384,7 +384,7 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
                     collider.attribute("width").as_float(),
                     collider.attribute("height").as_float(), STATIC);
                 spike->ctype = ColliderType::SPIKE;
-                app->scene->spikes.Add(spike);
+        
 
             }
         }

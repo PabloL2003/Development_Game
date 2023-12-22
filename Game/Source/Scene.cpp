@@ -38,7 +38,7 @@ bool Scene::Awake(pugi::xml_node& config)
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
 	}
-	// declare awake of enemies
+	/* declare awake of enemies*/
 
 	enemie = (Flyenem*)app->entityManager->CreateEntity(EntityType::FLYENEM);
 	enemie->parameters = config.child("flyenem");
@@ -130,8 +130,7 @@ bool Scene::CleanUp()
 	enemie2 = nullptr;
 	enemie3 = nullptr;
 	enemie4 = nullptr;
-	boxes.Clear();
-	spikes.Clear();
+
 	return true;
 }
 
