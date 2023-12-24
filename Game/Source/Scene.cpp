@@ -31,27 +31,6 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
-	// iterate all objects in the scene
-	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-		item->parameters = itemNode;
-	}
-	/* declare awake of enemies*/
-
-	enemie = (Flyenem*)app->entityManager->CreateEntity(EntityType::FLYENEM);
-	enemie->parameters = config.child("flyenem");
-
-	enemie2 = (Flyenem*)app->entityManager->CreateEntity(EntityType::FLYENEM);
-	enemie2->parameters = config.child("flyenem2");
-
-	enemie3 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
-	enemie3->parameters = config.child("wenem");
-
-	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
-	enemie4->parameters = config.child("wenem2");
-
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
