@@ -51,6 +51,7 @@
     <ClCompile Include="Source\Debug.cpp">
       <Filter>Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Source\Debug.h">
       <Filter>Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

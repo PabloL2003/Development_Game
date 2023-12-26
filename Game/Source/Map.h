@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
+#include "DynArray.h"
+#include "Pathfinding.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -21,6 +23,18 @@ struct TileSet
 
 	SDL_Texture* texture;
 	SDL_Rect GetTileRect(int gid) const;
+
+	SDL_Rect GetRect(uint gid) {
+		SDL_Rect rect = { 0 };
+
+		int relativeIndex = gid - firstgid;
+		rect.w = tileWidth;
+		rect.h = tileHeight;
+		rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
+		rect.y = margin + (tileHeight + spacing) * (relativeIndex / columns);
+		
+		return rect;
+	}
 };
 
 //  We create an enum for map type, just for convenience,
@@ -144,9 +158,13 @@ private:
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
 	bool LoadObject(pugi::xml_node& node, Objects* object);
 	bool LoadAllObjects(pugi::xml_node mapNode);
+
+	int GetTileWidth();
+	int GetTileHeight();
 
 public: 
 
@@ -154,9 +172,13 @@ public:
 	SString name;
 	SString path;
 
+	PathFinding* pathfinding;
+
 private:
 
 	bool mapLoaded;
+	MapLayer* navigationLayer;
+	int blockedGid;
 };
 
 #endif // __MAP_H__
