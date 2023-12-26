@@ -31,6 +31,7 @@ bool Item::Start() {
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 16, 16, bodyType::STATIC);
 	pbody->ctype = ColliderType::ITEM;
+	myBodies.Add(pbody);
 
 	return true;
 }
