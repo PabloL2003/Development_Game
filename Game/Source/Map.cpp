@@ -37,6 +37,13 @@ bool Map::Start() {
     mapPath += name;
     bool ret = Load(mapPath);
 
+    pathfinding = new PathFinding();
+
+    uchar* navigationMap = NULL;
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
+    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    RELEASE_ARRAY(navigationMap);
+
     return ret;
 }
 
@@ -96,7 +103,8 @@ iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
 
-    //
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
 
     return ret;
 }
@@ -174,6 +182,10 @@ bool Map::Load(SString mapFileName)
         LOG("Could not load map xml file %s. pugi error: %s", mapFileName.GetString(), result.description());
         ret = false;
     }
+    else
+    {
+        name = mapFileName.GetString();
+    }
 
     if(ret == true)
     {
@@ -199,80 +211,6 @@ bool Map::Load(SString mapFileName)
     {
         ret = LoadColliders(mapFileXML.child("map"));
     }
-   
-
-
-    /*   crear 2 loops uno fuera que va por las layers hasta que encuantra las object groups. y despues dentro un que va por cada objeto de la layer,
-        dentro de los loops crear un if que te diferencie el nombre de las 2 layes, y segun el nombre de la layer decir que los objetos tienen valor spike o platform.*/
-
-   
-    // hay que añadirle un bool que lo llamas desde el load//
-   /* for (pugi::xml_node objectMode = mapNode.child("objectgroup"); objectMode && ret; objectMode = objectMode.next_sibling("objectgroup")) {
-
-        if (objectNode.attribute("id").as_int() ==2 ) {
-
-            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
-                int x = objectIt.attribute("x").as_int();
-                int y = objectIt.attribute("y").as_int();
-                int width = objectIt.attribute("width").as_int();
-                int height = objectIt.attribute("height").as_int();
-
-
-
-
-
-                x += width / 2;
-                y += height / 2;
-
-                PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
-                c1->ctype = ColliderType::SPIKE;
-
-            }
-
-        }else {
-            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
-                int x = objectIt.attribute("x").as_int();
-                int y = objectIt.attribute("y").as_int();
-                int width = objectIt.attribute("width").as_int();
-                int height = objectIt.attribute("height").as_int();
-
-
-
-
-
-                x += width / 2;
-                y += height / 2;
-
-                PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
-                c1->ctype = ColliderType::PLATFORM;
-
-            }
-
-
-        }
-
-
-    }
-    */
-
-
-
-    // NOTE: Later you have to create a function here to load and create the colliders from the map
-
-    //PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
-    //c1->ctype = ColliderType::PLATFORM;
-
-    //PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    //c2->ctype = ColliderType::PLATFORM;
-
-    //PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    //c3->ctype = ColliderType::PLATFORM;
-    ////  Copiar codigo y cambiar coordenadas para mapear los colliders
-    //PhysBody* c4 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC);
-    //c4->ctype = ColliderType::PLATFORM;
-
-    //PhysBody* c5 = app->physics->CreateRectangle(592, 704 + 64, 96, 10, STATIC);
-    //c5->ctype = ColliderType::SPIKE;
     
     if(ret == true)
     {
@@ -562,4 +500,35 @@ Properties::Property* Properties::GetProperty(const char* name)
     return p;
 }
 
+int Map::GetTileWidth() {
+    return mapData.tileWidth;
+}
 
+int Map::GetTileHeight() {
+    return mapData.tileHeight;
+}
+
+void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
+{
+    bool ret = false;
+
+    uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
+    memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
+
+    for (int x = 0; x < mapData.width; x++)
+    {
+        for (int y = 0; y < mapData.height; y++)
+        {
+            int i = (y * navigationLayer->width) + x;
+
+            int gid = navigationLayer->Get(x, y);
+
+            if (gid == blockedGid) navigationMap[i] = 0;
+            else navigationMap[i] = 1;
+        }
+
+        *buffer = navigationMap;
+        width = mapData.width;
+        height = mapData.height;
+    }
+}

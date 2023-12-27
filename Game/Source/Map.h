@@ -117,6 +117,7 @@ struct MapData
 	List<TileSet*> tilesets;
 	MapTypes type;
 
+	
 	List<MapLayer*> maplayers;
 	List<Objects*> objects;
 };
@@ -178,7 +179,7 @@ private:
 
 	bool mapLoaded;
 	MapLayer* navigationLayer;
-	int blockedGid;
+	int blockedGid; //id de lo de la navigationlayer
 };
 
 #endif // __MAP_H__
