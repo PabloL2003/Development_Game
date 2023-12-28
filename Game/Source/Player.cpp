@@ -299,6 +299,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->debug->debug = true;
 		}
+		
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

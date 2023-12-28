@@ -6,6 +6,8 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Player.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -88,6 +90,9 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) return false;
 
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+
 	return true;
 }
 
@@ -109,3 +114,32 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+bool Scene::LoadState(pugi::xml_node node)
+{
+	player->position.x = node.child(player->name.GetString()).child("position").attribute("x").as_int();
+	player->position.y = node.child(player->name.GetString()).child("position").attribute("y").as_int();
+	player->jumps = node.child("player").attribute("jumps").as_int();
+
+	iPoint savedPos;
+	savedPos.x = METERS_TO_PIXELS(node.child("player").child("position").attribute("x").as_int());
+	savedPos.y = METERS_TO_PIXELS(node.child("player").child("position").attribute("y").as_int());
+
+	player->TeleportTo(savedPos);
+
+	return true;
+}
+
+bool Scene::SaveState(pugi::xml_node node)
+{
+	pugi::xml_node Node = node.append_child(player->name.GetString());
+
+	Node.append_attribute("jumps").set_value(player->jumps);
+	Node = node.append_child("position");
+	Node.append_attribute("x").set_value(player->position.x);
+	Node.append_attribute("y").set_value(player->position.y);
+
+	return true;
+
+}
+

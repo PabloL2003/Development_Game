@@ -510,7 +510,7 @@ int Map::GetTileHeight() {
 
 void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
-    bool ret = false;
+   /* bool ret = false;
 
     uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
     memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
@@ -530,5 +530,5 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
         *buffer = navigationMap;
         width = mapData.width;
         height = mapData.height;
-    }
+    }*/
 }

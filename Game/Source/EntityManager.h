@@ -26,6 +26,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void ReSpawn();
+
 	// Additional methods
 	Entity* CreateEntity(EntityType type);
 
@@ -33,9 +35,17 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	bool EntityManager::LoadState(pugi::xml_node node);
+
+	bool EntityManager::SaveState(pugi::xml_node node);
+
 public:
 
+	pugi::xml_node myNode;
+
 	List<Entity*> entities;
+
+	List<Entity*> savedEntities;
 
 };
 

@@ -46,6 +46,11 @@ public:
 	bool Contains(int x, int y) const;
 	int RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const;
 
+	void SetPos(int x, int y) {
+		b2Vec2 pos(x, y);
+		body->SetTransform(pos, 0);
+	}
+
 public:
 	int width, height;
 	b2Body* body;
@@ -74,6 +79,8 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, bodyType type);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bodyType type);
 	
+	void DestroyObject(PhysBody* pbody);
+
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 

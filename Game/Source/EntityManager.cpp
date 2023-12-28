@@ -3,6 +3,8 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
+#include "Item.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -121,9 +123,90 @@ bool EntityManager::Update(float dt)
 	{
 		pEntity = item->data;
 
+		if (pEntity->pendingToDestroy) {
+
+			for (ListItem<PhysBody*>* corpse = pEntity->myBodies.start; corpse != NULL; corpse = corpse->next) {
+
+				app->physics->DestroyObject((PhysBody*)corpse->data);
+			}
+			pEntity->pendingToDestroy = false;
+			DestroyEntity(pEntity);
+		}
 		if (pEntity->active == false) continue;
 		ret = item->data->Update(dt);
 	}
 
 	return ret;
+}
+
+bool EntityManager::LoadState(pugi::xml_node node) {
+	
+	ListItem<Entity*>* item;
+
+	bool ret = true;
+
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity->type == EntityType::ITEM)
+		{
+			for (ListItem<PhysBody*>* corpse = pEntity->myBodies.start; corpse != NULL; corpse = corpse->next) {
+				app->physics->DestroyObject((PhysBody*)corpse->data);
+			}
+			pEntity->pendingToDestroy = false;
+			DestroyEntity(pEntity);
+		}
+
+	}
+
+	pEntity = NULL;
+
+	for (item = savedEntities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (pEntity->type == EntityType::ITEM)
+		{
+			for (pugi::xml_node itemNode = node.child(pEntity->name.GetString()); itemNode; itemNode = itemNode.next_sibling("item"))
+			{
+				pEntity = app->entityManager->CreateEntity(EntityType::ITEM);
+				pEntity->position.x = itemNode.child("position").attribute("x").as_int();
+				pEntity->position.y = itemNode.child("position").attribute("y").as_int();
+			}
+		}
+	}
+
+	return true;
+}
+
+bool EntityManager::SaveState(pugi::xml_node node) {
+
+	savedEntities = entities;
+
+	ListItem<Entity*>* item;
+
+	bool ret = true;
+
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity->type == EntityType::ITEM)
+		{
+			pugi::xml_node itemNode = node.append_child(pEntity->name.GetString());
+			itemNode = itemNode.append_child("position");
+			itemNode.append_attribute("x").set_value(pEntity->position.x);
+			itemNode.append_attribute("y").set_value(pEntity->position.y);
+		}
+	}
+
+	return true;
+}
+
+void EntityManager::ReSpawn()
+{
+	
 }

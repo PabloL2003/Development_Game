@@ -23,6 +23,7 @@ Physics::Physics() : Module()
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
 	debug = false;
+	name.Create("physics");
 }
 
 // Destructor
@@ -313,4 +314,8 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	}
 
 	return ret;
+}
+
+void Physics::DestroyObject(PhysBody* pbody) {
+	world->DestroyBody(pbody->body);
 }

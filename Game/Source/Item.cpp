@@ -52,3 +52,8 @@ bool Item::CleanUp()
 {
 	return true;
 }
+
+void Item::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+
+}

@@ -29,12 +29,12 @@ bool PathFinding::CleanUp()
 
 void PathFinding::SetNavigationMap(uint w, uint h, uchar* data)
 {
-	width = w;
-	height = h;
+	//width = w;
+	//height = h;
 
-	RELEASE_ARRAY(map);
-	map = new uchar[width * height];
-	memcpy(map, data, width * height);
+	//RELEASE_ARRAY(map);
+	//map = new uchar[width * height];
+	//memcpy(map, data, width * height);
 }
 
 bool PathFinding::CheckBoundaries(const iPoint& pos) const

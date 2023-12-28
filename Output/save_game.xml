@@ -1,12 +1,22 @@
 <?xml version="1.0"?>
-<!-- L02: TODO 4: Create a simulation xml file to read -->
 <game_state>
-	<input />
 	<window />
+	<input />
 	<textures />
 	<audio />
-	<scene />
+	<debug />
+	<physics />
+	<scene>
+		<Player jumps="1" />
+		<position x="766" y="977" />
+	</scene>
+	<:anonymous />
+	<entitymanager>
+		<item>
+			<position x="50" y="45" />
+		</item>
+	</entitymanager>
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-254" y="-500" />
 	</renderer>
 </game_state>
