@@ -177,17 +177,13 @@ bool Map::Load(SString mapFileName)
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
 
-    if(result == NULL)
+    if (result == NULL)
     {
         LOG("Could not load map xml file %s. pugi error: %s", mapFileName.GetString(), result.description());
         ret = false;
     }
-    else
-    {
-        name = mapFileName.GetString();
-    }
 
-    if(ret == true)
+    if (ret == true)
     {
         ret = LoadMap(mapFileXML);
     }
@@ -201,7 +197,7 @@ bool Map::Load(SString mapFileName)
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
- 
+
     if (ret == true)
     {
         ret = LoadAllObjects(mapFileXML.child("map"));
@@ -211,20 +207,20 @@ bool Map::Load(SString mapFileName)
     {
         ret = LoadColliders(mapFileXML.child("map"));
     }
-    
-    if(ret == true)
+
+    if (ret == true)
     {
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
-        LOG("width : %d height : %d",mapData.width,mapData.height);
-        LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
-        
+        LOG("width : %d height : %d", mapData.width, mapData.height);
+        LOG("tile_width : %d tile_height : %d", mapData.tileWidth, mapData.tileHeight);
+
         LOG("Tilesets----");
 
         ListItem<TileSet*>* tileset;
         tileset = mapData.tilesets.start;
 
         while (tileset != NULL) {
-            LOG("name : %s firstgid : %d",tileset->data->name.GetString(), tileset->data->firstgid);
+            LOG("name : %s firstgid : %d", tileset->data->name.GetString(), tileset->data->firstgid);
             LOG("tile width : %d tile height : %d", tileset->data->tileWidth, tileset->data->tileHeight);
             LOG("spacing : %d margin : %d", tileset->data->spacing, tileset->data->margin);
             tileset = tileset->next;
@@ -236,13 +232,15 @@ bool Map::Load(SString mapFileName)
         mapLayer = mapData.maplayers.start;
 
         while (mapLayer != NULL) {
-            LOG("id : %d name : %s", mapLayer->data->id, mapLayer->data->name.GetString());
-            LOG("Layer width : %d Layer height : %d", mapLayer->data->width, mapLayer->data->height);
+            if (mapLayer->data->properties.GetProperty("Navigation") != NULL && mapLayer->data->properties.GetProperty("Navigation")->value) {
+                navigationLayer = mapLayer->data;
+                break;
+            }
             mapLayer = mapLayer->next;
         }
     }
 
-    if(mapFileXML) mapFileXML.reset();
+    if (mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
 
@@ -510,25 +508,32 @@ int Map::GetTileHeight() {
 
 void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
-   /* bool ret = false;
+    bool ret = false;
 
+    //Sets the size of the map. The navigation map is a unidimensional array 
     uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
+    //reserves the memory for the navigation map
     memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
 
     for (int x = 0; x < mapData.width; x++)
     {
         for (int y = 0; y < mapData.height; y++)
         {
+            //i is the index of x,y coordinate in a unidimensional array that represents the navigation map
             int i = (y * navigationLayer->width) + x;
 
+            //Gets the gid of the map in the navigation layer
             int gid = navigationLayer->Get(x, y);
 
+            //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
+            //!!!! make sure that you assign blockedGid according to your map
             if (gid == blockedGid) navigationMap[i] = 0;
             else navigationMap[i] = 1;
         }
+    }
 
-        *buffer = navigationMap;
-        width = mapData.width;
-        height = mapData.height;
-    }*/
+    *buffer = navigationMap;
+    width = mapData.width;
+    height = mapData.height;
+
 }

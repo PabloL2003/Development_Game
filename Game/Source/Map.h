@@ -179,7 +179,7 @@ private:
 
 	bool mapLoaded;
 	MapLayer* navigationLayer;
-	int blockedGid; //id de lo de la navigationlayer
+	int blockedGid = 124; //id de lo de la navigationlayer
 };
 
 #endif // __MAP_H__

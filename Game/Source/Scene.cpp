@@ -92,6 +92,12 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	 
+	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
+		iPoint origin = app->map->WorldToMap(1, 1);
+		iPoint destiny = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+		app->map->pathfinding->CreatePath(origin, destiny);
+	}
 
 	return true;
 }
