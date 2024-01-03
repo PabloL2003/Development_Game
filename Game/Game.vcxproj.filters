@@ -60,6 +60,12 @@
     <ClCompile Include="Source\WalkingEnemie.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUIManager.cpp">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUIControlButton.cpp">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -148,6 +154,15 @@
     <ClInclude Include="Source\WalkingEnemie.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GUIManager.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUIControl.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUIControlButton.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -173,6 +188,9 @@
     </Filter>
     <Filter Include="Modules\Gameplay">
       <UniqueIdentifier>{76a5dcf4-90e4-451b-a159-73ccb5622ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Core\GUI">
+      <UniqueIdentifier>{8bbfc808-3a16-44a4-92e0-fe2a9d7dc273}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

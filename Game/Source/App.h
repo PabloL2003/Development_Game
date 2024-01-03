@@ -20,6 +20,7 @@ class EntityManager;
 class Map;
 class PathFinding;
 class Physics;
+class GUIManager;
 class Debug;
 
 class App
@@ -94,6 +95,7 @@ public:
 	Map* map;
 	PathFinding* pathfinding;
 	Physics* physics;
+	GUIManager* guiManager;
 	Debug* debug;
 
 	uint32 maxFrameDuration = 0;

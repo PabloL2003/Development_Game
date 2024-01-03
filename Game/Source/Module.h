@@ -6,6 +6,7 @@
 #include "PugiXml/src/pugixml.hpp"
 
 class App;
+class GUIControl;
 
 class Module
 {
@@ -61,6 +62,11 @@ public:
 	}
 
 	virtual bool SaveState(pugi::xml_node node)
+	{
+		return true;
+	}
+
+	virtual bool OnGUIMouseClickEvent(GUIControl* control)
 	{
 		return true;
 	}

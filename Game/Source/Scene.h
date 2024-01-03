@@ -6,6 +6,8 @@
 #include "Item.h"
 #include "FlyingEnemie.h"
 #include "WalkingEnemie.h"
+#include "GUIControl.h"
+#include "GUIControlButton.h"
 
 struct SDL_Texture;
 
@@ -40,6 +42,9 @@ public:
 
 	bool SaveState(pugi::xml_node node);
 
+	//Handles multiple GUI event methods
+	bool OnGUIMouseClickEvent(GUIControl* control);
+
 	iPoint GetPLayerPosition();
 	iPoint GetenemiePosition();
 	iPoint Getenemie2Position();
@@ -52,6 +57,9 @@ public:
 	Flyenem* enemie2;
 	Wenem* enemie3;
 	Wenem* enemie4;
+
+	GUIControlButton* gcButton;
+
 
 private:
 	SDL_Texture* img;

@@ -13,6 +13,8 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "GUIControl.h"
+#include "GUIManager.h"
 
 Scene::Scene() : Module()
 {
@@ -86,6 +88,9 @@ bool Scene::Start()
 		app->map->mapData.tileWidth,
 		app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.Count());
+
+	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120, 20 };
+	gcButton = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 1, "MyButton", btPos, this);
 
 	return true;
 }
@@ -244,4 +249,12 @@ iPoint Scene::Getenemie3Position() {
 
 iPoint Scene::Getenemie4Position() {
 	return enemie4->position;
+}
+
+bool Scene::OnGUIMouseClickEvent(GUIControl* control)
+{
+	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
+	LOG("Press Gui Control: %d", control->id);
+
+	return true;
 }
