@@ -25,7 +25,7 @@
   <scene>
 	<map path="Assets/Maps/" name="Mapa_Dungen_dev.tmx"/>
 
-	  <player x="100" y="1100" texturepath="Assets/Textures/Pepe1Sheet.png">
+	  <player x="100" y="3350" texturepath="Assets/Textures/Pepe1Sheet.png">
 		  <right_idle>
 			  <pushback x="11" y="21" width="30" height="43"/>
 		  </right_idle>
@@ -79,7 +79,7 @@
 	  <item x="50" y="45" texturepath="Assets/Textures/espada.png"/>
 
 
-	  <flyenem x="1250" y="1100" texturepath="Assets/Textures/bat anmation.png">
+	  <flyenem x="1250" y="3350" texturepath="Assets/Textures/bat anmation.png">
 
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 		  
@@ -98,7 +98,7 @@
 		  
 	  </flyenem>
 	  
-	  <flyenem2 x="1150" y="150" texturepath="Assets/Textures/bat anmation.png">
+	  <flyenem2 x="1150" y="2400" texturepath="Assets/Textures/bat anmation.png">
 		  
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 		  
@@ -119,7 +119,7 @@
 
 
 
-	  <wenem x="1750" y="1050" texturepath="Assets/Textures/spideranim2.png">
+	  <wenem x="1750" y="3300" texturepath="Assets/Textures/spideranim2.png">
 		  
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 		  
@@ -151,7 +151,7 @@
 	  </wenem>
 	  
 	  
-	  <wenem2 x="800" y="150" texturepath="Assets/Textures/spideranim2.png">
+	  <wenem2 x="800" y="2400" texturepath="Assets/Textures/spideranim2.png">
 
 		  <pathtile mouseTileTex="Assets/Textures/tiletext.png"/>
 
