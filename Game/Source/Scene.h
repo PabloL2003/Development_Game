@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "FlyingEnemie.h"
 #include "WalkingEnemie.h"
+#include "BOSS.h"
 #include "GUIControl.h"
 #include "GUIControlButton.h"
 
@@ -57,7 +58,7 @@ public:
 	Flyenem* enemie2;
 	Wenem* enemie3;
 	Wenem* enemie4;
-
+	BOSS* BOSS;
 	GUIControlButton* gcButton;
 
 

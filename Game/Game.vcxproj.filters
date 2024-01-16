@@ -66,6 +66,9 @@
     <ClCompile Include="Source\GUIControlButton.cpp">
       <Filter>Modules\Core\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BOSS.cpp">
+      <Filter>Application\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -162,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="Source\GUIControlButton.h">
       <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BOSS.h">
+      <Filter>Application\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

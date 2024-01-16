@@ -181,7 +181,38 @@
 
 
 	  </wenem2>
-	  
+
+
+	  <BOSS x="800" y="2400" texturepath="Assets/Textures/Adolfo.png" >
+
+		  <BOSSrigthmov animspeed ="0.2f" loop="true">
+			  <pushback x="76" y="21" width="30" height="43"/>
+			  <pushback x="140" y="21" width="30" height="43"/>
+			  <pushback x="205" y="21" width="30" height="43"/>
+			  <pushback x="268" y="21" width="30" height="43"/>
+			  <pushback x="11" y="85" width="30" height="43"/>
+			  <pushback x="76" y="85" width="30" height="43"/>
+			  <pushback x="140" y="85" width="30" height="43"/>
+			  <pushback x="205" y="85" width="30" height="43"/>
+			  <pushback x="268" y="85" width="30" height="43"/>
+			  <pushback x="11" y="149" width="30" height="43"/>
+		  </BOSSrigthmov>
+
+		  <BOSSleftmov animspeed ="0.2f" loop="true">
+			  <pushback x="140" y="149" width="30" height="43"/>
+			  <pushback x="205" y="149" width="30" height="43"/>
+			  <pushback x="268" y="149" width="30" height="43"/>
+			  <pushback x="11" y="213" width="30" height="43"/>
+			  <pushback x="76" y="213" width="30" height="43"/>
+			  <pushback x="140" y="213" width="30" height="43"/>
+			  <pushback x="205" y="213" width="30" height="43"/>
+			  <pushback x="268" y="213" width="30" height="43"/>
+			  <pushback x="11" y="276" width="30" height="43"/>
+			  <pushback x="76" y="276" width="30" height="43"/>
+		  </BOSSleftmov>
+		  
+		  
+	  </BOSS>
  
   </scene>
   

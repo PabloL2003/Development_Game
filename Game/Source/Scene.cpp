@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Physics.h"
 #include "WalkingEnemie.h"
-
+#include "BOSS.h"
 #include "Defs.h"
 #include "Log.h"
 #include "GUIControl.h"
@@ -54,6 +54,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
+	//BOSS = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
+	//BOSS->parameters = config.child("BOSS");
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module

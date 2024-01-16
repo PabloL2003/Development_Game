@@ -8,8 +8,8 @@
 	<physics />
 	<scene>
 		<player x="84" y="3343" />
-		<flyenem1 x="1288" y="3334" />
-		<flyenem2 x="1188" y="2384" />
+		<flyenem1 x="1266" y="3334" />
+		<flyenem2 x="1166" y="2384" />
 		<wenem1 x="1751" y="3288" />
 		<wenem2 x="801" y="2390" />
 	</scene>
