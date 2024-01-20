@@ -66,8 +66,8 @@ bool BOSS::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x, position.y, 7, bodyType::DYNAMIC);
-	pbody->body->SetGravityScale(0);
+	pbody = app->physics->CreateCircle(position.x, position.y, 18, bodyType::DYNAMIC);
+	pbody->body->SetGravityScale(-2);
 
 	despawn.x = 3000;
 	despawn.y = 3000;
