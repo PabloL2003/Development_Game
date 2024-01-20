@@ -54,8 +54,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
-	//BOSS = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
-	//BOSS->parameters = config.child("BOSS");
+	enemie5 = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
+	enemie5->parameters = config.child("BOSS");
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
@@ -160,7 +160,7 @@ bool Scene::CleanUp()
 	enemie2 = nullptr;
 	enemie3 = nullptr;
 	enemie4 = nullptr;
-
+	enemie5 = nullptr;
 	return true;
 }
 
@@ -191,6 +191,11 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	enemynode4.append_attribute("x") = enemie4->position.x;
 	enemynode4.append_attribute("y") = enemie4->position.y;
+
+	pugi::xml_node enemynode5 = node.append_child("BOSS");
+
+	enemynode5.append_attribute("x") = enemie5->position.x;
+	enemynode5.append_attribute("y") = enemie5->position.y;
 	
 	return true;
 }
@@ -229,6 +234,12 @@ bool Scene::LoadState(pugi::xml_node node)
 	enemie4->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie4->position.x), PIXEL_TO_METERS(enemie4->position.y)), 0);
 	enemie4->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
+	enemie5->position.x = node.child("BOSS").attribute("x").as_int();
+	enemie5->position.y = node.child("BOSS").attribute("y").as_int();
+
+	enemie5->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie5->position.x), PIXEL_TO_METERS(enemie5->position.y)), 0);
+	enemie5->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
 	return true;
 	
 }
@@ -251,6 +262,10 @@ iPoint Scene::Getenemie3Position() {
 
 iPoint Scene::Getenemie4Position() {
 	return enemie4->position;
+}
+
+iPoint Scene::Getenemie5Position() {
+	return enemie5->position;
 }
 
 bool Scene::OnGUIMouseClickEvent(GUIControl* control)

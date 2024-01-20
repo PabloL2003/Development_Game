@@ -51,6 +51,7 @@ public:
 	iPoint Getenemie2Position();
 	iPoint Getenemie3Position();
 	iPoint Getenemie4Position();
+	iPoint Getenemie5Position();
 
 public:
 	Player* player;
@@ -58,7 +59,7 @@ public:
 	Flyenem* enemie2;
 	Wenem* enemie3;
 	Wenem* enemie4;
-	BOSS* BOSS;
+	BOSS* enemie5;
 	GUIControlButton* gcButton;
 
 
