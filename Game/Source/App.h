@@ -20,6 +20,7 @@ class EntityManager;
 class Map;
 class PathFinding;
 class Physics;
+class FadeToBlack;
 class GUIManager;
 class Debug;
 
@@ -95,6 +96,7 @@ public:
 	Map* map;
 	PathFinding* pathfinding;
 	Physics* physics;
+	FadeToBlack* ftb;
 	GUIManager* guiManager;
 	Debug* debug;
 

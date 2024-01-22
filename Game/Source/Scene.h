@@ -8,6 +8,8 @@
 #include "WalkingEnemie.h"
 #include "GUIControl.h"
 #include "GUIControlButton.h"
+#include "GUICheckbox.h"
+#include "GUISlider.h"
 
 struct SDL_Texture;
 
@@ -58,8 +60,14 @@ public:
 	Wenem* enemie3;
 	Wenem* enemie4;
 
+	// Buttons
 	GUIControlButton* gcButton;
 
+	//Sliders
+	GUISlider* slider;
+
+	//Checkboxes
+	GUICheckbox* checkbox;
 
 private:
 	SDL_Texture* img;

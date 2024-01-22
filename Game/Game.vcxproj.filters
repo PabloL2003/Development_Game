@@ -69,6 +69,12 @@
     <ClCompile Include="Source\GUICheckbox.cpp">
       <Filter>Modules\Core\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUISlider.cpp">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FadeToBlack.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -168,6 +174,12 @@
     </ClInclude>
     <ClInclude Include="Source\GUICheckbox.h">
       <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUISlider.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FadeToBlack.h">
+      <Filter>Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -90,7 +90,12 @@ bool Scene::Start()
 		app->map->mapData.tilesets.Count());
 
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120, 20 };
+
+	uint w, h;
+	app->win->GetWindowSize(w, h);
 	gcButton = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 1, "MyButton", btPos, this);
+	/*checkbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 2, "Nigga", { 100, 100, 50, 50 }, this);*/
+	/*slider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 3, "Nigga2", { 100,100,35,35 }, this);*/
 
 	return true;
 }

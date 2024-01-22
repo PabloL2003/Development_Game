@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "Debug.h"
 #include "GUIManager.h"
+#include "FadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -36,6 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	pathfinding = new PathFinding();
 	entityManager = new EntityManager();
+	ftb = new FadeToBlack();
 	guiManager = new GUIManager();
 	debug = new Debug();
 
@@ -53,6 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(entityManager);
 	AddModule(guiManager);
+	AddModule(ftb);
 
 	// Render last to swap buffer
 	AddModule(render);

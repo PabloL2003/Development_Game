@@ -71,10 +71,24 @@ public:
 		return true;
 	}
 
+	// Switches isEnabled and calls Start() method
+	virtual void Enable() {
+		if (!active) {
+			active = true;
+		}
+	}
+
+	// Switches isEnabled and calls CleanUp() method
+	virtual void Disable() {
+		if (active) {
+			active = false;
+		}
+	}
+
 public:
 
 	SString name;
-	bool active;
+	bool active = true;
 
 };
 
