@@ -63,8 +63,8 @@ private:
 
 	Animation* currentAnim = nullptr;
 
+	Animation BOSSright_idle;
 	Animation BOSSrigthmov;
-
 	Animation BOSSleftmov;
 };
 #endif

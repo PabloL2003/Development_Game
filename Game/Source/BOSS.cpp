@@ -96,8 +96,7 @@ void BOSS::MovementLogic(float dt) {
 				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 	}
-
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		currentAnim = &BOSSrigthmov;
 		if (pbody->body->GetLinearVelocity().x < -0.5f)
@@ -109,6 +108,9 @@ void BOSS::MovementLogic(float dt) {
 			if (pbody->body->GetLinearVelocity().x < maxVel)
 				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
+	}
+	else {
+		pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	}
 
 }
@@ -125,7 +127,13 @@ bool BOSS::Update(float dt)
 	app->render->DrawTexture(texture, position.x, position.y - 15, &(currentAnim->GetCurrentFrame()));
 
 	/*app->audio->PlayFx(FlyFx); */
-	MovementLogic(dt);
+	if (destiny.DistanceTo(origin) < 20) {
+		MovementLogic(dt);
+	}
+	else if (destiny.DistanceTo(origin) != 21) {
+		pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+	}
+
 
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;

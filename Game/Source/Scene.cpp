@@ -71,9 +71,13 @@ bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
-	
+
 	//Music is commented so that you can add your own music
-	app->audio->PlayMusic("Assets/Audio/Music/game-music.wav");
+	if (player->position.y>610) {
+	      app->audio->PlayMusic("Assets/Audio/Music/game-music.wav");
+	}
+	
+
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -109,6 +113,13 @@ bool Scene::Update(float dt)
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
+
+	if ((player->position.y < 610)&&(bossm ==false)) {
+
+		app->audio->PlayMusic("Assets/Audio/Music/BossMusic.wav");
+		bossm = true;
+	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

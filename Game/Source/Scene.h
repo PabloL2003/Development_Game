@@ -61,7 +61,7 @@ public:
 	Wenem* enemie4;
 	BOSS* enemie5;
 	GUIControlButton* gcButton;
-
+	bool bossm = false;
 
 private:
 	SDL_Texture* img;

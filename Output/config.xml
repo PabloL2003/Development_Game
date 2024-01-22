@@ -183,8 +183,12 @@
 	  </wenem2>
 
 
-	  <BOSS x="1500" y="600" texturepath="Assets/Textures/Adolfo.png" >
+	  <BOSS x="1800" y="600" texturepath="Assets/Textures/Adolfo.png" >
 
+		  <BOSSright_idle>
+			  <pushback x="11" y="21" width="30" height="43"/>
+		  </BOSSright_idle>
+		  
 		  <BOSSrigthmov animspeed ="0.2f" loop="true">
 			  <pushback x="76" y="21" width="30" height="43"/>
 			  <pushback x="140" y="21" width="30" height="43"/>
