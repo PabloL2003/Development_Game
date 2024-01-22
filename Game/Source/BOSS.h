@@ -51,7 +51,7 @@ public:
 	iPoint despawn;
 	bool isKilled = false;
 	bool killedPlayer = false;
-
+	int BOSSHP=3;
 private:
 
 

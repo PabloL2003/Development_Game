@@ -67,7 +67,7 @@ bool BOSS::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x, position.y, 18, bodyType::DYNAMIC);
-	pbody->body->SetGravityScale(-50);
+	pbody->body->SetGravityScale(-5);
 
 	despawn.x = 3000;
 	despawn.y = 3000;
@@ -214,16 +214,21 @@ void BOSS::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (physB->body->GetLinearVelocity().y >= 0.5)
 			{
 				LOG("ENEMY KILLED");
+				BOSSHP -= 1;;
+
+
+			}
+			if (BOSSHP == 0) {
 				isKilled = true;
 				app->audio->PlayFx(isDeadFx);
 			}
-
 			//If the enemy position in y is greater than the player's
 			else if (physB->body->GetLinearVelocity().y < 0.5)
 			{
 				//Teleport the enemy to its original position
 				app->scene->player->isKilled = true;
 				killedPlayer = true;
+				BOSSHP = 3;
 			}
 
 		}
