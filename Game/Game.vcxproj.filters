@@ -75,6 +75,7 @@
     <ClCompile Include="Source\FadeToBlack.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Source\FadeToBlack.h">
       <Filter>Modules\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene_Menu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

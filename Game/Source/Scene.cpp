@@ -5,6 +5,8 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
+#include "Scene_Menu.h"
+#include "EntityManager.h"
 #include "Map.h"
 #include "Item.h"
 #include "Player.h"
@@ -54,6 +56,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
+	this->active = false;
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
@@ -112,6 +115,14 @@ bool Scene::Update(float dt)
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
+	if (!app->entityManager->IsEnabled()) app->entityManager->Enable();
+
+	if (app->scene_menu->IsEnabled())
+	{
+		app->scene_menu->Disable();
+	}
+
+	//Pause menu
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

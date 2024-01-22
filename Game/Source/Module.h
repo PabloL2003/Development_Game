@@ -7,6 +7,7 @@
 
 class App;
 class GUIControl;
+class GUIControl;
 
 class Module
 {
@@ -83,6 +84,15 @@ public:
 		if (active) {
 			active = false;
 		}
+	}
+
+	inline bool IsEnabled() const {
+		return active;
+	}
+
+	virtual bool OnGuiMouseClickEvent(GUIControl* control)
+	{
+		return true;
 	}
 
 public:

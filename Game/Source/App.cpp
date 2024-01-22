@@ -5,11 +5,13 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene.h"
+#include "Scene_Menu.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Debug.h"
 #include "GUIManager.h"
 #include "FadeToBlack.h"
+#include "EntityManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -34,6 +36,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	scene = new Scene();
+	scene_menu = new Scene_Menu();
 	map = new Map();
 	pathfinding = new PathFinding();
 	entityManager = new EntityManager();
@@ -51,6 +54,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debug);
 	AddModule(physics);
 	AddModule(scene);
+	AddModule(scene_menu);
 	AddModule(map);
 	AddModule(pathfinding);
 	AddModule(entityManager);

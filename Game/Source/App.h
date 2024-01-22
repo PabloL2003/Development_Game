@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "EntityManager.h"
 
+
 #include "PugiXml/src/pugixml.hpp"
 
 // Modules
@@ -16,6 +17,7 @@ class Render;
 class Textures;
 class Audio;
 class Scene;
+class Scene_Menu;
 class EntityManager;
 class Map;
 class PathFinding;
@@ -92,6 +94,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	Scene* scene;
+	Scene_Menu* scene_menu;
 	EntityManager* entityManager;
 	Map* map;
 	PathFinding* pathfinding;
