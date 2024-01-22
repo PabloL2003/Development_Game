@@ -98,6 +98,7 @@
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FlyingEnemie.cpp" />
+    <ClCompile Include="Source\GUICheckbox.cpp" />
     <ClCompile Include="Source\GUIControlButton.cpp" />
     <ClCompile Include="Source\GUIManager.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FlyingEnemie.h" />
+    <ClInclude Include="Source\GUICheckbox.h" />
     <ClInclude Include="Source\GUIControl.h" />
     <ClInclude Include="Source\GUIControlButton.h" />
     <ClInclude Include="Source\GUIManager.h" />

@@ -66,6 +66,9 @@
     <ClCompile Include="Source\GUIControlButton.cpp">
       <Filter>Modules\Core\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUICheckbox.cpp">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -161,6 +164,9 @@
       <Filter>Modules\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Source\GUIControlButton.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUICheckbox.h">
       <Filter>Modules\Core\GUI</Filter>
     </ClInclude>
   </ItemGroup>
