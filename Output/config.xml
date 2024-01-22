@@ -25,7 +25,7 @@
   <scene>
 	<map path="Assets/Maps/" name="Mapa_Dungen_dev.tmx"/>
 
-	  <player x="100" y="3350" texturepath="Assets/Textures/Pepe1Sheet.png">
+	  <player x="1100" y="350" texturepath="Assets/Textures/Pepe1Sheet.png">
 		  <right_idle>
 			  <pushback x="11" y="21" width="30" height="43"/>
 		  </right_idle>

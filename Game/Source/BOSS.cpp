@@ -67,7 +67,7 @@ bool BOSS::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x, position.y, 18, bodyType::DYNAMIC);
-	pbody->body->SetGravityScale(-2);
+	pbody->body->SetGravityScale(-50);
 
 	despawn.x = 3000;
 	despawn.y = 3000;
@@ -83,6 +83,7 @@ bool BOSS::Start() {
 void BOSS::MovementLogic(float dt) {
 
 	//movement logic to mimic the player's
+
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		currentAnim = &BOSSleftmov;
@@ -109,6 +110,10 @@ void BOSS::MovementLogic(float dt) {
 				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
 		}
 	}
+	else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
+		pbody->body->ApplyForce(b2Vec2(0, -18.0f * dt), pbody->body->GetWorldCenter(), true);
+	}
 	else {
 		pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	}
@@ -127,7 +132,7 @@ bool BOSS::Update(float dt)
 	app->render->DrawTexture(texture, position.x, position.y - 15, &(currentAnim->GetCurrentFrame()));
 
 	/*app->audio->PlayFx(FlyFx); */
-	if (destiny.DistanceTo(origin) < 20) {
+	if (destiny.DistanceTo(origin) < 25) {
 		MovementLogic(dt);
 	}
 	else if (destiny.DistanceTo(origin) != 21) {
