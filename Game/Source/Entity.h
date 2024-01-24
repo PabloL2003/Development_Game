@@ -15,6 +15,7 @@ enum class EntityType
 	FLYENEM,
 	WALKENEM,
 	BOSS,
+	COIN,
 	UNKNOWN
 };
 

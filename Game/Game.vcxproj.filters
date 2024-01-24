@@ -69,6 +69,9 @@
     <ClCompile Include="Source\BOSS.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Coins.cpp">
+      <Filter>Application\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -167,6 +170,9 @@
       <Filter>Modules\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Source\BOSS.h">
+      <Filter>Application\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Coins.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
   </ItemGroup>

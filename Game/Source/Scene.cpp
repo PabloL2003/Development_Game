@@ -57,6 +57,46 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie5 = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
 	enemie5->parameters = config.child("BOSS");
 
+	coin1 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin1->parameters = config.child("coin1");
+
+	coin2 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin2->parameters = config.child("coin2");
+
+	coin3 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin3->parameters = config.child("coin3");
+
+	coin4 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin4->parameters = config.child("coin4");
+
+	coin5 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin5->parameters = config.child("coin5");
+
+	coin6 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin6->parameters = config.child("coin6");
+
+	coin7 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin7->parameters = config.child("coin7");
+
+	coin8= (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin8->parameters = config.child("coin8");
+
+	coin9 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin9->parameters = config.child("coin9");
+
+	coin10 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin10->parameters = config.child("coin10");
+
+	coin11 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin11->parameters = config.child("coin11");
+
+	coin12 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin12->parameters = config.child("coin12");
+
+
+
+
+
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = config.child("map").attribute("name").as_string();

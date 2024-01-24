@@ -480,6 +480,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->scene->enemie3->killedPlayer = true;
 		app->scene->enemie4->killedPlayer = true;
 		break;
+	case ColliderType::COIN:
+		LOG("Collision COIN");
+		app->audio->PlayFx(pickSwordFx);
+		if (app->debug->debug == false)
+		{
+			app->debug->debug = true;
+		}
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

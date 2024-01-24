@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "FlyingEnemie.h"
 #include "WalkingEnemie.h"
+#include "Coins.h"
 #include "BOSS.h"
 #include "GUIControl.h"
 #include "GUIControlButton.h"
@@ -60,6 +61,19 @@ public:
 	Wenem* enemie3;
 	Wenem* enemie4;
 	BOSS* enemie5;
+	COIN* coin1;
+	COIN* coin2;
+	COIN* coin3;
+	COIN* coin4;
+	COIN* coin5;
+	COIN* coin6;
+	COIN* coin7;
+	COIN* coin8;
+	COIN* coin9;
+	COIN* coin10;
+	COIN* coin11;
+	COIN* coin12;
+
 	GUIControlButton* gcButton;
 	bool bossm = false;
 
