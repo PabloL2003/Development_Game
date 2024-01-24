@@ -31,6 +31,9 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	// Manages the menu 
+	void PressPause();
+
 	// Called each loop iteration
 	bool Update(float dt);
 
@@ -61,21 +64,39 @@ public:
 	Wenem* enemie4;
 
 	// Buttons
-	GUIControlButton* gcButton;
+	GUIControlButton* pauseBtn;
+	GUIControlButton* resumeBtn;
+	GUIControlButton* backToTitleBtn;
+	GUIControlButton* settingsBtn;
+	GUIControlButton* exitBtn;
+	// -- Settings
+	GUIControlButton* gameReturnBtn;
 
-	//Sliders
-	GUISlider* slider;
+	// Sliders 
+	// -- Settings 
+	GUISlider* bgmGameSlider;
+	GUISlider* sfxGameSlider;
 
-	//Checkboxes
-	GUICheckbox* checkbox;
+	// Checkboxes
+	// -- Settings
+	GUICheckbox* fullscreenGameCbox;
+	GUICheckbox* vsyncGameCbox;
+
+
+	bool pause;
 
 private:
+
+	/*SDL_Texture* pauseMenuTexture;
+	SDL_Texture* settingsBackground;*/
+
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
 	
-
+	bool exit;
+	bool gameplaySettings;
 };
 
 #endif // __SCENE_H__

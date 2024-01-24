@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Physics.h"
 #include "WalkingEnemie.h"
+#include "FadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -85,6 +86,8 @@ bool Scene::Start()
 	textPosX = (float)windowW / 2 - (float)texW / 2;
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
+	pause = exit = gameplaySettings = false;
+
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->mapData.width,
 		app->map->mapData.height,
@@ -96,9 +99,39 @@ bool Scene::Start()
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
-	gcButton = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 1, "MyButton", btPos, this);
-	/*checkbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 2, "Nigga", { 100, 100, 50, 50 }, this);*/
-	/*slider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 3, "Nigga2", { 100,100,35,35 }, this);*/
+	
+	// Buttons
+	// -- Gameplay screen
+	pauseBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 1, "PAUSE", { (int)w - 100, (int)20,50,20 }, this);
+	// -- Pause screen
+	resumeBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 2, "RESUME", { (int)w / 2 - 50, (int)h / 2 - 100, 100, 20 }, this);
+	settingsBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 3, "SETTINGS", { (int)w / 2 - 50, (int)h / 2 - 60,100,20 }, this);
+	backToTitleBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 4, "MAIN MENU", { (int)w / 2 - 50,(int)h / 2 - 20, 100, 20 }, this);
+	exitBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 5, "EXIT", { (int)w / 2 - 50,(int)h / 2 + 20,100,20 }, this);
+	// -- Settings screen
+	gameReturnBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 6, "X", { (int)w - 55, 5, 50, 50 }, this);
+
+	// Sliders
+	// -- Settings screen
+	bgmGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 7, "BGM slider", { 500, 145, 35, 35 }, this);
+	sfxGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 8, "SFX slider", { 500, 235, 35, 35 }, this);
+
+	// Checkboxes
+	// -- Settings screen
+	fullscreenGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 9, "Fullscreen cbox", { 550, 455, 50, 50 }, this);
+	vsyncGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 10, "VSync cbox", { 550, 175, 50, 50 }, this);
+
+	// Initial GUI states
+	resumeBtn->state = GUIControlState::DISABLED;
+	settingsBtn->state = GUIControlState::DISABLED;
+	backToTitleBtn->state = GUIControlState::DISABLED;
+	exitBtn->state = GUIControlState::DISABLED;
+	pauseBtn->state = GUIControlState::DISABLED;
+	gameReturnBtn->state = GUIControlState::DISABLED;
+	bgmGameSlider->state = GUIControlState::DISABLED;
+	sfxGameSlider->state = GUIControlState::DISABLED;
+	fullscreenGameCbox->state = GUIControlState::DISABLED;
+	vsyncGameCbox->state = GUIControlState::DISABLED;
 
 	return true;
 }
@@ -107,6 +140,16 @@ bool Scene::Start()
 bool Scene::PreUpdate()
 {
 	return true;
+}
+
+void Scene::PressPause()
+{
+	resumeBtn->state = GUIControlState::NORMAL;
+	settingsBtn->state = GUIControlState::NORMAL;
+	backToTitleBtn->state = GUIControlState::NORMAL;
+	exitBtn->state = GUIControlState::NORMAL;
+	app->entityManager->Disable();
+	pause = true;
 }
 
 // Called each loop iteration
@@ -120,6 +163,22 @@ bool Scene::Update(float dt)
 	if (app->scene_menu->IsEnabled())
 	{
 		app->scene_menu->Disable();
+	}
+
+	if (IsEnabled() && !app->scene_menu->IsEnabled())
+	{
+		if (!gameplaySettings)
+		{
+			if (pauseBtn->state == GUIControlState::DISABLED) pauseBtn->state = GUIControlState::NORMAL;
+		}
+	}
+	else
+	{
+		if (pauseBtn->state == GUIControlState::NORMAL) pauseBtn->state = GUIControlState::DISABLED;
+		if (resumeBtn->state == GUIControlState::NORMAL) resumeBtn->state = GUIControlState::DISABLED;
+		if (backToTitleBtn->state == GUIControlState::NORMAL) backToTitleBtn->state = GUIControlState::DISABLED;
+		if (settingsBtn->state == GUIControlState::NORMAL) settingsBtn->state = GUIControlState::DISABLED;
+		if (exitBtn->state == GUIControlState::NORMAL) exitBtn->state = GUIControlState::DISABLED;
 	}
 
 	//Pause menu
@@ -151,6 +210,36 @@ bool Scene::Update(float dt)
 		enemie->killedPlayer = true;
 		enemie2->killedPlayer = true;
 	}
+
+	if (pause)
+	{
+		player->pbody->body->SetActive(false);
+		if (app->physics->IsEnabled())
+		{
+			app->physics->Disable();
+		}
+	}
+	else
+	{
+		player->pbody->body->SetActive(true);
+		if (!app->physics->IsEnabled())
+		{
+			app->physics->Enable();
+		}
+	}
+
+	if (gameplaySettings)
+	{
+		// Draw options image
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		PressPause();
+	}
+
+	if (exit) return false;
+
 	return true;
 }
 
@@ -159,8 +248,8 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	/*if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ret = false;*/
 
 	return ret;
 }
@@ -270,7 +359,102 @@ iPoint Scene::Getenemie4Position() {
 bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
-	LOG("Press Gui Control: %d", control->id);
+	LOG("Event by %d", control->id);
+	int flags = SDL_GetWindowFlags(app->win->window);
+	switch (control->id)
+	{
+	case 1: // Pause btn
+		LOG("Pause button click. PAUSE ENABLED");
+		PressPause();
 
+		break;
+
+	case 2: // Resume btn
+		LOG("Resume button click. PAUSE DISABLED");
+		resumeBtn->state = GUIControlState::DISABLED;
+		settingsBtn->state = GUIControlState::DISABLED;
+		backToTitleBtn->state = GUIControlState::DISABLED;
+		exitBtn->state = GUIControlState::DISABLED;
+		app->entityManager->Enable();
+
+		pause = false;
+		break;
+
+	case 3: // Settings btn
+		LOG("Settings button click");
+		bgmGameSlider->SetValue(app->audio->GetBGMVolume());
+		sfxGameSlider->SetValue(app->audio->GetSFXVolume());
+		gameplaySettings = true;
+		pauseBtn->state = GUIControlState::DISABLED;
+		resumeBtn->state = GUIControlState::DISABLED;
+		settingsBtn->state = GUIControlState::DISABLED;
+		backToTitleBtn->state = GUIControlState::DISABLED;
+		exitBtn->state = GUIControlState::DISABLED;
+
+		gameReturnBtn->state = GUIControlState::NORMAL;
+		bgmGameSlider->state = GUIControlState::NORMAL;
+		sfxGameSlider->state = GUIControlState::NORMAL;
+
+		(flags & SDL_WINDOW_FULLSCREEN) ? fullscreenGameCbox->state = GUIControlState::SELECTED
+										: fullscreenGameCbox->state = GUIControlState::NORMAL;
+
+		(app->vsync) ? vsyncGameCbox->state = GUIControlState::SELECTED
+											: vsyncGameCbox->state = GUIControlState::NORMAL;
+		
+		break;
+	case 4: // Main menu btn
+		LOG("Main menu button click");
+		pause = false;
+		player->isKilled = true;
+		app->ftb->SceneFadeToBlack(this, app->scene_menu, 30);
+		pauseBtn->state = GUIControlState::DISABLED;
+		resumeBtn->state = GUIControlState::DISABLED;
+		settingsBtn->state = GUIControlState::DISABLED;
+		backToTitleBtn->state = GUIControlState::DISABLED;
+		exitBtn->state = GUIControlState::DISABLED;
+
+		break;
+	case 5: // Exit btn
+		LOG("Exit button click");
+		exit = true;
+		break;
+
+	case 6: // Return
+		pauseBtn->state = GUIControlState::NORMAL;
+		resumeBtn->state = GUIControlState::NORMAL;
+		settingsBtn->state = GUIControlState::NORMAL;
+		backToTitleBtn->state = GUIControlState::NORMAL;
+		exitBtn->state = GUIControlState::NORMAL;
+
+		gameReturnBtn->state = GUIControlState::DISABLED;
+		bgmGameSlider->state = GUIControlState::DISABLED;
+		sfxGameSlider->state = GUIControlState::DISABLED;
+		vsyncGameCbox->state = GUIControlState::DISABLED;
+		fullscreenGameCbox->state = GUIControlState::DISABLED;
+
+		gameplaySettings = false;
+		break;
+
+	case 7: //BGM slider
+		LOG("Music slider");
+		app->audio->SetBGMVolume(bgmGameSlider->value);
+		break;
+		
+	case 8: // SFX slider
+		LOG("SFX slider");
+		app->audio->SetSFXVolume(sfxGameSlider->value);
+		break;
+
+	case 9: // Fullscreen cbox
+		LOG("Fullscreen slider");
+		(fullscreenGameCbox->state == GUIControlState::SELECTED) ? SDL_SetWindowFullscreen(app->win->window, 0)
+																: SDL_SetWindowFullscreen(app->win->window, 1);
+		break;
+
+	case 10: // VSync cbox
+		app->vsync = !app->vsync;
+		break;
+	}
+	
 	return true;
 }

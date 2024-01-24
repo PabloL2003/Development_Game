@@ -45,6 +45,7 @@ public:
 	GUIControlButton* playBtn;
 	GUIControlButton* continueBtn;
 	GUIControlButton* menuOptionsBtn;
+	GUIControlButton* creditsBtn;
 	GUIControlButton* menuExitBtn;
 	GUIControlButton* returnBtn;
 
@@ -57,10 +58,18 @@ public:
 	// -- Settings
 	GUICheckbox* fullscreenCbox;
 	GUICheckbox* vsyncCbox;
-	
-private:
 
 	bool exit;
+
+private:
+
+	/*SDL_Texture* background;
+	const char* background_texturePath;
+	SDL_Texture* settingsBackground;
+	SDL_Texture* creditsBackground;*/
+
 	bool menuSettings;
+	bool credits;
 };
 #endif // __SCENE_MENU_H__
+
