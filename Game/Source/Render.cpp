@@ -80,7 +80,8 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
-	if (app->debug->debug)
+	// Debug camera
+	/*if (app->debug->debug)
 	{
 		float camSpeed = 1;
 
@@ -95,13 +96,12 @@ bool Render::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x -= (int)ceil(camSpeed * dt);
-	}
+	}*/
 
-	else 
-	{
-		camera.x = -(int)(app->scene->player->position.x - (camera.w * 0.5f));
-		camera.y = -(int)(app->scene->player->position.y - (camera.h * 0.5f));
-	}
+	
+	camera.x = -(int)(app->scene->player->position.x - (camera.w * 0.5f));
+	camera.y = -(int)(app->scene->player->position.y - (camera.h * 0.5f));
+
 
 	if (camera.x < -895)
 		camera.x = -895;

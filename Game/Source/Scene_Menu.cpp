@@ -77,7 +77,7 @@ bool Scene_Menu::Start()
 	// Checkboxes
 	// -- Settings
 	fullscreenCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 7, "Fullscreen cbox", { 650, 520, 50, 50 }, this);
-	vsyncCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 8, "Vsync cbox", { 550, 100, 50, 50 }, this);
+	vsyncCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 8, "Vsync cbox", { 500, 620, 50, 50 }, this);
 
 	// Sliders
 	// -- Settings

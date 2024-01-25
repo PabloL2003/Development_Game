@@ -34,8 +34,6 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	Enable();
-
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 	// iterate all objects in the scene
@@ -82,6 +80,9 @@ bool Scene::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
+	pauseMenuTexture = app->tex->Load("Assets/Textures/PauseMenu.png");
+	settingsBackground = app->tex->Load("Assets/Textures/PauseSettings.png");
+
 	//Get the size of the texture
 	app->tex->GetSize(img, texW, texH);
 
@@ -115,13 +116,13 @@ bool Scene::Start()
 
 	// Sliders
 	// -- Settings screen
-	bgmGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 7, "BGM slider", { 500, 145, 35, 35 }, this);
-	sfxGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 8, "SFX slider", { 500, 235, 35, 35 }, this);
+	bgmGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 7, "BGM slider", { 500, 275, 35, 35 }, this);
+	sfxGameSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 8, "SFX slider", { 500, 385, 35, 35 }, this);
 
 	// Checkboxes
 	// -- Settings screen
-	fullscreenGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 9, "Fullscreen cbox", { 550, 455, 50, 50 }, this);
-	vsyncGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 10, "VSync cbox", { 550, 175, 50, 50 }, this);
+	fullscreenGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 9, "Fullscreen cbox", { 650, 520, 50, 50 }, this);
+	vsyncGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 10, "VSync cbox", { 530, 600, 50, 50 }, this);
 
 	// Initial GUI states
 	resumeBtn->state = GUIControlState::DISABLED;
@@ -157,7 +158,7 @@ void Scene::PressPause()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	// Renders the image in the center of the screen 
+	Enable();
 
 	/*app->map->Load();*/
 	if (!app->entityManager->IsEnabled()) app->entityManager->Enable();
@@ -219,6 +220,11 @@ bool Scene::Update(float dt)
 		{
 			app->physics->Disable();
 		}
+
+		uint w, h;
+		app->win->GetWindowSize(w, h);
+
+		app->render->DrawTexture(pauseMenuTexture, app->render->camera.x*-1 + windowW/6, app->render->camera.y * -1 + windowH/4 , NULL);
 	}
 	else
 	{
@@ -231,7 +237,8 @@ bool Scene::Update(float dt)
 
 	if (gameplaySettings)
 	{
-		// Draw options image
+		app->render->DrawTexture(settingsBackground, app->render->camera.x, app->render->camera.y * -1, NULL);
+		LOG("Printing settings menu");
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
