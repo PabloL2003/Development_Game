@@ -57,7 +57,30 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
+
 	this->active = false;
+
+	enemie5 = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
+	enemie5->parameters = config.child("BOSS");
+
+	
+
+	coin7 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin7->parameters = config.child("coin7");
+
+	coin8= (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin8->parameters = config.child("coin8");
+
+	coin9 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin9->parameters = config.child("coin9");
+
+	coin10 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin10->parameters = config.child("coin10");
+
+	coin11 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin11->parameters = config.child("coin11");
+
+
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
@@ -213,6 +236,7 @@ bool Scene::Update(float dt)
 		enemie2->killedPlayer = true;
 	}
 
+
 	if (pause)
 	{
 		player->pbody->body->SetActive(false);
@@ -302,6 +326,39 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	enemynode4.append_attribute("x") = enemie4->position.x;
 	enemynode4.append_attribute("y") = enemie4->position.y;
+
+
+	pugi::xml_node enemynode5 = node.append_child("BOSS");
+
+	enemynode5.append_attribute("x") = enemie5->position.x;
+	enemynode5.append_attribute("y") = enemie5->position.y;
+
+	pugi::xml_node coin7 = node.append_child("coin7");
+
+	coin7.append_attribute("x") = enemie5->position.x;
+	coin7.append_attribute("y") = enemie5->position.y;
+
+	pugi::xml_node coin8 = node.append_child("coin8");
+
+	coin8.append_attribute("x") = enemie5->position.x;
+	coin8.append_attribute("y") = enemie5->position.y;
+
+	pugi::xml_node coin9 = node.append_child("coin9");
+
+	coin9.append_attribute("x") = enemie5->position.x;
+	coin9.append_attribute("y") = enemie5->position.y;
+
+	pugi::xml_node coin10 = node.append_child("coin10");
+
+	coin10.append_attribute("x") = enemie5->position.x;
+	coin10.append_attribute("y") = enemie5->position.y;
+
+	pugi::xml_node coin11 = node.append_child("coin11");
+
+	coin11.append_attribute("x") = enemie5->position.x;
+	coin11.append_attribute("y") = enemie5->position.y;
+
+
 	
 	return true;
 }
@@ -339,6 +396,29 @@ bool Scene::LoadState(pugi::xml_node node)
 
 	enemie4->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie4->position.x), PIXEL_TO_METERS(enemie4->position.y)), 0);
 	enemie4->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	enemie5->position.x = node.child("BOSS").attribute("x").as_int();
+	enemie5->position.y = node.child("BOSS").attribute("y").as_int();
+
+	enemie5->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie5->position.x), PIXEL_TO_METERS(enemie5->position.y)), 0);
+	enemie5->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
+	// coins load safe //
+
+	coin7->position.x = node.child("coin7").attribute("x").as_int();
+	coin7->position.y = node.child("coin7").attribute("y").as_int();
+
+	coin8->position.x = node.child("coin8").attribute("x").as_int();
+	coin8->position.y = node.child("coin8").attribute("y").as_int();
+
+	coin9->position.x = node.child("coin9").attribute("x").as_int();
+	coin9->position.y = node.child("coin9").attribute("y").as_int();
+
+	coin10->position.x = node.child("coin10").attribute("x").as_int();
+	coin10->position.y = node.child("coin10").attribute("y").as_int();
+
+	coin11->position.x = node.child("coin11").attribute("x").as_int();
+	coin11->position.y = node.child("coin11").attribute("y").as_int();
 
 	return true;
 	
