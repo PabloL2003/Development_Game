@@ -7,19 +7,23 @@
 	<debug />
 	<physics />
 	<scene>
-		<player x="1553" y="1040" />
-		<flyenem1 x="2813" y="2984" />
-		<flyenem2 x="1218" y="134" />
-		<wenem1 x="1695" y="1048" />
-		<wenem2 x="784" y="150" />
+
+		<player x="1372" y="591" />
+		<flyenem1 x="1343" y="3334" />
+		<flyenem2 x="1243" y="2384" />
+		<wenem1 x="1751" y="3288" />
+		<wenem2 x="801" y="2390" />
+		<BOSS x="1628" y="589" />
+
 	</scene>
 	<scene_menu />
 	<:anonymous />
 	<pathfinding />
 	<entitymanager />
 	<guiManager />
-	<fadetoblack />
+
 	<renderer>
-		<camera x="-895" y="-500" />
+		<camera x="-895" y="-207" />
+
 	</renderer>
 </game_state>
