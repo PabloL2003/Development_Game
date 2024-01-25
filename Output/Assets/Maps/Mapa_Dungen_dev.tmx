@@ -3615,7 +3615,7 @@
    <tile gid="112"/>
   </data>
  </layer>
- <layer id="1" name="background" width="60" height="60" locked="1">
+ <layer id="1" name="background" width="60" height="60">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -3642,34 +3642,9 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3714,23 +3689,23 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3773,26 +3748,26 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3833,6 +3808,27 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3848,6 +3844,10 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3874,50 +3874,6 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3972,6 +3928,11 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -3984,24 +3945,11 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -4061,6 +4009,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -4072,6 +4022,56 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -4128,10 +4128,10 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -4189,9 +4189,9 @@
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
-   <tile gid="19"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile gid="19"/>
    <tile gid="19"/>
    <tile gid="19"/>
@@ -14808,6 +14808,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="66"/>
    <tile/>
    <tile/>
    <tile/>
@@ -14867,6 +14868,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="74"/>
    <tile/>
    <tile/>
    <tile/>
@@ -14926,9 +14928,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="74"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21826,7 +21826,7 @@
     <property name="Collision" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="37" x="272" y="434.67" width="123" height="321.333">
+  <object id="37" x="272" y="434.67" width="96.3333" height="321.333">
    <properties>
     <property name="Collision" type="bool" value="false"/>
    </properties>
@@ -21986,8 +21986,8 @@
     <property name="Collision" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="126" x="1916.67" y="628" width="99.3333" height="651.333"/>
-  <object id="130" x="-14.6667" y="716" width="17.3333" height="1210.67"/>
+  <object id="126" x="1916.67" y="-2" width="19.3333" height="1281.33"/>
+  <object id="130" x="-14.6667" y="0" width="17.3333" height="1926.67"/>
   <object id="144" x="0.666683" y="208.67" width="240" height="352.333"/>
   <object id="221" x="241" y="268" width="1678" height="20"/>
  </objectgroup>
