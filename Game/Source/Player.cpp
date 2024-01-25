@@ -137,7 +137,7 @@ bool Player::Start() {
 	SetSpawnPoint(spawn);
 
 	spawn2.x = 200;
-	spawn2.y = 1750;
+	spawn2.y = 200;
 
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");

@@ -183,7 +183,7 @@
 	  </wenem2>
 
 
-	  <BOSS x="1600" y="300" texturepath="Assets/Textures/Adolfo.png" >
+	  <BOSS x="1300" y="300" texturepath="Assets/Textures/Adolfo.png" >
 
 		  <BOSSright_idle>
 			  <pushback x="11" y="21" width="30" height="43"/>
