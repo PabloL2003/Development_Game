@@ -62,6 +62,7 @@ public:
 	int COINFx;
 	int Collectedcoins=0;
 	iPoint spawn;
+	iPoint spawn2;
 	
 	int jumps = 2;
 	bool jumping = false;

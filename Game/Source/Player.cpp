@@ -136,6 +136,9 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
 
+	spawn2.x = 200;
+	spawn2.y = 1750;
+
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	COINFx = app->audio->LoadFx("Assets/Audio/Fx/coin.wav");
@@ -454,11 +457,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickSwordFx);
-		if (app->debug->debug == false)
-		{
-			app->debug->debug = true;
-		}
+		
+		SetSpawnPoint(spawn2);
+		isKilled = true;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
