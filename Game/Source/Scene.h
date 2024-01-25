@@ -63,6 +63,13 @@ public:
 	Wenem* enemie3;
 	Wenem* enemie4;
 
+	BOSS* enemie5;
+	COIN* coin7;
+	COIN* coin8;
+	COIN* coin9;
+	COIN* coin10;
+	COIN* coin11;
+
 	// Buttons
 	GUIControlButton* pauseBtn;
 	GUIControlButton* resumeBtn;
