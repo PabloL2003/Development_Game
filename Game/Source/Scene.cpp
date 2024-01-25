@@ -154,7 +154,7 @@ bool Scene::Update(float dt)
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
 
-	if ((player->position.y < 500 && player->position.x > 1050 )&&(bossm ==false)) {
+	if ((player->position.y < 500 )&&(bossm ==false)) {
 
 		app->audio->PlayMusic("Assets/Audio/Music/BossMusic.wav");
 		bossm = true;
