@@ -31,12 +31,13 @@ public:
 
 	void MovementLogic(float dt);
 
-
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	void IsDead();
 
 	void KilledPlayer();
+
+	void IsDamaged();
 
 
 public:
@@ -49,8 +50,10 @@ public:
 	int isDeadFx;
 	iPoint spawn;
 	iPoint despawn;
+	iPoint newpos;
 	bool isKilled = false;
 	bool killedPlayer = false;
+	bool isDamaged = false;
 	int BOSSHP = 3;
 private:
 

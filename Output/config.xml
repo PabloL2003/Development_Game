@@ -21,15 +21,10 @@
     <resizable value="true"/>
     <fullscreen_window value="false"/>
   </window>
-
-  <audio>
-    <music volume="128"/>
-    <fx volume="128"/>
-  </audio>
-
-	<scene_menu>
+	
+  <scene_menu>
 		<background texturepath="Assets/Textures/MenuScene.png"/>
-	</scene_menu>
+  </scene_menu>
 
   <scene>
 	<map path="Assets/Maps/" name="Mapa_Dungen_dev.tmx"/>

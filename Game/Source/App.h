@@ -18,6 +18,7 @@ class Textures;
 class Audio;
 class Scene;
 class Scene_Menu;
+class Scene_Intro;
 class EntityManager;
 class Map;
 class PathFinding;
@@ -95,6 +96,7 @@ public:
 	Audio* audio;
 	Scene* scene;
 	Scene_Menu* scene_menu;
+	Scene_Intro* scene_intro;
 	EntityManager* entityManager;
 	Map* map;
 	PathFinding* pathfinding;

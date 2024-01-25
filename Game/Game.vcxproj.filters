@@ -82,6 +82,7 @@
     <ClCompile Include="Source\Boss.cpp">
       <Filter>Application\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Intro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Source\Boss.h">
       <Filter>Application\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene_Intro.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
