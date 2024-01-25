@@ -137,12 +137,8 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
 
-	spawn2.x = 200;
-	spawn2.y = 1750;
-
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
-	COINFx = app->audio->LoadFx("Assets/Audio/Fx/coin.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
 
 	return true;
@@ -475,9 +471,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		
-		SetSpawnPoint(spawn2);
-		isKilled = true;
+		app->audio->PlayFx(pickSwordFx);
+		if (app->debug->debug == false)
+		{
+			app->debug->debug = true;
+		}
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
@@ -499,15 +497,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->scene->enemie2->killedPlayer = true;
 		app->scene->enemie3->killedPlayer = true;
 		app->scene->enemie4->killedPlayer = true;
-		break;
-	case ColliderType::COIN:
-		LOG("Collision COIN");
-		app->audio->PlayFx(COINFx);
-		Collectedcoins + 1;
-		if (!app->debug->debug == false)
-		{
-			app->debug->debug = true;
-		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
