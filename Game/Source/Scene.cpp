@@ -57,23 +57,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie5 = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
 	enemie5->parameters = config.child("BOSS");
 
-	coin1 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin1->parameters = config.child("coin1");
-
-	coin2 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin2->parameters = config.child("coin2");
-
-	coin3 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin3->parameters = config.child("coin3");
-
-	coin4 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin4->parameters = config.child("coin4");
-
-	coin5 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin5->parameters = config.child("coin5");
-
-	coin6 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin6->parameters = config.child("coin6");
+	
 
 	coin7 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
 	coin7->parameters = config.child("coin7");
@@ -90,8 +74,6 @@ bool Scene::Awake(pugi::xml_node& config)
 	coin11 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
 	coin11->parameters = config.child("coin11");
 
-	coin12 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
-	coin12->parameters = config.child("coin12");
 
 
 
