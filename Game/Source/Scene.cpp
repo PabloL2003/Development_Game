@@ -13,7 +13,7 @@
 #include "Physics.h"
 #include "WalkingEnemie.h"
 #include "FadeToBlack.h"
-
+#include "BOSS.h"
 #include "Defs.h"
 #include "Log.h"
 #include "GUIControl.h"
@@ -59,7 +59,50 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemie4 = (Wenem*)app->entityManager->CreateEntity(EntityType::WALKENEM);
 	enemie4->parameters = config.child("wenem2");
 
-	this->active = false;
+
+	enemie5 = (BOSS*)app->entityManager->CreateEntity(EntityType::BOSS);
+	enemie5->parameters = config.child("BOSS");
+
+	coin1 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin1->parameters = config.child("coin1");
+
+	coin2 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin2->parameters = config.child("coin2");
+
+	coin3 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin3->parameters = config.child("coin3");
+
+	coin4 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin4->parameters = config.child("coin4");
+
+	coin5 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin5->parameters = config.child("coin5");
+
+	coin6 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin6->parameters = config.child("coin6");
+
+	coin7 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin7->parameters = config.child("coin7");
+
+	coin8= (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin8->parameters = config.child("coin8");
+
+	coin9 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin9->parameters = config.child("coin9");
+
+	coin10 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin10->parameters = config.child("coin10");
+
+	coin11 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin11->parameters = config.child("coin11");
+
+	coin12 = (COIN*)app->entityManager->CreateEntity(EntityType::COIN);
+	coin12->parameters = config.child("coin12");
+
+
+
+
+
 
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
@@ -76,8 +119,13 @@ bool Scene::Start()
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/espada.png");
 	
+
 	//Music is commented so that you can add your own music
-	app->audio->PlayMusic("Assets/Audio/Music/game-music.wav");
+	if (player->position.y>400) {
+	      app->audio->PlayMusic("Assets/Audio/Music/game-music.wav",2.0f);
+	}
+	
+
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -184,6 +232,13 @@ bool Scene::Update(float dt)
 	}
 
 
+	if ((player->position.y < 500 )&&(bossm ==false)) {
+
+		app->audio->PlayMusic("Assets/Audio/Music/BossMusic.wav");
+		bossm = true;
+	}
+
+
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
@@ -264,7 +319,7 @@ bool Scene::CleanUp()
 	enemie2 = nullptr;
 	enemie3 = nullptr;
 	enemie4 = nullptr;
-
+	enemie5 = nullptr;
 	return true;
 }
 
@@ -295,6 +350,11 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	enemynode4.append_attribute("x") = enemie4->position.x;
 	enemynode4.append_attribute("y") = enemie4->position.y;
+
+	pugi::xml_node enemynode5 = node.append_child("BOSS");
+
+	enemynode5.append_attribute("x") = enemie5->position.x;
+	enemynode5.append_attribute("y") = enemie5->position.y;
 	
 	return true;
 }
@@ -333,6 +393,12 @@ bool Scene::LoadState(pugi::xml_node node)
 	enemie4->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie4->position.x), PIXEL_TO_METERS(enemie4->position.y)), 0);
 	enemie4->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
 
+	enemie5->position.x = node.child("BOSS").attribute("x").as_int();
+	enemie5->position.y = node.child("BOSS").attribute("y").as_int();
+
+	enemie5->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie5->position.x), PIXEL_TO_METERS(enemie5->position.y)), 0);
+	enemie5->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+
 	return true;
 	
 }
@@ -355,6 +421,10 @@ iPoint Scene::Getenemie3Position() {
 
 iPoint Scene::Getenemie4Position() {
 	return enemie4->position;
+}
+
+iPoint Scene::Getenemie5Position() {
+	return enemie5->position;
 }
 
 bool Scene::OnGUIMouseClickEvent(GUIControl* control)

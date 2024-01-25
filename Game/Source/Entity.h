@@ -14,6 +14,8 @@ enum class EntityType
 	ITEM,
 	FLYENEM,
 	WALKENEM,
+	BOSS,
+	COIN,
 	UNKNOWN
 };
 
