@@ -22,11 +22,15 @@ public:
 
 	bool CleanUp();
 
+	void TeleportTo(iPoint pos);
+
+	void IsPicked();
 
 public:
 
 	bool isPicked = false;
-
+	iPoint despawn;
+	bool isKilled = false;
 private:
 
 	SDL_Texture* texture;

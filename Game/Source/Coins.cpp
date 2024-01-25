@@ -32,6 +32,9 @@ bool COIN::Start() {
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::STATIC);
 	pbody->ctype = ColliderType::COIN;
 
+	despawn.x = 3000;
+	despawn.y = 3000;
+
 	return true;
 }
 
@@ -47,6 +50,28 @@ bool COIN::Update(float dt)
 	return true;
 }
 
+void COIN::TeleportTo(iPoint pos)
+{
+	// Detén la velocidad actual del enemigo
+	pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+	// Establece la posición del cuerpo físico del enemigo en el punto de destino
+	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(pos.x), PIXEL_TO_METERS(pos.y)), 0.0f);
+
+	// Actualiza la posición del enemigo
+	position.x = pos.x;
+	position.y = pos.y;
+
+}
+
+void COIN::IsPicked()
+{
+	if (isKilled == true)
+	{
+		TeleportTo(despawn);
+	}
+	isKilled = false;
+}
 bool COIN::CleanUp()
 {
 	app->tex->UnLoad(texture);
