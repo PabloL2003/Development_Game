@@ -63,10 +63,9 @@ public:
 
 private:
 
-	/*SDL_Texture* background;
-	const char* background_texturePath;
+	SDL_Texture* background;
 	SDL_Texture* settingsBackground;
-	SDL_Texture* creditsBackground;*/
+	SDL_Texture* creditsBackground;
 
 	bool menuSettings;
 	bool credits;

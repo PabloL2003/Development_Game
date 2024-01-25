@@ -54,10 +54,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debug);
 	AddModule(physics);
 	AddModule(scene);
-	AddModule(scene_menu);
 	AddModule(map);
-	AddModule(pathfinding);
 	AddModule(entityManager);
+	AddModule(scene_menu);
+	AddModule(pathfinding);
 	AddModule(guiManager);
 	AddModule(ftb);
 

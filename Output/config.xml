@@ -27,6 +27,10 @@
     <fx volume="128"/>
   </audio>
 
+	<scene_menu>
+		<background texturepath="Assets/Textures/MenuScene.png"/>
+	</scene_menu>
+
   <scene>
 	<map path="Assets/Maps/" name="Mapa_Dungen_dev.tmx"/>
 

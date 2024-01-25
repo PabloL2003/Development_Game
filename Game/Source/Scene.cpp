@@ -34,6 +34,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	Enable();
+
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 	// iterate all objects in the scene
@@ -72,7 +74,7 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	//img = app->tex->Load("Assets/Textures/test.png");
+	img = app->tex->Load("Assets/Textures/espada.png");
 	
 	//Music is commented so that you can add your own music
 	app->audio->PlayMusic("Assets/Audio/Music/game-music.wav");
@@ -156,7 +158,7 @@ void Scene::PressPause()
 bool Scene::Update(float dt)
 {
 	// Renders the image in the center of the screen 
-	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
+
 	/*app->map->Load();*/
 	if (!app->entityManager->IsEnabled()) app->entityManager->Enable();
 
@@ -181,7 +183,6 @@ bool Scene::Update(float dt)
 		if (exitBtn->state == GUIControlState::NORMAL) exitBtn->state = GUIControlState::DISABLED;
 	}
 
-	//Pause menu
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
@@ -406,7 +407,7 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		LOG("Main menu button click");
 		pause = false;
 		player->isKilled = true;
-		app->ftb->SceneFadeToBlack(this, app->scene_menu, 30);
+		app->ftb->SceneFadeToBlack(this, app->scene_menu, 0);
 		pauseBtn->state = GUIControlState::DISABLED;
 		resumeBtn->state = GUIControlState::DISABLED;
 		settingsBtn->state = GUIControlState::DISABLED;

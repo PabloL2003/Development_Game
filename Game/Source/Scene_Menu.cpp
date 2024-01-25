@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Input.h"
 #include "Textures.h"
+#include "Render.h"
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
@@ -34,8 +35,6 @@ bool Scene_Menu::Awake(pugi::xml_node& config)
 	LOG("Loading Scene_Menu");
 	bool ret = true;
 
-	// Podemos llamar animaciones aquí
-
 	return ret;
 }
 
@@ -46,8 +45,20 @@ bool Scene_Menu::Start()
 	exit = false;
 	menuSettings = false;
 	credits = false;
+	Enable();
 
 	//Inicializar texturas y música
+	background = app->tex->Load("Assets/Textures/MenuScene.png");
+	if (background == nullptr)
+	{
+		LOG("Background no");
+	}
+	else
+	{
+		LOG("Background yes");
+	}
+	settingsBackground = app->tex->Load("Assets/Textures/SettingsMMenuScreen.png");
+	creditsBackground = app->tex->Load("Assets/Textures/CreditsScreen.png");
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
@@ -65,13 +76,13 @@ bool Scene_Menu::Start()
 
 	// Checkboxes
 	// -- Settings
-	fullscreenCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 7, "Fullscreen cbox", { 550, 455, 50, 50 }, this);
-	vsyncCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 8, "Vsync cbox", { 550, 175, 50, 50 }, this);
+	fullscreenCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 7, "Fullscreen cbox", { 650, 520, 50, 50 }, this);
+	vsyncCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 8, "Vsync cbox", { 550, 100, 50, 50 }, this);
 
 	// Sliders
 	// -- Settings
-	bgmSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 9, "BGM Slider", { 500, 145, 35, 35 }, this);
-	sfxSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 10, "SFX Slider", { 500, 235, 35, 35 }, this);
+	bgmSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 9, "BGM Slider", { 500, 275, 35, 35 }, this);
+	sfxSlider = (GUISlider*)app->guiManager->CreateGuiControl(GUIControlType::SLIDER, 10, "SFX Slider", { 500, 385, 35, 35 }, this);
 
 	// Initial GUI states
 	returnBtn->state = GUIControlState::DISABLED;
@@ -126,7 +137,25 @@ bool Scene_Menu::Update(float dt)
 		}
 	}
 
+	if (app->scene->IsEnabled()) app->scene->Disable();
+
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) return false;
+
+	if (exit) return false;
+
+	// Render background textures
+
+	app->render->DrawTexture(background, app->render->camera.x, app->render->camera.y * -1, NULL);
+
+	if (menuSettings)
+	{
+		app->render->DrawTexture(settingsBackground, app->render->camera.x, app->render->camera.y * -1, NULL);
+	}
+
+	if (credits)
+	{
+		app->render->DrawTexture(creditsBackground, app->render->camera.x, app->render->camera.y * -1, NULL);
+	}
 
 	return true;
 }
@@ -136,14 +165,16 @@ bool Scene_Menu::PostUpdate()
 {
 	bool ret = true;
 
-	//Render background
+	app->guiManager->Draw();
 
 	return ret;
 }
 
 bool Scene_Menu::CleanUp()
 {
-
+	background = nullptr;
+	settingsBackground = nullptr;
+	creditsBackground = nullptr;
 	return true;
 }
 
@@ -207,7 +238,7 @@ bool Scene_Menu::OnGUIMouseClickEvent(GUIControl* control)
 		break;
 	case 5: // Exit btn
 		LOG("Exit button");
-
+		exit = true;
 		break;
 	case 6: // Return btn
 		LOG("Exit button");
@@ -245,9 +276,6 @@ bool Scene_Menu::OnGUIMouseClickEvent(GUIControl* control)
 		app->audio->SetSFXVolume(sfxSlider->value);
 		break;
 	}
-
-
-
 
 	return true;
 }

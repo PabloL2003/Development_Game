@@ -59,6 +59,19 @@ bool GUIManager::Update(float dt)
 	return true;
 }
 
+bool GUIManager::Draw() {
+
+	ListItem<GUIControl*>* control = guiControlsList.start;
+
+	while (control != nullptr)
+	{
+		control->data->Draw(app->render);
+		control = control->next;
+	}
+
+	return true;
+}
+
 bool GUIManager::CleanUp()
 {
 	ListItem<GUIControl*>* control = guiControlsList.start;

@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene.h"
+#include "Scene_Menu.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -403,6 +404,7 @@ void Player::MovementLogic(float dt) {
 
 
 }
+
 
 //Logic of the death of the player
 void Player::IsDead()

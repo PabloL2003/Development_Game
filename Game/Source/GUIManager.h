@@ -22,6 +22,8 @@ public:
 	//Called each loop iteration
 	bool Update(float dt);
 
+	bool Draw();
+
 	//Called before quitting
 	bool CleanUp();
 
