@@ -216,7 +216,11 @@ void BOSS::OnCollision(PhysBody* physA, PhysBody* physB)
 				LOG("ENEMY KILLED");
 				BOSSHP -= 1;;
 				//Añadir un desplazamiento al player o un timer de invulnerabilidad al boss//
+			/*	iPoint newpos;
+				newpos.x = app->scene->player->position.x-50;
+				newpos.y = app->scene->player->position.y;
 
+				app->scene->player->TeleportTo(newpos);*/
 			}
 			if (BOSSHP == 0) {
 				isKilled = true;

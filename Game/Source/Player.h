@@ -62,6 +62,8 @@ public:
 
 	iPoint spawn;
 	iPoint spawn2;
+	int COINFx;
+	int Collectedcoins = 0;
 	int jumps = 2;
 	bool jumping = false;
 	bool isKilled = false;

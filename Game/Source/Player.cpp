@@ -142,165 +142,176 @@ bool Player::Start() {
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
+	COINFx = app->audio->LoadFx("Assets/Audio/Fx/coin.wav");
 
 	return true;
 }
 
 void Player::AnimationLogic(float dt) {
 
-	//logic for animations in the case it is rightIdle
-	if (currentAnim == &rightIdle)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			//if the player runs left 
-			currentAnim = &leftRun;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			//if the player runs right
-			currentAnim = &rightRun;
-		}
-		if (jumping == true)
-		{
-			//if the player jumps
-			currentAnim = &rightJump;
-		}
-	}
 
-	//logic for animations in the case it is leftIdle
-	if (currentAnim == &leftIdle)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (app->scene->pause == false) {
+		//logic for animations in the case it is rightIdle
+		if (currentAnim == &rightIdle)
 		{
-			//if the player runs left
-			currentAnim = &leftRun;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			//if the player runs right
-			currentAnim = &rightRun;
-		}
-		if (jumping == true)
-		{
-			//if the player jumps
-			currentAnim = &leftJump;
-		}
-	}
-
-	//logic for animations in the case it is rightRun
-	if (currentAnim == &rightRun)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
-		{
-			if (app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				//if the player does not press any key
+				//if the player runs left 
+				currentAnim = &leftRun;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			{
+				//if the player runs right
+				currentAnim = &rightRun;
+			}
+			if (jumping == true)
+			{
+				//if the player jumps
+				currentAnim = &rightJump;
+			}
+		}
+
+		//logic for animations in the case it is leftIdle
+		if (currentAnim == &leftIdle)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			{
+				//if the player runs left
+				currentAnim = &leftRun;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			{
+				//if the player runs right
+				currentAnim = &rightRun;
+			}
+			if (jumping == true)
+			{
+				//if the player jumps
+				currentAnim = &leftJump;
+			}
+		}
+
+		//logic for animations in the case it is rightRun
+		if (currentAnim == &rightRun)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT)
+				{
+					//if the player does not press any key
+					currentAnim = &rightIdle;
+				}
+				//if the player changes movement direction
+				else currentAnim = &leftRun;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+			{
+				//double check if the player changes movement direction
+				currentAnim = &leftRun;
+			}
+			if (jumping == true)
+			{
+				//if the player jumps
+				currentAnim = &rightJump;
+			}
+		}
+
+		//logic for animations in the case it is lefRun
+		if (currentAnim == &leftRun)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
+				{
+					//if the player does not press any key
+					currentAnim = &leftIdle;
+				}
+				//if the player changes movement direction
+				else currentAnim = &rightRun;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+			{
+				//double check if the player changes movement direction
+				currentAnim = &rightRun;
+			}
+			if (jumping == true)
+			{
+				//if the player jumps
+				currentAnim = &leftJump;
+			}
+		}
+		//Jump
+
+
+		//logic for animations in the case it is righJump
+		if (currentAnim == &rightJump)
+		{
+			//if the player changes movement direction
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+			{
+				currentAnim = &leftJump;
+			}
+			//return to Idle if not jumping
+			if (jumping == false)
+			{
 				currentAnim = &rightIdle;
 			}
-			//if the player changes movement direction
-			else currentAnim = &leftRun;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-		{
-			//double check if the player changes movement direction
-			currentAnim = &leftRun;
-		}
-		if (jumping == true)
-		{
-			//if the player jumps
-			currentAnim = &rightJump;
-		}
-	}
-
-	//logic for animations in the case it is lefRun
-	if (currentAnim == &leftRun)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
-		{
-			if (app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
+			if (isKilled == true)
 			{
-				//if the player does not press any key
+				//making sure the death animations plays even if jumping
+				currentAnim = &rightDeath;
+			}
+		}
+
+		//logic for animations in the case it is leftJump
+		if (currentAnim == &leftJump)
+		{
+			//if the player changes movement direction
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+			{
+				currentAnim = &rightJump;
+			}
+			//return to Idle if not jumping
+			if (jumping == false)
+			{
 				currentAnim = &leftIdle;
 			}
-			//if the player changes movement direction
-			else currentAnim = &rightRun;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+
+		//Death
+
+		//logic for animations in the case it is rightDeath and ensuring it plays 
+		if (currentAnim == &rightDeath && currentAnim->HasFinished())
 		{
-			//double check if the player changes movement direction
-			currentAnim = &rightRun;
+			//return to previous animations 
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+			{
+				currentAnim = &rightIdle;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+			{
+				currentAnim = &leftIdle;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			{
+				currentAnim = &rightJump;
+			}
 		}
-		if (jumping == true)
-		{
-			//if the player jumps
-			currentAnim = &leftJump;
-		}
+
+
 	}
-	//Jump
+	else {
 
-
-	//logic for animations in the case it is righJump
-	if (currentAnim == &rightJump)
-	{
-		//if the player changes movement direction
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-		{
-			currentAnim = &leftJump;
-		}
-		//return to Idle if not jumping
-		if (jumping == false)
-		{
-			currentAnim = &rightIdle;
-		}
-		if (isKilled == true)
-		{
-			//making sure the death animations plays even if jumping
-			currentAnim = &rightDeath;
-		}
 	}
-
-	//logic for animations in the case it is leftJump
-	if (currentAnim == &leftJump)
-	{
-		//if the player changes movement direction
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-		{
-			currentAnim = &rightJump;
-		}
-		//return to Idle if not jumping
-		if (jumping == false)
-		{
-			currentAnim = &leftIdle;
-		}
-	}
-
-	//Death
-
-	//logic for animations in the case it is rightDeath and ensuring it plays 
-	if (currentAnim == &rightDeath && currentAnim->HasFinished())
-	{
-		//return to previous animations 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-		{
-			currentAnim = &rightIdle;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-		{
-			currentAnim = &leftIdle;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		{
-			currentAnim = &rightJump;
-		}
-	}
-
-
-
 }
 
 void Player::MovementLogic(float dt) {
 
+	//CONTROL VEL MENU //
+	
+	if (app->scene->pause== false) {
+
+	
 	//Forces application for debug mode, ensuring the player can move freely 
 	if (app->debug->godMode) {
 
@@ -388,7 +399,10 @@ void Player::MovementLogic(float dt) {
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	}
+	else {
 
+	}
 }
 
 //Logic of the death of the player
@@ -481,7 +495,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->scene->enemie3->killedPlayer = true;
 		app->scene->enemie4->killedPlayer = true;
 		break;
+	case ColliderType::COIN:
+		LOG("Collision COIN");
+		app->audio->PlayFx(COINFx);
+		Collectedcoins + 1;
 
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
