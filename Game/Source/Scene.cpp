@@ -113,8 +113,8 @@ bool Scene::Start()
 	//img = app->tex->Load("Assets/Textures/test.png");
 
 	//Music is commented so that you can add your own music
-	if (player->position.y>610) {
-	      app->audio->PlayMusic("Assets/Audio/Music/game-music.wav");
+	if (player->position.y>400) {
+	      app->audio->PlayMusic("Assets/Audio/Music/game-music.wav",2.0f);
 	}
 	
 
@@ -154,7 +154,7 @@ bool Scene::Update(float dt)
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 	/*app->map->Load();*/
 
-	if ((player->position.y < 610)&&(bossm ==false)) {
+	if ((player->position.y < 500 && player->position.x > 1050 )&&(bossm ==false)) {
 
 		app->audio->PlayMusic("Assets/Audio/Music/BossMusic.wav");
 		bossm = true;

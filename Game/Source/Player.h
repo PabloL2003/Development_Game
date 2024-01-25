@@ -59,7 +59,8 @@ public:
 	int isKilledFx;
 	int saltoFx;
 	int width = 24, height = 43;
-
+	int COINFx;
+	int Collectedcoins=0;
 	iPoint spawn;
 	
 	int jumps = 2;

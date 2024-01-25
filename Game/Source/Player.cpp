@@ -138,6 +138,7 @@ bool Player::Start() {
 
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
+	COINFx = app->audio->LoadFx("Assets/Audio/Fx/coin.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
 
 	return true;
@@ -482,8 +483,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::COIN:
 		LOG("Collision COIN");
-		app->audio->PlayFx(pickSwordFx);
-		if (app->debug->debug == false)
+		app->audio->PlayFx(COINFx);
+		Collectedcoins + 1;
+		if (!app->debug->debug == false)
 		{
 			app->debug->debug = true;
 		}

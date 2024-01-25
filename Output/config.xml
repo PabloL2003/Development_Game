@@ -227,12 +227,12 @@
 	  <coin6 x="300" y="2650" texturepath="Assets/Textures/coin.png" ></coin6>
 	  
 	  
-	  <coin7 x="100" y="1500" texturepath="Assets/Textures/coin.png" ></coin7>
-	  <coin8 x="100" y="1400" texturepath="Assets/Textures/coin.png" ></coin8>
-	  <coin9 x="100" y="1300" texturepath="Assets/Textures/coin.png" ></coin9>
-	  <coin10 x="100" y="1200" texturepath="Assets/Textures/coin.png" ></coin10>
-	  <coin11 x="100" y="1100" texturepath="Assets/Textures/coin.png" ></coin11>
-	  <coin12 x="100" y="1000" texturepath="Assets/Textures/coin.png" ></coin12>
+	  <coin7 x="300" y="1500" texturepath="Assets/Textures/coin.png" ></coin7>
+	  <coin8 x="100" y="1300" texturepath="Assets/Textures/coin.png" ></coin8>
+	  <coin9 x="750" y="950" texturepath="Assets/Textures/coin.png" ></coin9>
+	  <coin10 x="80" y="870" texturepath="Assets/Textures/coin.png" ></coin10>
+	  <coin11 x="530" y="750" texturepath="Assets/Textures/coin.png" ></coin11>
+	  <coin12 x="320" y="500" texturepath="Assets/Textures/coin.png" ></coin12>
 		  
   </scene>
   
