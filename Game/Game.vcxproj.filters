@@ -76,12 +76,6 @@
       <Filter>Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene_Menu.cpp" />
-    <ClCompile Include="Source\BOSS.cpp">
-      <Filter>Application\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Coins.cpp">
-      <Filter>Application\Entities</Filter>
-    </ClCompile> 
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -189,12 +183,6 @@
       <Filter>Modules\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_Menu.h" />
-    <ClInclude Include="Source\BOSS.h">
-      <Filter>Application\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Coins.h">
-      <Filter>Application\Entities</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

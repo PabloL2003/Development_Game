@@ -29,7 +29,6 @@ enum class ColliderType {
 	PLATFORM,
 	SPIKE,
 	ENEMIE,
-	COIN,
 	UNKNOWN
 	// ..
 };

@@ -93,12 +93,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::WALKENEM:
 		entity = new Wenem();
 		break;
-	case EntityType::BOSS:
-		entity = new BOSS();
-		break;
-	case EntityType::COIN:
-		entity = new COIN();
-		break;
 	default:
 		break;
 	}
