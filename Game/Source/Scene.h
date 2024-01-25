@@ -66,7 +66,7 @@ public:
 	COIN* coin9;
 	COIN* coin10;
 	COIN* coin11;
-	COIN* coin12;
+
 
 	GUIControlButton* gcButton;
 	bool bossm = false;
