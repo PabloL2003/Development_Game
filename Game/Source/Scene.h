@@ -6,6 +6,8 @@
 #include "Item.h"
 #include "FlyingEnemie.h"
 #include "WalkingEnemie.h"
+#include "Coin.h"
+#include "Boss.h"
 #include "GUIControl.h"
 #include "GUIControlButton.h"
 #include "GUICheckbox.h"
@@ -62,6 +64,16 @@ public:
 	Flyenem* enemie2;
 	Wenem* enemie3;
 	Wenem* enemie4;
+	BOSS* enemie5;
+
+
+	//coins
+	COIN* coin7;
+	COIN* coin8;
+	COIN* coin9;
+	COIN* coin10;
+	COIN* coin11;
+	COIN* coin12;
 
 	// Buttons
 	GUIControlButton* pauseBtn;

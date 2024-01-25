@@ -61,7 +61,7 @@ public:
 	int width = 24, height = 43;
 
 	iPoint spawn;
-	
+	iPoint spawn2;
 	int jumps = 2;
 	bool jumping = false;
 	bool isKilled = false;

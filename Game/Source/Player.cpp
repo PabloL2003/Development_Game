@@ -5,7 +5,6 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene.h"
-#include "Scene_Menu.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -23,7 +22,7 @@ Player::~Player() {
 void Player::InitAnims() {
 
 	//For each child in config, iterate to find the animation and load the values.
-	
+
 	//R.Idle
 	for (pugi::xml_node node = parameters.child("right_idle").child("pushback");
 		node; node = node.next_sibling("pushback")) {
@@ -41,7 +40,7 @@ void Player::InitAnims() {
 							node.attribute("width").as_int(),
 							node.attribute("height").as_int() });
 	}
-    //R.Run
+	//R.Run
 	for (pugi::xml_node node = parameters.child("right_run").child("pushback");
 		node; node = node.next_sibling("pushback"))
 	{
@@ -137,6 +136,9 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
 
+	spawn2.x = 200;
+	spawn2.y = 200;
+
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
@@ -145,8 +147,6 @@ bool Player::Start() {
 }
 
 void Player::AnimationLogic(float dt) {
-
-	if (app->scene->pause == false) {
 
 	//logic for animations in the case it is rightIdle
 	if (currentAnim == &rightIdle)
@@ -212,7 +212,7 @@ void Player::AnimationLogic(float dt) {
 			currentAnim = &rightJump;
 		}
 	}
-	
+
 	//logic for animations in the case it is lefRun
 	if (currentAnim == &leftRun)
 	{
@@ -238,7 +238,7 @@ void Player::AnimationLogic(float dt) {
 		}
 	}
 	//Jump
-	
+
 
 	//logic for animations in the case it is righJump
 	if (currentAnim == &rightJump)
@@ -295,128 +295,113 @@ void Player::AnimationLogic(float dt) {
 		}
 	}
 
-	}
-	else
-	{
 
-	}
-	
 
 }
 
 void Player::MovementLogic(float dt) {
 
-	if (app->scene->pause == false)
-	{
+	//Forces application for debug mode, ensuring the player can move freely 
+	if (app->debug->godMode) {
 
+		pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
 
-		//Forces application for debug mode, ensuring the player can move freely 
-		if (app->debug->godMode) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));
 
-			pbody->body->ApplyForce(b2Vec2(0, -GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, -5.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-				pbody->body->SetLinearVelocity(b2Vec2(-5.0f, 0.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, 5.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-				pbody->body->SetLinearVelocity(b2Vec2(5.0f, 0.0f));
-
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
-				pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-		}
-		//Gravity application
-		pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
-
-		//Jump Logic, preventing the player to jump infinitely
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && jumps > 0)
-		{
-			app->audio->PlayFx(saltoFx);
-			pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
-			pbody->body->ApplyForce(b2Vec2(0, -18.0f * dt), pbody->body->GetWorldCenter(), true);
-			jumping = true;
-			jumps--;
-
-		}
-
-		//Moving left logic
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
-			if (pbody->body->GetLinearVelocity().x > 0.5f)
-			{
-				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().x > -maxVel)
-					pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
+			pbody->body->SetLinearVelocity(b2Vec2(-5.0f, 0.0f));
 
-		//Moving right logic
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 5.0f));
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
-			if (pbody->body->GetLinearVelocity().x < -0.5f)
-			{
-				//Opposite direction dampening
-				pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-			else
-			{
-				if (pbody->body->GetLinearVelocity().x < maxVel)
-					pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
-			}
-		}
+			pbody->body->SetLinearVelocity(b2Vec2(5.0f, 0.0f));
 
-		//Applying the dampening when the movement is idle
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE) {
-			b2Vec2 velocity = pbody->body->GetLinearVelocity();
-			float frictionForce = -velocity.x * idleDampenMultiplier;
-
-			//Applying the dampening in the opposite direction
-			pbody->body->ApplyForce(b2Vec2(frictionForce, 0.0f), pbody->body->GetWorldCenter(), true);
-		}
-
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+			pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	}
-	else
+	//Gravity application
+	pbody->body->ApplyForce(b2Vec2(0, GRAVITY_Y * dt), pbody->body->GetWorldCenter(), true);
+
+	//Jump Logic, preventing the player to jump infinitely
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && jumps > 0)
 	{
+		app->audio->PlayFx(saltoFx);
+		pbody->body->SetLinearVelocity(b2Vec2(pbody->body->GetLinearVelocity().x, 0.0f));
+		pbody->body->ApplyForce(b2Vec2(0, -18.0f * dt), pbody->body->GetWorldCenter(), true);
+		jumping = true;
+		jumps--;
 
 	}
+
+	//Moving left logic
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
+		if (pbody->body->GetLinearVelocity().x > 0.5f)
+		{
+			//Opposite direction dampening
+			pbody->body->ApplyForce(b2Vec2(-movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+		else
+		{
+			if (pbody->body->GetLinearVelocity().x > -maxVel)
+				pbody->body->ApplyForce(b2Vec2(-movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+	}
+
+	//Moving right logic
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		//Applying movement dampening in both directions, and ensuring the movement doesn't surpass the limit
+		if (pbody->body->GetLinearVelocity().x < -0.5f)
+		{
+			//Opposite direction dampening
+			pbody->body->ApplyForce(b2Vec2(movementDampen * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+		else
+		{
+			if (pbody->body->GetLinearVelocity().x < maxVel)
+				pbody->body->ApplyForce(b2Vec2(movementForce * dt, 0.0f), pbody->body->GetWorldCenter(), true);
+		}
+	}
+
+	//Applying the dampening when the movement is idle
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE) {
+		b2Vec2 velocity = pbody->body->GetLinearVelocity();
+		float frictionForce = -velocity.x * idleDampenMultiplier;
+
+		//Applying the dampening in the opposite direction
+		pbody->body->ApplyForce(b2Vec2(frictionForce, 0.0f), pbody->body->GetWorldCenter(), true);
+	}
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 
 }
 
-
 //Logic of the death of the player
 void Player::IsDead()
 {
-	if (isKilled) 
+	if (isKilled)
 	{
 		currentAnim = &rightDeath;
 		app->audio->PlayFx(isKilledFx);
 		TeleportTo(spawn);
 	}
 	isKilled = false;
-	
+
 }
 
 void Player::SetSpawnPoint(iPoint pos)
@@ -447,7 +432,7 @@ bool Player::Update(float dt)
 
 	//Then we perform the necessary updates
 	currentAnim->Update();
-	app->render->DrawTexture(texture, position.x+5, position.y-8, &(currentAnim->GetCurrentFrame()));
+	app->render->DrawTexture(texture, position.x + 5, position.y - 8, &(currentAnim->GetCurrentFrame()));
 
 	AnimationLogic(dt);
 	MovementLogic(dt);
@@ -471,11 +456,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickSwordFx);
-		if (app->debug->debug == false)
-		{
-			app->debug->debug = true;
-		}
+
+		SetSpawnPoint(spawn2);
+		isKilled = true;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
@@ -498,9 +481,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->scene->enemie3->killedPlayer = true;
 		app->scene->enemie4->killedPlayer = true;
 		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
-	
+
 	}
 }

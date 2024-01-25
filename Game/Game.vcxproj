@@ -95,6 +95,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Boss.cpp" />
+    <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -121,6 +123,8 @@
     <ClCompile Include="Source\WalkingEnemie.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Anim.h" />
+    <ClInclude Include="Source\Boss.h" />
+    <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
