@@ -171,9 +171,6 @@ bool Scene::Update(float dt)
 		enemie2->killedPlayer = true;
 	}
 
-
-
-
 	return true;
 }
 
@@ -305,23 +302,20 @@ bool Scene::LoadState(pugi::xml_node node)
 
 	// coins load safe //
 
-	coin7->position.x = node.child("BOSS").attribute("x").as_int();
-	coin7->position.y = node.child("BOSS").attribute("y").as_int();
+	coin7->position.x = node.child("coin7").attribute("x").as_int();
+	coin7->position.y = node.child("coin7").attribute("y").as_int();
 
-	coin8->position.x = node.child("BOSS").attribute("x").as_int();
-	coin8->position.y = node.child("BOSS").attribute("y").as_int();
+	coin8->position.x = node.child("coin8").attribute("x").as_int();
+	coin8->position.y = node.child("coin8").attribute("y").as_int();
 
-	coin9->position.x = node.child("BOSS").attribute("x").as_int();
-	coin9->position.y = node.child("BOSS").attribute("y").as_int();
+	coin9->position.x = node.child("coin9").attribute("x").as_int();
+	coin9->position.y = node.child("coin9").attribute("y").as_int();
 
-	coin10->position.x = node.child("BOSS").attribute("x").as_int();
-	coin10->position.y = node.child("BOSS").attribute("y").as_int();
+	coin10->position.x = node.child("coin10").attribute("x").as_int();
+	coin10->position.y = node.child("coin10").attribute("y").as_int();
 
-	coin11->position.x = node.child("BOSS").attribute("x").as_int();
-	coin11->position.y = node.child("BOSS").attribute("y").as_int();
-
-	coin12->position.x = node.child("BOSS").attribute("x").as_int();
-	coin12->position.y = node.child("BOSS").attribute("y").as_int();
+	coin11->position.x = node.child("coin11").attribute("x").as_int();
+	coin11->position.y = node.child("coin11").attribute("y").as_int();
 
 	return true;
 	

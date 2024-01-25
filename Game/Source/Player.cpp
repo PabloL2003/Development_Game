@@ -486,10 +486,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision COIN");
 		app->audio->PlayFx(COINFx);
 		Collectedcoins + 1;
-		if (!app->debug->debug == false)
-		{
-			app->debug->debug = true;
-		}
+
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

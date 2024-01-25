@@ -61,12 +61,6 @@ public:
 	Wenem* enemie3;
 	Wenem* enemie4;
 	BOSS* enemie5;
-	COIN* coin1;
-	COIN* coin2;
-	COIN* coin3;
-	COIN* coin4;
-	COIN* coin5;
-	COIN* coin6;
 	COIN* coin7;
 	COIN* coin8;
 	COIN* coin9;

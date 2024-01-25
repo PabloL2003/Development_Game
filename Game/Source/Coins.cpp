@@ -21,6 +21,7 @@ bool COIN::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	isKilled = false;
 
 	return true;
 }
@@ -40,6 +41,8 @@ bool COIN::Start() {
 
 bool COIN::Update(float dt)
 {
+	IsPicked();
+
 	pbody->body->ApplyForce(b2Vec2(0, 0), pbody->body->GetWorldCenter(), true);
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -72,6 +75,7 @@ void COIN::IsPicked()
 	}
 	isKilled = false;
 }
+
 bool COIN::CleanUp()
 {
 	app->tex->UnLoad(texture);
@@ -88,3 +92,8 @@ bool COIN::CleanUp()
 	return true;
 }
 
+void COIN::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	
+
+}
