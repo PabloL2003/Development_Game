@@ -12,6 +12,10 @@
 #include "GUIControlButton.h"
 #include "GUICheckbox.h"
 #include "GUISlider.h"
+#include "GUIControlValueBox.h"
+
+#include <chrono>
+using namespace std;
 
 struct SDL_Texture;
 
@@ -48,6 +52,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 
 	bool SaveState(pugi::xml_node node);
+
+	void ResetTimer();
 
 	//Handles multiple GUI event methods
 	bool OnGUIMouseClickEvent(GUIControl* control);
@@ -94,14 +100,15 @@ public:
 	GUICheckbox* fullscreenGameCbox;
 	GUICheckbox* vsyncGameCbox;
 
+	// Value boxes
+	GUIControlValueBox* playerDeathsBox;
+	GUIControlValueBox* timerBox;
+
 
 	bool pause;
 
+
 private:
-
-	/*SDL_Texture* pauseMenuTexture;
-	SDL_Texture* settingsBackground;*/
-
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
@@ -112,6 +119,10 @@ private:
 	
 	bool exit;
 	bool gameplaySettings;
+
+	// Variables for timer
+	std::chrono::high_resolution_clock::time_point startTime;
+	std::chrono::duration<float> elapsedTime;
 };
 
 #endif // __SCENE_H__

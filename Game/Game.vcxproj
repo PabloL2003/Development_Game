@@ -103,6 +103,7 @@
     <ClCompile Include="Source\FlyingEnemie.cpp" />
     <ClCompile Include="Source\GUICheckbox.cpp" />
     <ClCompile Include="Source\GUIControlButton.cpp" />
+    <ClCompile Include="Source\GUIControlValueBox.cpp" />
     <ClCompile Include="Source\GUIManager.cpp" />
     <ClCompile Include="Source\GUISlider.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Source\GUICheckbox.h" />
     <ClInclude Include="Source\GUIControl.h" />
     <ClInclude Include="Source\GUIControlButton.h" />
+    <ClInclude Include="Source\GUIControlValueBox.h" />
     <ClInclude Include="Source\GUIManager.h" />
     <ClInclude Include="Source\GUISlider.h" />
     <ClInclude Include="Source\Item.h" />

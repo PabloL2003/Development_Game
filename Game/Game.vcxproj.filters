@@ -84,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="Source\Scene_Intro.cpp" />
     <ClCompile Include="Source\Scene_Win.cpp" />
+    <ClCompile Include="Source\GUIControlValueBox.cpp">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene_Intro.h" />
     <ClInclude Include="Source\Scene_Win.h" />
+    <ClInclude Include="Source\GUIControlValueBox.h">
+      <Filter>Modules\Core\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

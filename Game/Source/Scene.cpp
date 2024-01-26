@@ -20,6 +20,11 @@
 #include "GUIControl.h"
 #include "GUIManager.h"
 
+#include <iostream>
+#include <string>
+#include <chrono>
+using namespace std;
+
 Scene::Scene() : Module()
 {
 	name.Create("scene");
@@ -91,6 +96,9 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+	// Initialising the timer
+	startTime = std::chrono::high_resolution_clock::now();
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/espada.png");
 	
@@ -144,6 +152,11 @@ bool Scene::Start()
 	fullscreenGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 9, "Fullscreen cbox", { 650, 520, 50, 50 }, this);
 	vsyncGameCbox = (GUICheckbox*)app->guiManager->CreateGuiControl(GUIControlType::CHECKBOX, 10, "VSync cbox", { 530, 600, 50, 50 }, this);
 
+	// Value boxes
+	// -- Gameplay screen
+	playerDeathsBox = (GUIControlValueBox*)app->guiManager->CreateGuiControl(GUIControlType::VALUEBOX, 11, " ", { 10, (int)20,120,50 }, this);
+	timerBox = (GUIControlValueBox*)app->guiManager->CreateGuiControl(GUIControlType::VALUEBOX, 12, " ", { 10, (int)60,120,50 }, this);
+
 	// Initial GUI states
 	resumeBtn->state = GUIControlState::DISABLED;
 	settingsBtn->state = GUIControlState::DISABLED;
@@ -155,6 +168,8 @@ bool Scene::Start()
 	sfxGameSlider->state = GUIControlState::DISABLED;
 	fullscreenGameCbox->state = GUIControlState::DISABLED;
 	vsyncGameCbox->state = GUIControlState::DISABLED;
+	playerDeathsBox->state = GUIControlState::DISABLED;
+	timerBox->state = GUIControlState::DISABLED;
 
 	return true;
 }
@@ -180,7 +195,13 @@ bool Scene::Update(float dt)
 {
 	Enable();
 
+	std::string strDeaths = "Deaths: ";
+	strDeaths.append(std::to_string(player->deaths));
+	playerDeathsBox->SetValue(strDeaths);
+
+
 	/*app->map->Load();*/
+	// Manage scenes
 	if (!app->entityManager->IsEnabled()) app->entityManager->Enable();
 
 	if (app->scene_menu->IsEnabled())
@@ -193,6 +214,15 @@ bool Scene::Update(float dt)
 		if (!gameplaySettings)
 		{
 			if (pauseBtn->state == GUIControlState::DISABLED) pauseBtn->state = GUIControlState::NORMAL;
+			if (playerDeathsBox->state == GUIControlState::DISABLED) playerDeathsBox->state = GUIControlState::NORMAL;
+			if (timerBox->state == GUIControlState::DISABLED) timerBox->state = GUIControlState::NORMAL;
+
+			// Update the timer value
+			auto currentTime = std::chrono::high_resolution_clock::now();
+			elapsedTime = currentTime - startTime;
+
+			std::string strTime = std::to_string(elapsedTime.count());
+			timerBox->SetValue(strTime);
 		}
 	}
 	else
@@ -202,9 +232,11 @@ bool Scene::Update(float dt)
 		if (backToTitleBtn->state == GUIControlState::NORMAL) backToTitleBtn->state = GUIControlState::DISABLED;
 		if (settingsBtn->state == GUIControlState::NORMAL) settingsBtn->state = GUIControlState::DISABLED;
 		if (exitBtn->state == GUIControlState::NORMAL) exitBtn->state = GUIControlState::DISABLED;
+		if (playerDeathsBox->state == GUIControlState::NORMAL) playerDeathsBox->state = GUIControlState::DISABLED;
+		if (timerBox->state == GUIControlState::DISABLED) timerBox->state = GUIControlState::NORMAL;
 	}
 
-
+	// Load/Save request input
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
@@ -320,6 +352,7 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	playernode.append_attribute("x") = player->position.x;
 	playernode.append_attribute("y") = player->position.y;
+	playernode.append_attribute("deaths") = player->deaths;
 
 	pugi::xml_node enemynode1 = node.append_child("flyenem1");
 
@@ -380,6 +413,7 @@ bool Scene::LoadState(pugi::xml_node node)
 	//Player Load/Save state
 	player->position.x = node.child("player").attribute("x").as_int();
 	player->position.y = node.child("player").attribute("y").as_int();
+	player->deaths = node.child("player").attribute("deaths").as_int();
 
 	player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y)), 0);
 	player->pbody->body->SetLinearVelocity(b2Vec2(0, 0));
@@ -438,6 +472,12 @@ bool Scene::LoadState(pugi::xml_node node)
 	
 }
 
+void Scene::ResetTimer()
+{
+	startTime = std::chrono::high_resolution_clock::now();
+	elapsedTime = std::chrono::duration<float>::zero();
+}
+
 iPoint Scene::GetPLayerPosition() {
 	return player->position;
 }
@@ -492,6 +532,8 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		settingsBtn->state = GUIControlState::DISABLED;
 		backToTitleBtn->state = GUIControlState::DISABLED;
 		exitBtn->state = GUIControlState::DISABLED;
+		playerDeathsBox->state = GUIControlState::DISABLED;
+		timerBox->state = GUIControlState::DISABLED;
 
 		gameReturnBtn->state = GUIControlState::NORMAL;
 		bgmGameSlider->state = GUIControlState::NORMAL;
@@ -508,12 +550,16 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		LOG("Main menu button click");
 		pause = false;
 		player->isKilled = true;
+		player->deaths = 0;
+		ResetTimer();
 		app->ftb->SceneFadeToBlack(this, app->scene_menu, 0);
 		pauseBtn->state = GUIControlState::DISABLED;
 		resumeBtn->state = GUIControlState::DISABLED;
 		settingsBtn->state = GUIControlState::DISABLED;
 		backToTitleBtn->state = GUIControlState::DISABLED;
 		exitBtn->state = GUIControlState::DISABLED;
+		playerDeathsBox->state = GUIControlState::DISABLED;
+		timerBox->state = GUIControlState::DISABLED;
 
 		break;
 	case 5: // Exit btn
@@ -527,6 +573,8 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		settingsBtn->state = GUIControlState::NORMAL;
 		backToTitleBtn->state = GUIControlState::NORMAL;
 		exitBtn->state = GUIControlState::NORMAL;
+		playerDeathsBox->state = GUIControlState::NORMAL;
+		timerBox->state = GUIControlState::NORMAL;
 
 		gameReturnBtn->state = GUIControlState::DISABLED;
 		bgmGameSlider->state = GUIControlState::DISABLED;
@@ -555,6 +603,14 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 
 	case 10: // VSync cbox
 		app->vsync = !app->vsync;
+		break;
+
+	case 11: // Deaths value box
+		LOG("This does nothing, only display");
+		break;
+
+	case 12: // Timer value box
+		LOG("This does nothing, only display");
 		break;
 	}
 	

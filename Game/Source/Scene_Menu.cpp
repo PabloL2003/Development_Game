@@ -187,6 +187,7 @@ bool Scene_Menu::OnGUIMouseClickEvent(GUIControl* control)
 	case 1: //Play btn
 		LOG("Play button");
 		app->scene->player->TeleportTo(app->scene->player->spawn);
+		app->scene->ResetTimer();
 		app->ftb->SceneFadeToBlack(this, app->scene, 0.0f);
 		playBtn->state = GUIControlState::DISABLED;
 		continueBtn->state = GUIControlState::DISABLED;

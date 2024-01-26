@@ -9,17 +9,17 @@
 	<:anonymous />
 	<scene_intro />
 	<scene>
-		<player x="1121" y="237" />
-		<flyenem1 x="1308" y="784" />
-		<flyenem2 x="1238" y="1703" />
+		<player x="66" y="1743" deaths="1" />
+		<flyenem1 x="1307" y="784" />
+		<flyenem2 x="1237" y="1703" />
 		<wenem1 x="1663" y="1688" />
 		<wenem2 x="784" y="790" />
-		<BOSS x="1321" y="235" hp="1" />
-		<coin7 x="1321" y="235" />
-		<coin8 x="1321" y="235" />
-		<coin9 x="1321" y="235" />
-		<coin10 x="1321" y="235" />
-		<coin11 x="1321" y="235" />
+		<BOSS x="1284" y="284" hp="3" />
+		<coin7 x="1284" y="284" />
+		<coin8 x="1284" y="284" />
+		<coin9 x="1284" y="284" />
+		<coin10 x="1284" y="284" />
+		<coin11 x="1284" y="284" />
 	</scene>
 	<entitymanager />
 	<scene_menu />
@@ -28,6 +28,6 @@
 	<guiManager />
 	<fadetoblack />
 	<renderer>
-		<camera x="-609" y="0" />
+		<camera x="0" y="-1150" />
 	</renderer>
 </game_state>
