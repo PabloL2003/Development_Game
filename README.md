@@ -8,9 +8,10 @@
 ### ·Ability to jump.
 ### ·Slippery surfaces.
 ### ·Thrilling difficulty.
+### .Collect as many coins as you can.
 ### ·Two types of enemies: bats and spiders. Jump on top of them to kill them.
 ### ·Powerful boss. Jump three times on top of thim to kill him.
-### ·Death counter and timer: try to beat the game dying as little as possible and as fast as you can!
+### ·Death counter,Coin counter and timer: try to beat the game dying as little as possible and as fast as you can!
 
 ## Controls
 ### ·A-D: Move left and right;
