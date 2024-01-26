@@ -103,6 +103,7 @@ public:
 	// Value boxes
 	GUIControlValueBox* playerDeathsBox;
 	GUIControlValueBox* timerBox;
+	GUIControlValueBox* coinsBox;
 
 
 	bool pause;

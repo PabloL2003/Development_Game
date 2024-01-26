@@ -156,6 +156,7 @@ bool Scene::Start()
 	// -- Gameplay screen
 	playerDeathsBox = (GUIControlValueBox*)app->guiManager->CreateGuiControl(GUIControlType::VALUEBOX, 11, " ", { 10, (int)20,120,50 }, this);
 	timerBox = (GUIControlValueBox*)app->guiManager->CreateGuiControl(GUIControlType::VALUEBOX, 12, " ", { 10, (int)60,120,50 }, this);
+	coinsBox = (GUIControlValueBox*)app->guiManager->CreateGuiControl(GUIControlType::VALUEBOX, 13, " ", { 10, (int)100, 120, 50 }, this);
 
 	// Initial GUI states
 	resumeBtn->state = GUIControlState::DISABLED;
@@ -170,6 +171,7 @@ bool Scene::Start()
 	vsyncGameCbox->state = GUIControlState::DISABLED;
 	playerDeathsBox->state = GUIControlState::DISABLED;
 	timerBox->state = GUIControlState::DISABLED;
+	coinsBox->state = GUIControlState::DISABLED;
 
 	return true;
 }
@@ -180,6 +182,7 @@ bool Scene::PreUpdate()
 	return true;
 }
 
+// Pause menu buttons management
 void Scene::PressPause()
 {
 	resumeBtn->state = GUIControlState::NORMAL;
@@ -195,10 +198,15 @@ bool Scene::Update(float dt)
 {
 	Enable();
 
+	//Setting value for valueboxes
+
 	std::string strDeaths = "Deaths: ";
 	strDeaths.append(std::to_string(player->deaths));
 	playerDeathsBox->SetValue(strDeaths);
 
+	std::string strCoins = "Coins: ";
+	strCoins.append(std::to_string(player->coincount));
+	coinsBox->SetValue(strCoins);
 
 	/*app->map->Load();*/
 	// Manage scenes
@@ -216,6 +224,7 @@ bool Scene::Update(float dt)
 			if (pauseBtn->state == GUIControlState::DISABLED) pauseBtn->state = GUIControlState::NORMAL;
 			if (playerDeathsBox->state == GUIControlState::DISABLED) playerDeathsBox->state = GUIControlState::NORMAL;
 			if (timerBox->state == GUIControlState::DISABLED) timerBox->state = GUIControlState::NORMAL;
+			if (coinsBox->state == GUIControlState::DISABLED) coinsBox->state = GUIControlState::NORMAL;
 
 			// Update the timer value
 			auto currentTime = std::chrono::high_resolution_clock::now();
@@ -233,7 +242,8 @@ bool Scene::Update(float dt)
 		if (settingsBtn->state == GUIControlState::NORMAL) settingsBtn->state = GUIControlState::DISABLED;
 		if (exitBtn->state == GUIControlState::NORMAL) exitBtn->state = GUIControlState::DISABLED;
 		if (playerDeathsBox->state == GUIControlState::NORMAL) playerDeathsBox->state = GUIControlState::DISABLED;
-		if (timerBox->state == GUIControlState::DISABLED) timerBox->state = GUIControlState::NORMAL;
+		if (timerBox->state == GUIControlState::NORMAL) timerBox->state = GUIControlState::DISABLED;
+		if (coinsBox->state == GUIControlState::NORMAL) coinsBox->state = GUIControlState::DISABLED;
 	}
 
 	// Load/Save request input
@@ -534,6 +544,7 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		exitBtn->state = GUIControlState::DISABLED;
 		playerDeathsBox->state = GUIControlState::DISABLED;
 		timerBox->state = GUIControlState::DISABLED;
+		coinsBox->state = GUIControlState::DISABLED;
 
 		gameReturnBtn->state = GUIControlState::NORMAL;
 		bgmGameSlider->state = GUIControlState::NORMAL;
@@ -560,6 +571,7 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		exitBtn->state = GUIControlState::DISABLED;
 		playerDeathsBox->state = GUIControlState::DISABLED;
 		timerBox->state = GUIControlState::DISABLED;
+		coinsBox->state = GUIControlState::DISABLED;
 
 		break;
 	case 5: // Exit btn
@@ -575,6 +587,7 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 		exitBtn->state = GUIControlState::NORMAL;
 		playerDeathsBox->state = GUIControlState::NORMAL;
 		timerBox->state = GUIControlState::NORMAL;
+		coinsBox->state = GUIControlState::NORMAL;
 
 		gameReturnBtn->state = GUIControlState::DISABLED;
 		bgmGameSlider->state = GUIControlState::DISABLED;
@@ -612,7 +625,11 @@ bool Scene::OnGUIMouseClickEvent(GUIControl* control)
 	case 12: // Timer value box
 		LOG("This does nothing, only display");
 		break;
+
+	case 13: // Coins value box
+		LOG("This does nothing, only display");
+		break;
 	}
-	
+
 	return true;
 }

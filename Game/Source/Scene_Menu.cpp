@@ -49,19 +49,13 @@ bool Scene_Menu::Start()
 
 	//Inicializar texturas y música
 	background = app->tex->Load("Assets/Textures/MenuScene.png");
-	if (background == nullptr)
-	{
-		LOG("Background no");
-	}
-	else
-	{
-		LOG("Background yes");
-	}
 	settingsBackground = app->tex->Load("Assets/Textures/SettingsMMenuScreen.png");
 	creditsBackground = app->tex->Load("Assets/Textures/CreditsScreen.png");
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
+	resetp.x = 100;
+	resetp.y = 1750;
 	// Buttons 
 	// -- Main menu
 	playBtn = (GUIControlButton*)app->guiManager->CreateGuiControl(GUIControlType::BUTTON, 1, "Play", { 50,60,250,100 }, this);
@@ -186,7 +180,8 @@ bool Scene_Menu::OnGUIMouseClickEvent(GUIControl* control)
 	{
 	case 1: //Play btn
 		LOG("Play button");
-		app->scene->player->TeleportTo(app->scene->player->spawn);
+		app->scene->player->TeleportTo(resetp);
+		app->scene->player->SetSpawnPoint(resetp);
 		app->scene->ResetTimer();
 		app->ftb->SceneFadeToBlack(this, app->scene, 0.0f);
 		playBtn->state = GUIControlState::DISABLED;
