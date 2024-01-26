@@ -71,8 +71,8 @@ bool BOSS::Start() {
 
 	despawn.x = 3000;
 	despawn.y = 3000;
-	newpos.x = position.x + 20;
-	newpos.y = position.y;
+	newpos.x = 100;
+	newpos.y = 1750;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMIE;
 	SetSpawnPoint(spawn);
@@ -152,6 +152,7 @@ bool BOSS::Update(float dt)
 
 void BOSS::TeleportTo(iPoint pos)
 {
+
 	// Detén la velocidad actual del enemigo
 	pbody->body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
@@ -174,6 +175,7 @@ void BOSS::IsDead()
 	if (isKilled == true)
 	{
 		TeleportTo(despawn);
+		app->scene->player->SetSpawnPoint(newpos);
 	}
 	isKilled = false;
 }

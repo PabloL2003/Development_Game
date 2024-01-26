@@ -19,6 +19,7 @@ class Audio;
 class Scene;
 class Scene_Menu;
 class Scene_Intro;
+class Scene_Win;
 class EntityManager;
 class Map;
 class PathFinding;
@@ -97,6 +98,7 @@ public:
 	Scene* scene;
 	Scene_Menu* scene_menu;
 	Scene_Intro* scene_intro;
+	Scene_Win* scene_win;
 	EntityManager* entityManager;
 	Map* map;
 	PathFinding* pathfinding;

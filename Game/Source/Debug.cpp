@@ -78,14 +78,12 @@ bool Debug::Update(float dt)
 		//Teleport player to the first checkpoint
 		if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		{
-			app->scene->player->SetSpawnPoint(app->scene->player->spawn);
 			app->scene->player->TeleportTo(app->scene->player->spawn);
 		}
 
 		// Teleport player to the second checkpoint
 		if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 		{
-			app->scene->player->SetSpawnPoint(app->scene->player->spawn2);
 			app->scene->player->TeleportTo(app->scene->player->spawn2);
 		}
 	

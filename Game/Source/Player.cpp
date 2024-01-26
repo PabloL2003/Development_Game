@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Input.h"
 #include "Render.h"
+#include "Scene_Win.h"
 #include "Scene.h"
 #include "Log.h"
 #include "Point.h"
@@ -132,6 +133,7 @@ bool Player::Start() {
 	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
 	spawn.x = parameters.attribute("x").as_int();
 	spawn.y = parameters.attribute("y").as_int();
+	deaths = 0;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	SetSpawnPoint(spawn);
@@ -488,18 +490,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!app->debug->debug)
 		{
 			isKilled = true;
+			deaths++;
 		}
 		//Enemies spawn reset
 		app->scene->enemie->killedPlayer = true;
 		app->scene->enemie2->killedPlayer = true;
 		app->scene->enemie3->killedPlayer = true;
 		app->scene->enemie4->killedPlayer = true;
+		app->scene->enemie5->killedPlayer = true;
+		break;
+	case ColliderType::ENEMIE:
+		if (!app->debug->debug)
+		{
+			deaths++;
+		}
 		break;
 	case ColliderType::COIN:
 		LOG("Collision COIN");
 		app->audio->PlayFx(COINFx);
-		Collectedcoins + 1;
-
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

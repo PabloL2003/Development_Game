@@ -67,6 +67,8 @@ private:
 	SDL_Texture* settingsBackground;
 	SDL_Texture* creditsBackground;
 
+	iPoint resetp;
+
 	bool menuSettings;
 	bool credits;
 };

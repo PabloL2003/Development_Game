@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Scene_Menu.h"
+#include "Scene_Win.h"
 #include "EntityManager.h"
 #include "Map.h"
 #include "Item.h"
@@ -212,24 +213,36 @@ bool Scene::Update(float dt)
 	{
 		enemie3->killedPlayer = true;
 		enemie4->killedPlayer = true;
+		enemie5->killedPlayer = true;
 	}
 
 	if (enemie2->killedPlayer == true)
 	{
 		enemie3->killedPlayer = true;
 		enemie4->killedPlayer = true;
+		enemie5->killedPlayer = true;
 	}
 
 	if (enemie3->killedPlayer == true)
 	{
 		enemie->killedPlayer = true;
 		enemie2->killedPlayer = true;
+		enemie5->killedPlayer = true;
 	}
 
 	if (enemie4->killedPlayer == true)
 	{
 		enemie->killedPlayer = true;
 		enemie2->killedPlayer = true;
+		enemie5->killedPlayer = true;
+	}
+
+	if (enemie5->killedPlayer == true)
+	{
+		enemie->killedPlayer = true;
+		enemie2->killedPlayer = true;
+		enemie3->killedPlayer = true;
+		enemie4->killedPlayer = true;
 	}
 
 	if (pause)
@@ -256,7 +269,7 @@ bool Scene::Update(float dt)
 
 	if (gameplaySettings)
 	{
-		app->render->DrawTexture(settingsBackground, app->render->camera.x, app->render->camera.y * -1, NULL);
+		app->render->DrawTexture(settingsBackground, app->render->camera.x*-1, app->render->camera.y * -1, NULL);
 		LOG("Printing settings menu");
 	}
 
@@ -264,6 +277,12 @@ bool Scene::Update(float dt)
 	{
 		PressPause();
 	}
+
+	if (enemie5->BOSSHP == 0)
+	{
+		app->ftb->SceneFadeToBlack(app->scene, app->scene_win, 0.0f);
+	}
+
 
 	if (exit) return false;
 
@@ -326,6 +345,7 @@ bool Scene::SaveState(pugi::xml_node node)
 
 	enemynode5.append_attribute("x") = enemie5->position.x;
 	enemynode5.append_attribute("y") = enemie5->position.y;
+	enemynode5.append_attribute("hp") = enemie5->BOSSHP;
 
 	pugi::xml_node coin7 = node.append_child("coin7");
 
@@ -391,6 +411,7 @@ bool Scene::LoadState(pugi::xml_node node)
 
 	enemie5->position.x = node.child("BOSS").attribute("x").as_int();
 	enemie5->position.y = node.child("BOSS").attribute("y").as_int();
+	enemie5->BOSSHP = node.child("BOSS").attribute("hp").as_int();
 
 	enemie5->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(enemie5->position.x), PIXEL_TO_METERS(enemie5->position.y)), 0);
 	enemie5->pbody->body->SetLinearVelocity(b2Vec2(0, 0));

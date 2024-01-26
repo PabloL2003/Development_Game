@@ -83,6 +83,7 @@
       <Filter>Application\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene_Intro.cpp" />
+    <ClCompile Include="Source\Scene_Win.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h" />
@@ -197,6 +198,7 @@
       <Filter>Application\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_Intro.h" />
+    <ClInclude Include="Source\Scene_Win.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
