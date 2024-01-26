@@ -59,6 +59,7 @@ public:
 	int pickSwordFx;
 	int saltoFx;
 	int width = 24, height = 43;
+	int coincount=0;
 
 	iPoint spawn;
 	iPoint spawn2;

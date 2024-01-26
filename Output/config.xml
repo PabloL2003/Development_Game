@@ -221,10 +221,10 @@
 
 	  </BOSS>
 
-	  <coin7 x="500" y="1500" texturepath="Assets/Textures/coin.png" ></coin7>
+	  <coin7 x="520" y="1550" texturepath="Assets/Textures/coin.png" ></coin7>
 	  <coin8 x="1450" y="1650" texturepath="Assets/Textures/coin.png" ></coin8>
 	  <coin9 x="750" y="980" texturepath="Assets/Textures/coin.png" ></coin9>
-	  <coin10 x="400" y="920" texturepath="Assets/Textures/coin.png" ></coin10>
+	  <coin10 x="400" y="1080" texturepath="Assets/Textures/coin.png" ></coin10>
 	  <coin11 x="1350" y="750" texturepath="Assets/Textures/coin.png" ></coin11>
 
 

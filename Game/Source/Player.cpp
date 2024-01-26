@@ -141,6 +141,8 @@ bool Player::Start() {
 	spawn2.x = 200;
 	spawn2.y = 200;
 
+	coincount = 0;
+
 	saltoFx = app->audio->LoadFx("Assets/Audio/Fx/salto-fx.wav");
 	pickSwordFx = app->audio->LoadFx("Assets/Audio/Fx/you-win-street-fighter.wav");
 	isKilledFx = app->audio->LoadFx("Assets/Audio/Fx/SPIKES_TRAP_ON.wav");
@@ -467,7 +469,7 @@ bool Player::CleanUp()
 }
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+	
 	switch (physB->ctype)
 	{
 	case ColliderType::ITEM:
@@ -508,6 +510,23 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::COIN:
 		LOG("Collision COIN");
 		app->audio->PlayFx(COINFx);
+		coincount += 1;
+		if (coincount == 1) {
+		app->scene->coin7->isKilled = true;
+		}
+		if (coincount == 2) {
+			app->scene->coin8->isKilled = true;
+		}
+		if (coincount == 3) {
+			app->scene->coin11->isKilled = true;
+		}
+		if (coincount == 4) {
+			app->scene->coin9->isKilled = true;
+		}
+		if (coincount == 5) {
+			app->scene->coin10->isKilled = true;
+		}
+
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
